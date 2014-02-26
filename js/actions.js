@@ -1,7 +1,7 @@
 function signOut(){
 	
 	//$.jStorage.set("tarjetaP",tarjetaP);
-	$.jStorage.deleteKey("act");
+	$.jStorage.deleteKey("acnGames.act");
 	act=null;
 	document.location.href='index.html';
 	window.location="";
@@ -9,7 +9,7 @@ function signOut(){
 
 function load(){
 	
-	var value = $.jStorage.get("act");
+	var value = $.jStorage.get("acnGames.act");
 	//console.log(value);
 	if(value){
 		//TODO Compruebo que las cookies no hayan expirado
@@ -28,49 +28,50 @@ function signIn(){
 	
 	
 	if(ps== "" || em ==""){
-		alert('datos invalidos');
+		$('#singInForm').attr("class","col-lg-4 has-error");
+		$('#error').html("El usuario y/o contraseña no pueden ser vacios<br/>");
+		
 	}else{
+		
 		$.ajax({
             url: 'loginF.php',
             dataType: "json",
             data: {email:em, ps:ps},
+            
             success: function(data) {
-				
-				
 				if (data.status == "ok") {
-                
                 	var ct ={};
                 	ct.email=em;
                 	ct.name=data.name;
                 	ct.surname=data.surname;
                 	ct.auth_token=data.auth_token;
                 	ct.user_id=data.id;
-                	$.jStorage.set("act",ct);
+                	$.jStorage.set("acnGames.act",ct);
 					$('#container').html($.View("views/page.ejs",{username:ct.name}));      
                 
                 }else if(data.status == "error") {
-                
-                	alert('Usuario y contraseña invalidos');
-					$('#container').html($.View("views/signIn.ejs"));      
-                
-                }else{
-                	alert('Ocurrio un Error, Por favor intenteloas tarde');
-					$('#container').html($.View("views/signIn.ejs"));
+                	$('#error').html("El usuario y/o contraseña son invalidos<br/>");
+                	$('#singInForm').attr("class","col-lg-4 has-error");
+				}else{
+                	$('#singInForm').attr("class","col-lg-4 has-error");
+                	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
                 }
-				
-					
-							
-				
-				
             },
             error: function(error){
-				console.log('Ocurrio un error');
+				$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
 				console.log(error);            	
             }
-
         });
 	}
-	
-	
+};
+
+
+function checkEnter(event)
+{
+    if (event.keyCode == 13) 
+   {
+       signIn();
+       
+    }
 };
 
