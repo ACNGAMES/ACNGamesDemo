@@ -22,7 +22,6 @@ function load(){
 var act = null;
 function signIn(){
 	//action="loginF.php"
-	//TODO en esta funcion debo hacer un request a php y storear la informacio nen la cache
 	var em=$('#email').val();
 	var ps=$('#ps').val();
 	
@@ -34,7 +33,7 @@ function signIn(){
 	}else{
 		
 		$.ajax({
-            url: 'loginF.php',
+            url: 'serverCall/loginF.php',
             dataType: "json",
             data: {email:em, ps:ps},
             
@@ -47,7 +46,9 @@ function signIn(){
                 	ct.auth_token=data.auth_token;
                 	ct.user_id=data.id;
                 	$.jStorage.set("acnGames.act",ct);
-					$('#container').html($.View("views/page.ejs",{username:ct.name}));      
+					//$('#container').html($.View("views/page.ejs",{username:ct.name}));
+					//TODO:Corregir esto una vez que tengamos la verdadera url
+					window.location.href="/ACNPHP"//load();      
                 
                 }else if(data.status == "error") {
                 	$('#error').html("El usuario y/o contraseña son invalidos<br/>");
@@ -74,4 +75,6 @@ function checkEnter(event)
        
     }
 };
+
+
 
