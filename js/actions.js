@@ -47,9 +47,12 @@ function signIn(){
                 	ct.user_id=data.id;
                 	$.jStorage.set("acnGames.act",ct);
 					//$('#container').html($.View("views/page.ejs",{username:ct.name}));
-					//TODO:Corregir esto una vez que tengamos la verdadera url
-					window.location.href="/ACNPHP"//load();      
-                
+					if(location.pathname.indexOf("php")>-1){
+                		window.location.href="index.html";
+                	}else{
+                		window.location.href="";//load();
+                	}
+                	
                 }else if(data.status == "error") {
                 	$('#error').html("El usuario y/o contraseña son invalidos<br/>");
                 	$('#singInForm').attr("class","col-lg-4 has-error");
