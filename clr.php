@@ -60,7 +60,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
             <div class="col-lg-3"></div>
           <div class="col-lg-6">
             <div class="alert alert-danger">
-              El link al que desea ingresar es <a class="alert-link" >incorrecto</a>! para empezar a jugar por favor inicie sesi&oacute;n o registrese  
+              El link al que desea ingresar es <a class="alert-link" >incorrecto</a>! para empezar a jugar por favor inicie sesi&oacute;n  
             </div>
           </div>
         </div><!-- /.row -->';
@@ -73,7 +73,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
             <div class="col-lg-3"></div>
           <div class="col-lg-6">
             <div class="alert alert-success">
-              Gracias por activar su cuenta de <a class="alert-link" >ACN  Games</a>! para empezar a jugar por favor inicie sesi&oacute;n 
+              Gracias por activar su cuenta de <a class="alert-link" >ACN  Games</a>! para empezar a jugar por favor inicie sesi&oacute;n o registrese
             </div>
           </div>
         </div><!-- /.row -->';
