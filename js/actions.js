@@ -14,7 +14,7 @@ function load(){
 	if(value){
 		//TODO Compruebo que las cookies no hayan expirado
 		//document.location.href='template.html';
-		$('#container').html($.View("views/page.ejs",{username:value.name}));	
+		$('#container').html($.View("views/page.ejs",value));	
 	}else{
 		$('#container').html($.View("views/signIn.ejs"));
 	}
@@ -79,5 +79,8 @@ function checkEnter(event)
     }
 };
 
-
+function changePass(){
+	$('#pagina_central').html($.View("views/changePass.ejs"));	
+	
+};
 

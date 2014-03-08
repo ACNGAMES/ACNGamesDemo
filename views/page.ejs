@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-                <a class="navbar-brand" href="#">ACN Games</a>
+                <a class="navbar-brand" onclick="load()" href="#">ACN Games</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -62,7 +62,7 @@
             <li id="alertas" class="dropdown alerts-dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Alertas <span class="badge">3</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <!--<li><a href="#">Gano <span class="label label-default">Su apuesta a 12 años de Esclavitud</span></a></li>-->>
+                <!--<li><a href="#">Gano <span class="label label-default">Su apuesta a 12 años de Esclavitud</span></a></li>-->
                 <li><a href="#"><span class="label label-primary">Desafio</span> Jose lo ha Desafiado</a></li>
                 <li><a href="#"><span class="label label-success">Gano</span> Su apuesta a 12 años de Esclavitud</a></li>
                 <li><a href="#"><span class="label label-info">Desafio Ganado</span> Le ha ganado el dasfio a Pedro por 10 Cr.</a></li>
@@ -74,7 +74,7 @@
             </li>
             <li><a href="#">Donaciones</a></li>
             <li class="dropdown user-dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=this.username%> <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=this.name%> <%=this.surname%> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#"><i class="fa fa-user"></i> Cuenta</a></li>
                 <li><a href="#"><i class="fa fa-money"></i> Mis Apuestas</a></li>
@@ -90,7 +90,7 @@
         </div>
         <!-- /.container -->
     </nav>
-	<div id="pagina central"> 
+	<div id="pagina_central"> 
 		
     <div id="myCarousel" class="carousel slide">
         <!-- Indicators -->
