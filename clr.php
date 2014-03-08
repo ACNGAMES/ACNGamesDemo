@@ -60,11 +60,31 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
             <div class="col-lg-3"></div>
           <div class="col-lg-6">
             <div class="alert alert-danger">
-              El link al que desea ingresar es <a class="alert-link" >incorrecto</a>! para empezar a jugar por favor inicie sesi&oacute;n  
+              El link al que desea ingresar es <a class="alert-link" >incorrecto</a>! para empezar a jugar por favor inicie sesi&oacute;n o registrese 
             </div>
           </div>
-        </div><!-- /.row -->';
-    
+        </div><!-- /.row -->
+     <div class="col-lg-4"> </div>
+      <div class="col-lg-4" id="singInForm">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <font color="red" id="error"></font>
+        <div class="form-group input-group">
+            <span class="input-group-addon">Enterprise ID</span>
+        	<input type="email" name="email" onkeypress="checkEnter(event)" class="form-control" id="email" placeholder="Email address" required="" autofocus="">
+        </div>
+        <div class="form-group input-group">
+            <span class="input-group-addon">     Password</span>
+        	<input type="password" name="ps" onkeypress="checkEnter(event)" class="form-control" id="ps" placeholder="Password" required="">
+        </div>
+
+        <br/>
+        <a>Olvido su contraseña?</a>
+        <br/><br/>
+        <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Sign in</button>      
+      </div>
+        </div> <!-- /container -->
+        </body>
+    </html>';    
 }else{
   $id = $_GET[1];
   $at = $_GET[2];
@@ -72,11 +92,32 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
   echo '        <div class="row">
             <div class="col-lg-3"></div>
           <div class="col-lg-6">
-            <div class="alert alert-success">
-              Gracias por activar su cuenta de <a class="alert-link" >ACN  Games</a>! para empezar a jugar por favor inicie sesi&oacute;n o registrese
+            <div class="alert alert-info">
+              }por favor ingrese su <a class="alert-link" >Nueva</a> contraseña 
             </div>
           </div>
-        </div><!-- /.row -->';
+        </div><!-- /.row -->
+        <div class="col-lg-3"></div>
+      <div class="col-lg-5">
+        <div class="jumbotron">
+        <div id="singInForm" class="container2">
+            <h2 class="form-signin-heading">Ingrese su nueva contraseña</h2>
+            <font color="red" id="error"></font>
+            <div class="form-group input-group">
+            <span class="input-group-addon">New Password</span>
+        	<input type="password" name="new_ps" class="form-control" id="ps" onkeypress="checkEnter2(event)" placeholder="New Password" required="">
+        	</div>
+            <div class="form-group input-group">
+            <span class="input-group-addon">Re- Password</span>
+        	<input type="password" name="re_ps" class="form-control" id="ps" onkeypress="checkEnter2(event)" placeholder="Re-New Password" required="">
+        	</div>
+            <br/>
+            <button class="btn btn-lg btn-primary btn-block" onclick="restorePs()">Cambiar Contreña</button>
+        </div>
+        </div>
+              
+      </div>
+      </div>';
   } 
 
    echo '<div class="col-lg-4"> </div>
