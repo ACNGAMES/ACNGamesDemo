@@ -1,69 +1,123 @@
-<?php 
+<?php
 
-// primero hay que incluir la clase phpmailer para poder instanciar
-//un objeto de la misma
-require "includes/class.phpmailer.php";
+sendMail();
 
-//instanciamos un objeto de la clase phpmailer al que llamamos 
-//por ejemplo mail
-$mail = new phpmailer();
+/*function sendMail(){
 
-//Definimos las propiedades y llamamos a los métodos 
-//correspondientes del objeto mail
+     //Recuperar los datos que serviran para enviar el correo
+     $seEnvio;      //Para determinar si se envio o no el correo
+     //$destinatario = 'jonatanbahut@gmail.com';        //A quien se envia
+     $elmensaje = str_replace("\n.", "\n..", $_POST['elmsg']);     //por si el mensaje empieza con un punto ponerle 2
+     $elmensaje = wordwrap($elmensaje, 70);                       //dividir el mensaje en trozos de 70 cols
+     //Recupear el asunto
+     $asunto = $_POST['asunt'];
+     //Formatear un poco el texto que escribio el usuario (asunto) en la caja
+     //de comentario con ayuda de HTML
+     $mensaje ='
+		<html>
+		<head>
+		  <title>Recordatorio de cumpleaños para Agosto</title>
+		</head>
+		<body>
+		  <p>¡Estos son los cumpleaños para Agosto!</p>
+		  <table>
+		    <tr>
+		      <th>Quien</th><th>Día</th><th>Mes</th><th>Año</th>
+		    </tr>
+		    <tr>
+		      <td>Joe</td><td>3</td><td>Agosto</td><td>1970</td>
+		    </tr>
+		    <tr>
+		      <td>Sally</td><td>17</td><td>Agosto</td><td>1973</td>
+		    </tr>
+		  </table>
+		</body>
+		</html>
+		';
 
-//Con PluginDir le indicamos a la clase phpmailer donde se 
-//encuentra la clase smtp que como he comentado al principio de 
-//este ejemplo va a estar en el subdirectorio includes
-$mail->PluginDir = "includes/";
-$mail->IsSMTP();
-//Con la propiedad Mailer le indicamos que vamos a usar un 
-//servidor smtp
-$mail->Mailer = "smtp";
+// Para enviar un correo HTML mail, la cabecera Content-type debe fijarse
+$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
-//Asignamos a Host el nombre de nuestro servidor smtp
+// Cabeceras adicionales
+$cabeceras .= 'To: Jonatan <jonatanbahut@gmail.com>, Fieldy <fieldy_prodark@hotmail.com>' . "\r\n";
+$cabeceras .= 'From: ACN Games <accounts@acngames.com.ar>' . "\r\n";
+//$cabeceras .= 'Cc: birthdayarchive@example.com' . "\r\n";
+//$cabeceras .= 'Bcc: birthdaycheck@example.com' . "\r\n";
+    if(mail($cabeceras,$asunto,$mensaje)){
+        $seEnvio = true;
+    }else{
+        $seEnvio = false;
+	}
+//Enviar el estado del envio (por metodo GET ) y redirigir navegador al archivo index.php
+    if($seEnvio == true){
+        header('Enviadoooo');
+    }else{
+        header('Location: index.php?estado=no_enviado');
+    }
+  
+};*/
+
+
+/*function sendMail(){
+
+require_once('mailer.php');
+ 
+ $from = "Sandra Sender <accounts@acngames.com.ar>";
+ $to = "Ramona Recipient <jonatanbahut@gmail.com>";
+ $subject = "Hi!";
+ $body = "Hi,\n\nHow are you?";
+ 
+ $host = "mx1.hostinger.es";
+ $username = "accounts@acngames.com.ar";
+ $password = "Edenor2014";
+ $port = "2525";
+ 
+ $headers = array ('From' => $from,
+   'To' => $to,
+   'Subject' => $subject);
+ $smtp = Mail::factory('smtp',
+   array ('host' => $host,
+     'port' => $port,
+     'auth' => true,
+     'username' => $username,
+     'password' => $password));
+ 
+ $mail = $smtp->send($to, $headers, $body);
+ 
+ if (PEAR::isError($mail)) {
+   echo("<p>" . $mail->getMessage() . "</p>");
+  } else {
+   echo("<p>Message successfully sent!</p>");
+  }
+	
+};*/
+
+function sendMail(){
+	
+require_once("js/class.phpmailer.php");
+$mail = new PHPMailer(); // create a new object
+$mail->IsSMTP(); // enable SMTP
+$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+$mail->SMTPAuth = true; // authentication enabled
+$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
 $mail->Host = "mx1.hostinger.es";
-$mail->Port = 2525;
-//Le indicamos que el servidor smtp requiere autenticación
-$mail->SMTPAuth = true;
-
-//Le decimos cual es nuestro nombre de usuario y password
-$mail->Username = "accounts@acngames.com.ar"; 
+$mail->Port = 2525; // or 587
+$mail->IsHTML(true);
+$mail->Username = "accounts@acngames.com.ar";
 $mail->Password = "Edenor2014";
-$mail->SMTPSecure = 'ssl'; 
-//Indicamos cual es nuestra dirección de correo y el nombre que 
-//queremos que vea el usuario que lee nuestro correo
-$mail->From = "accounts@acngames.com.ar"; 
-$mail->FromName = "Mi Nombre";
-
-//el valor por defecto 10 de Timeout es un poco escaso dado que voy a usar 
-//una cuenta gratuita, por tanto lo pongo a 30 
-$mail->Timeout=120;
-
-//Indicamos cual es la dirección de destino del correo
-$mail->AddAddress("eortiz@edenor.com");
-
-//Asignamos asunto y cuerpo del mensaje
-//El cuerpo del mensaje lo ponemos en formato html, haciendo 
-//que se vea en negrita
-$mail->Subject = "Prueba de phpmailer";
-$mail->Body = "Mensaje de prueba mandado con phpmailer en formato html";
-
-//Definimos AltBody por si el destinatario del correo no admite email con formato html 
-$mail->AltBody = "Mensaje de prueba mandado con phpmailer en formato solo texto";
-
-//se envia el mensaje, si no ha habido problemas 
-//la variable $exito tendra el valor true
-$exito = $mail->Send();
-
-
-
-if(!$exito)
-{
-echo "Problemas enviando correo electrónico a ";
-echo "".$mail->ErrorInfo;	
+$mail->SetFrom("accounts@acngames.com.ar");
+$mail->Subject = "Test";
+$mail->Body = "hello";
+$mail->AddAddress("jonatanbahut@gmail.com");
+ if(!$mail->Send())
+    {
+    echo "Mailer Error: " . $mail->ErrorInfo;
+    }
+    else
+    {
+    echo "Message has been sent";
+    }
+	
 }
-else
-{
-echo "Mensaje enviado correctamente";
-} 
-?>
+

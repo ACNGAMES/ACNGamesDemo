@@ -14,8 +14,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a><i class="fa fa-pencil"></i> Registrarse</a></li>
-                    <li><a><i class="fa fa-envelope"></i> Contactenos</a></li>
+                    <li><a href="#" onclick="loadRegister()"><i class="fa fa-pencil"></i> Registrarse</a></li>
+                    <li><a href="#"><i class="fa fa-envelope"></i> Contactenos</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -30,16 +30,15 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <font color="red" id="error"></font>
         <div class="form-group input-group">
-            <span class="input-group-addon">Enterprise ID</span>
-        	<input type="email" name="email" onkeypress="checkEnter(event)" class="form-control" id="email" placeholder="Email address" required="" autofocus="">
+            <span class="input-group-addon">Enterprise</span>
+        	<input type="email" name="email" onkeypress="checkEnter(event)" class="form-control" id="email" placeholder="Enterprise ID" required="" autofocus="">
         </div>
         <div class="form-group input-group">
             <span class="input-group-addon">     Password</span>
         	<input type="password" name="ps" onkeypress="checkEnter(event)" class="form-control" id="ps" placeholder="Password" required="">
         </div>
         
-        <br/>
-        <a>Olvido su contraseña?</a>
+        <a href="#">¿Olvidó su contraseña?</a>
         <br/><br/>
         <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Sign in</button>      
       </div>

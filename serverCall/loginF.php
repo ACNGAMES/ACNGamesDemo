@@ -29,41 +29,41 @@ function foo2()
         $var=true;
   }
 
-  /*
-  echo '<table>'; 
-  while($fila = mysql_fetch_assoc($resultado)) 
-  { 
-    echo '<tr>'; 
-    echo '<td>' . $fila['email'] . '</td><td>' . $fila['ps'] . '</td>'; 
-    echo '</tr>'; 
-  } 
-  echo '</table>';*/
-  
-  
-   
-  
-   if ($var==true)
+  if ($var==true)
     {
-    
-    //TODO aca tengo que genrar el token de authenticacion y subirlo al base
-    $auth_token = '1224'; 
     $fila = mysql_fetch_assoc($resultado);
+    //TODO aca tengo que genrar el token de authenticacion y subirlo al base
+    $auth_token = '1224';
     $data = array('status'=> 'ok',
                   'user_id'=>$fila['USER_ID'],
                   'name'=>$fila['NAME'],
                   'surname'=>$fila['SURNAME'],
-                  'auth_token'=>$auth_token 
-                 );           
+                  'auth_token'=>$auth_token,
+                  'silver' =>12,
+                  'gold' => 1 
+                 );
+    mysql_free_result($resultado);
+    $userid = $fila['USER_ID'];   
+    $sentencia = "SELECT * FROM u970955255_acn.CM_ACTIVATE_ACCT where user_id='$userid'"; 
+    // Ejecuta la sentencia SQL 
+    $resultado = mysql_query($sentencia, $iden); 
+    if(!$resultado) 
+        die("Error: no se pudo realizar la consulta");
+    if(mysql_num_rows($resultado)!= 0){
+        $data = array('status'=> 'activate');
+    }  
+    mysql_free_result($resultado);
+    //Envio la respuesta por json
+    echo json_encode($data);
     
     }else{
          $data = array('status'=> 'error');
+         mysql_free_result($resultado);
+         //Envio la respuesta por json
+         echo json_encode($data);
     }
     
-    // JSON encode and send back to the server
-    echo json_encode($data);
-    // Libera la memoria del resultado
-    mysql_free_result($resultado);
-  
+    
     // Cierra la conexión con la base de datos 
     mysql_close($iden); 
    
