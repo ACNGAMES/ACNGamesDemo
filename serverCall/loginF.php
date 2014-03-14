@@ -48,7 +48,10 @@ function foo2()
     if(!$resultado) 
         die("Error: no se pudo realizar la consulta");
     if(mysql_num_rows($resultado)!= 0){
-        $data = array('status'=> 'activate');
+        $data = array('status'=> 'activate',
+					'user_id'=>$userid,
+					'auth_token'=>$auth_token
+		);
     }  
     mysql_free_result($resultado);
     //Envio la respuesta por json

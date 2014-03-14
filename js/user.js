@@ -41,14 +41,15 @@ function signIn(){
                 	}
 					
                 }else if(data.status == "activate"){
+                	aux={};
+                	aux.auth_token=data.auth_token;
+                	aux.user_id=data.user_id;
                 	$('#singInForm').attr("class","col-lg-4");
                 	$('#error').html(
                 	'<div class="row">'
-                		//+'<div class="col-lg-6">'
             				+'<div class="alert alert-danger">'
               					+'La cuenta no esta  <a class="alert-link" >Activada</a>! haga <a href="#" onclick="sendActMail()">click aqui </a>para solicitar el mail de acitcaci&oacute;n'  
         		    		+'</div>'
-        		    	//+'</div>'
         		    +'</div>');
                 	
                 }else if(data.status == "error") {
@@ -198,5 +199,28 @@ function getCoins(){
 	return resp;
 };
 
-
-
+var au;
+//Esta funcion sirve para solicitar el envio del mial nuevamente
+function sendActMail(){
+	$.ajax({
+            url: 'serverCall/resendF.php',
+            dataType: "json",
+            data: {id:aux.user_id, auth_token:aux.auth_token},
+            success: function(data) {
+            	if(data.status=="ok"){
+					$('#error').html(
+                	'<div class="row">'
+                	+'<div class="alert alert-success">'
+              		+'La solicitud se ha enviado  <a class="alert-link" >Exitosamente</a>! En minutos recibira un mail con el link de activaci&oacute;n. Por favor verifique que no este en la secci&oacute;n de spam'  
+        		    +'</div>'
+        		    +'</div>');					            		
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});	
+};

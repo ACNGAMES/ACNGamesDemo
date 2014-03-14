@@ -19,10 +19,8 @@ echo '<!DOCTYPE html>
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
     <!-- Core JS -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/actions.js"></script>
-    <script src="js/jstorage.js"></script>
-    <script src="js/jquerymx.min.js"></script>
+    <script src="js/head.min.js"></script>
+    
     
     
    </head>
