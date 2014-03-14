@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function signOut(){
 	
 	//$.jStorage.set("tarjetaP",tarjetaP);
@@ -152,3 +153,5 @@ function signUp(){
 
 };
 
+=======
+>>>>>>> b95391c1735a08c4e4eda15ce252abe0f65646fa
