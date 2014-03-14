@@ -25,7 +25,7 @@ function signIn(){
                 	ct.name=data.name;
                 	ct.surname=data.surname;
                 	ct.auth_token=data.auth_token;
-                	ct.user_id=data.id;
+                	ct.user_id=data.user_id;
                 	ct.silver=data.silver;
                 	ct.gold=data.gold;
                 	$.jStorage.set("acnGames.act",ct);
@@ -139,3 +139,25 @@ function hash(value){
 	return value;
 };
 
+
+//Esta funcion vlaida que el otken no haya expirado por que secerro la sesion
+function valToken(){
+	var resp;
+	$.ajax({
+            url: 'serverCall/valTokenF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token},
+            async: false,
+            success: function(data) {
+            	if(data.status=="ok"){
+            		resp= true;
+            	}else{
+            		resp= false;
+            	}
+            },error: function(error){
+            	resp= false;
+            } 
+
+	});
+	return resp;
+};

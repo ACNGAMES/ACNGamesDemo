@@ -33,7 +33,7 @@ function foo2()
     {
     $fila = mysql_fetch_assoc($resultado);
     //TODO aca tengo que genrar el token de authenticacion y subirlo al base
-    $auth_token = '1224';
+    $auth_token = '1234';
     $data = array('status'=> 'ok',
                   'user_id'=>$fila['USER_ID'],
                   'name'=>$fila['NAME'],

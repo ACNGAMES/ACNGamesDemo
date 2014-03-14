@@ -2,11 +2,21 @@
 function load(){
 	
 	var value = $.jStorage.get("acnGames.act");
-	//console.log(value);
 	if(value){
-		//TODO Compruebo que las cookies no hayan expirado
-		//document.location.href='template.html';
-		$('#container').html($.View("views/page.ejs",value));	
+		
+		act= value;
+		if(!valToken()){
+			$.jStorage.deleteKey("acnGames.act");
+			$('#container').html($.View("views/signIn.ejs"));
+			$('#error').html(
+                	'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'Su sessi&oacute;n  ha  <a class="alert-link" >Expirado</a>! Por favor inicie sesi&oacute;n nuevamente'  
+        	   		+'</div>'
+        		    +'</div>');		
+		}else{
+			$('#container').html($.View("views/page.ejs",value));	
+		};
 	}else{
 		$('#container').html($.View("views/signIn.ejs"));
 	}
