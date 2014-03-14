@@ -89,12 +89,12 @@ function loadRegister(){
 };
 
 function signUp(){
-	//action="registerF.php"
-	var nm=$('#name').val().toString().trim();
-	var sn=$('#surname').val().toString().trim();
-	var id=$('#enterprise').val().toString().trim();
-	var ps=$('#ps').val().toString().trim();
-	var ps2=$('#ps2').val().toString().trim();
+	//.toString().trim()
+	var nm=$('#name').val();
+	var sn=$('#surname').val();
+	var id=$('#enterprise').val();
+	var ps=$('#ps').val();
+	var ps2=$('#ps2').val();
 	var flag=true;
 	
 	$('#errorName').html("");
@@ -133,13 +133,18 @@ function signUp(){
 	}
 	
 	$.ajax({
-            url: 'registerF.php',
+            url: 'serverCall/registerF.php',
             dataType: "json",
-            data: {enterprise:id},
+            data: {name:nm, surname:sn, enterprise:id, ps:ps},
             
-            success: function(data) {
+            success: !function(data) {
             	$('#signUpForm').attr("class","col-lg-4 has-error");
 				$('#errorPs').html("Registro OK<br/>");
+				console.log(data);
+            },
+            error: function(error){
+				$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+				console.log("Error de conexion");            	
             }
 
 	});
