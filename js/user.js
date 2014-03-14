@@ -224,3 +224,71 @@ function sendActMail(){
             } 
 	});	
 };
+
+//Esta funcion sirve para cambiar contraseña
+function changePs(){
+		$('#error').html("");
+		var ps=$('#ps').val();
+		var new_ps=$('#new_ps').val();
+		var re_ps=$('#re_ps').val();
+		//Borro los cuadrads de error
+		$('#singInForm').attr("class","container2");
+		$('#pass').attr("class","form-group input-group");
+		$('#new_pass').attr("class","form-group input-group");
+		$('#re_pass').attr("class","form-group input-group");
+		
+	if(ps== "" || new_ps =="" || re_ps==""){
+		$('#singInForm').attr("class","container2 has-error");
+		$('#error').html(
+             '<div class="row">'
+            +'<div class="alert alert-danger">'
+            +'Los campos de contraseña, nueva contraseña y verificar nueva contraseña no pueden ser <a class="alert-link" >vacios</a>!'  
+        	+'</div>'
+        	+'</div>');
+	}else if(new_ps!=re_ps){
+			$('#new_pass').attr("class","form-group input-group has-error");
+			$('#re_pass').attr("class","form-group input-group has-error");
+			$('#error').html(
+             '<div class="row">'
+            +'<div class="alert alert-danger">'
+            +'Los campos nueva contraseña y verificar <a class="alert-link" >no coinciden</a>!'  
+        	+'</div>'
+        	+'</div>');
+	}else{
+			$.ajax({
+            url: 'serverCall/changePsF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, ps:hash(ps), new_ps:hash(new_ps)},
+            success: function(data) {
+            	if (data.status == "ok") {
+                	$('#error').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-success">'
+            		+'La contraseña se ha cambiado <a class="alert-link" >exitosamente</a>!'  
+        			+'</div>'
+        			+'</div>');
+					
+                }else if(data.status == "exp"){
+                	expire();
+                	
+                }else if(data.status == "error") {
+                	$('#pass').attr("class","form-group input-group has-error");
+					$('#error').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'La contraseña es <a class="alert-link" >invalida</a>!'  
+        			+'</div>'
+        			+'</div>');
+				}else{
+                	$('#singInForm').attr("class","col-lg-4 has-error");
+                	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+                }
+            },error: function(error){
+            	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+				console.log(error);
+            } 
+
+	});
+		
+	}	
+};

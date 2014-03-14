@@ -47,3 +47,14 @@ function expire(){
         	   		+'</div>'
         		    +'</div>');
 };
+
+
+//Esta funcion verifica el enter en un formulario de changepassword
+function checkEnter2(event)
+{
+    if (event.keyCode == 13) 
+   {
+      changePs();
+       
+    }
+};
