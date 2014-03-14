@@ -38,9 +38,7 @@ function foo2()
                   'user_id'=>$fila['USER_ID'],
                   'name'=>$fila['NAME'],
                   'surname'=>$fila['SURNAME'],
-                  'auth_token'=>$auth_token,
-                  'silver' =>12,
-                  'gold' => 1 
+                  'auth_token'=>$auth_token
                  );
     mysql_free_result($resultado);
     $userid = $fila['USER_ID'];   

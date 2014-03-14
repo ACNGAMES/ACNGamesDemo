@@ -29,12 +29,17 @@ function signIn(){
                 	ct.silver=data.silver;
                 	ct.gold=data.gold;
                 	$.jStorage.set("acnGames.act",ct);
-					//$('#container').html($.View("views/page.ejs",{username:ct.name}));
-					if(location.pathname.indexOf("php")>-1){
-                		window.location.href="index.html";
-                	}else{
-                		window.location.href="";//load();
+                	act=ct;
+                	
+                	if(getCoins()){
+                		//$('#container').html($.View("views/page.ejs",{username:ct.name}));
+						if(location.pathname.indexOf("php")>-1){
+                			window.location.href="index.html";
+                		}else{
+	                		window.location.href="";//load();
+    	            	}	
                 	}
+					
                 }else if(data.status == "activate"){
                 	$('#singInForm').attr("class","col-lg-4");
                 	$('#error').html(
@@ -161,3 +166,37 @@ function valToken(){
 	});
 	return resp;
 };
+
+
+//Esta funcion obtiene los creditos del usuario
+function getCoins(){
+	var resp;
+	$.ajax({
+            url: 'serverCall/getCrF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token},
+            async: false,
+            success: function(data) {
+            	if(data.status=="ok"){
+            		act.silver=data.silver;
+            		act.gold=data.gold;
+            		$.jStorage.set("acnGames.act",act);
+            		resp =true;
+            	}else if(data.status=="exp"){
+            		expire();
+            		resp =false;
+            	}else{
+            		alert('ocurrio un error');
+            		resp =false;;
+            	}
+            },error: function(error){
+            	resp =false;
+            	console.log(error);
+            } 
+
+	});
+	return resp;
+};
+
+
+

@@ -6,14 +6,7 @@ function load(){
 		
 		act= value;
 		if(!valToken()){
-			$.jStorage.deleteKey("acnGames.act");
-			$('#container').html($.View("views/signIn.ejs"));
-			$('#error').html(
-                	'<div class="row">'
-            		+'<div class="alert alert-danger">'
-            		+'Su sessi&oacute;n  ha  <a class="alert-link" >Expirado</a>! Por favor inicie sesi&oacute;n nuevamente'  
-        	   		+'</div>'
-        		    +'</div>');		
+			expire();		
 		}else{
 			$('#container').html($.View("views/page.ejs",value));	
 		};
@@ -41,4 +34,16 @@ function changePass(){
 //Esta funcion dibuja el formulario para crear cuenta
 function loadRegister(){
 	$('#container').html($.View("views/register.ejs"));
+};
+
+//Esta funcion dibuja la seccion de epxirado
+function expire(){
+	$.jStorage.deleteKey("acnGames.act");
+			$('#container').html($.View("views/signIn.ejs"));
+			$('#error').html(
+                	'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'Su sessi&oacute;n  ha  <a class="alert-link" >Expirado</a>! Por favor inicie sesi&oacute;n nuevamente'  
+        	   		+'</div>'
+        		    +'</div>');
 };
