@@ -28,14 +28,29 @@
       <div class="col-lg-4"></div>
       <div class="col-lg-4" id="signUpForm">
           <h2 class="form-signin-heading">Sign Up</h2>
-        <p><input type="name" name="name" class="form-control" id="name" placeholder="Name" required="" autofocus=""></p>
-        <font color="red" id="errorName"></font>
-        <p><input type="surname" name="surname" class="form-control" id="surname" placeholder="Surname" required="" autofocus=""></p>
-        <font color="red" id="errorSurname"></font>
-        <p><input type="enterprise" name="enterprise" class="form-control" id="enterprise" placeholder="Enterprise ID" required="" autofocus=""></p>
-        <font color="red" id="errorEnterprise"></font>
-        <p><input type="password" name="ps" class="form-control" id="ps" placeholder="Password" required=""></p>
-        <p><input type="password" name="ps2" class="form-control" id="ps2" placeholder="Confirm Password" required=""></p>
+        <div class="form-group input-group">
+          	<span  class="input-group-addon">    Name             </span>
+          	<p><input type="name" name="name" class="form-control" id="name" placeholder="Name" required="" autofocus=""></p>
+        </div>
+        	<font color="red" id="errorName"></font>
+        <div class="form-group input-group">
+          	<span class="input-group-addon">  Surname</span>
+          	<p><input type="surname" name="surname" class="form-control" id="surname" placeholder="Surname" required="" autofocus=""></p>
+        </div>
+        	<font color="red" id="errorSurname"></font>
+        <div class="form-group input-group">
+          	<span class="input-group-addon">  Enterprise</span>
+          	<p><input type="enterprise" name="enterprise" class="form-control" id="enterprise" placeholder="Enterprise ID" required="" autofocus=""></p>
+        </div>
+        	<font color="red" id="errorEnterprise"></font>
+        <div class="form-group input-group">
+          	<span class="input-group-addon">  Password</span>
+        	<p><input type="password" name="ps" class="form-control" id="ps" placeholder="Password" required=""></p>
+        </div>
+        <div class="form-group input-group">
+          	<span class="input-group-addon">Confirm password</span>
+        	<p><input type="password" name="ps2" class="form-control" id="ps2" placeholder="Confirm Password" required=""></p>
+        </div>
         <font color="red" id="errorPs"></font>
         <button class="btn btn-lg btn-primary btn-block" onclick="signUp()">Register</button>      
       </div>
