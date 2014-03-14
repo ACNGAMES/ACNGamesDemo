@@ -1,6 +1,49 @@
 <?php
 
+//$name=$_GET["nm"];
+//$surname=$_GET["sn"];
+//$enterprise=$_GET["id"];
+//$password=$_GET["ps"];
+
+
+
+//insertAccount();
 sendMail();
+
+//$vr = include("serverCall/var.php");
+
+ 
+/*function insertAccount(){
+		
+	include('var.php');	
+	global $name;
+	global $surname;
+	global $enterprise;
+	global $password;
+	
+	echo "Entro";
+	
+		if(!($iden = db_connection()))
+ 		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error())); 
+		
+ 		$sentencia = "INSERT INTO u970955255_acn.cm_event (EVENT_ID, EVENT, OFF_DTTM, NUMBER_BETS, SPORT_ID, RESULT, EVENT_STATUS_FLG) " + 
+ 					 "VALUES " +
+ 					 "(FLOOR( 1 + ( RAND( ) * 999999999999), '1', SYSDATE, 1, 1, 1, '1');";
+ 	
+		$resultado = mysql_query($sentencia, $iden); 
+		  if(!$resultado) 
+		    die("Error: no se pudo realizar la consulta");
+		  	echo "Error";
+		  if(mysql_num_rows($resultado)== 0){
+		        $var = false;
+			  echo "Error";
+		  }else{
+		        $var=true;
+				echo "OK";
+		  }
+	
+	//sendMail();
+ }*/
 
 /*function sendMail(){
 
@@ -59,18 +102,18 @@ $cabeceras .= 'From: ACN Games <accounts@acngames.com.ar>' . "\r\n";
 };*/
 
 
-/*function sendMail(){
+function sendMail(){
 
-require_once('mailer.php');
+include('mail.php');
  
- $from = "Sandra Sender <accounts@acngames.com.ar>";
- $to = "Ramona Recipient <jonatanbahut@gmail.com>";
+ $from = "Sandra Sender <jonatanbahut@gmail.com>";
+ $to = "Ramona Recipient <jbahut@edenor.com>";
  $subject = "Hi!";
  $body = "Hi,\n\nHow are you?";
  
- $host = "mx1.hostinger.es";
- $username = "accounts@acngames.com.ar";
- $password = "Edenor2014";
+ $host = "smtp.gmail.com";
+ $username = "jonatanbahut@gmail.com";
+ $password = "kornkorn1";
  $port = "2525";
  
  $headers = array ('From' => $from,
@@ -89,19 +132,26 @@ require_once('mailer.php');
    echo("<p>" . $mail->getMessage() . "</p>");
   } else {
    echo("<p>Message successfully sent!</p>");
+   echo "Salió mail";
   }
+  
 	
-};*/
+};
 
-function sendMail(){
-	
-require_once("js/class.phpmailer.php");
+/*function sendMail(){
+		
+require('class.phpmailer.php');	
+require('class.smtp.php');
+require_once('mail.php');
+
+
+
 $mail = new PHPMailer(); // create a new object
 $mail->IsSMTP(); // enable SMTP
 $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
 $mail->SMTPAuth = true; // authentication enabled
 $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
-$mail->Host = "mx1.hostinger.es";
+$mail->Host = "ns1.cdmon.net";
 $mail->Port = 2525; // or 587
 $mail->IsHTML(true);
 $mail->Username = "accounts@acngames.com.ar";
@@ -117,7 +167,9 @@ $mail->AddAddress("jonatanbahut@gmail.com");
     else
     {
     echo "Message has been sent";
+	//insert();
     }
 	
-}
+}*/
 
+?>
