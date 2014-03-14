@@ -33,7 +33,7 @@ function changePass(){
 
 //Esta funcion dibuja el formulario para crear cuenta
 function loadRegister(){
-	$('#container').html($.View("views/register.ejs"));
+	$('#container').html($.View("views/signUp.ejs"));
 };
 
 //Esta funcion dibuja la seccion de epxirado
