@@ -53,7 +53,7 @@ echo '<!DOCTYPE html>
     <br /><br /><br /><br />
  <div class="container">';
 if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
-   //TODO aca tengo que llamar a una pantalla de error      
+   //Pantalla de error      
   echo '<div class="row">
             <div class="col-lg-3"></div>
           <div class="col-lg-6">
@@ -66,15 +66,39 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
 }else{
   $id = $_GET[1];
   $at = $_GET[2];
-  //echo $id.' '.$at;
-  echo '        <div class="row">
+  include 'serverCall/valF.php';
+	if(validate($id, $at)){
+		
+	if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
+        die("Error: No se pudo conectar".mysql_error()); 
+     
+  	$sentencia = "DELETE from u970955255_acn.CM_ACTIVATE_ACCT where user_id='$id'"; 
+   	mysql_query($sentencia, $iden);
+	$SILVER_INIT=5;
+	$GOLD_INIT=0;
+	$sentencia = "INSERT INTO u970955255_acn.CM_COIN VALUES ('$id',$SILVER_INIT,$GOLD_INIT)"; 
+   	mysql_query($sentencia, $iden); 
+	mysql_close($iden);	
+	echo '        <div class="row">
             <div class="col-lg-3"></div>
           <div class="col-lg-6">
             <div class="alert alert-success">
               Gracias por activar su cuenta de <a class="alert-link" >ACN  Games</a>! para empezar a jugar por favor inicie sesi&oacute;n 
             </div>
           </div>
+        </div><!-- /.row -->';	
+	
+	}else{
+		echo '<div class="row">
+            <div class="col-lg-3"></div>
+          <div class="col-lg-6">
+            <div class="alert alert-danger">
+              El link al que desea ingresar es <a class="alert-link" >incorrecto</a>! para empezar a jugar por favor inicie sesi&oacute;n o registrese  
+            </div>
+          </div>
         </div><!-- /.row -->';
+	}
+  
   } 
 
    echo '<div class="col-lg-4"> </div>
@@ -99,9 +123,4 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
         </body>
     </html>';
   
-          
-
-
-    
-
 ?>
