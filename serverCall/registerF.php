@@ -1,19 +1,18 @@
 <?php
-
-//$name=$_GET["nm"];
-//$surname=$_GET["sn"];
-//$enterprise=$_GET["id"];
-//$password=$_GET["ps"];
-
+$name=$_GET["name"];
+$surname=$_GET["surname"];
+$enterprise=$_GET["enterprise"];
+$password=$_GET["ps"];
 
 
-//insertAccount();
-sendMail();
+
+insertAccount();
+//sendMail();
 
 //$vr = include("serverCall/var.php");
 
  
-/*function insertAccount(){
+function insertAccount(){
 		
 	include('var.php');	
 	global $name;
@@ -21,29 +20,27 @@ sendMail();
 	global $enterprise;
 	global $password;
 	
-	echo "Entro";
 	
 		if(!($iden = db_connection()))
  		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error())); 
 		
- 		$sentencia = "INSERT INTO u970955255_acn.cm_event (EVENT_ID, EVENT, OFF_DTTM, NUMBER_BETS, SPORT_ID, RESULT, EVENT_STATUS_FLG) " + 
- 					 "VALUES " +
- 					 "(FLOOR( 1 + ( RAND( ) * 999999999999), '1', SYSDATE, 1, 1, 1, '1');";
+ 		$sentencia = "INSERT INTO u970955255_acn.cm_user (USER_ID, ENTERPRISE_ID, NAME, SURNAME, PASSWORD, CRE_DTTM, AUTH_TOKEN) VALUES (FLOOR( 1 + ( RAND( ) * 9999999999)), '$enterprise', '$name', '$surname', '$password', CURTIME(), '123456');";
  	
+		//$enterprise, $name, $surname, $password	
 		$resultado = mysql_query($sentencia, $iden); 
-		  if(!$resultado) 
-		    die("Error: no se pudo realizar la consulta");
-		  	echo "Error";
-		  if(mysql_num_rows($resultado)== 0){
+		  /*if(mysql_num_rows($resultado)== 0){
 		        $var = false;
 			  echo "Error";
 		  }else{
 		        $var=true;
 				echo "OK";
-		  }
-	
+		  }*/
+		
+		//mysql_free_result(true);
+    	//Envio la respuesta por json
+    	echo json_encode($resultado);
 	//sendMail();
- }*/
+ }
 
 /*function sendMail(){
 
@@ -102,7 +99,7 @@ $cabeceras .= 'From: ACN Games <accounts@acngames.com.ar>' . "\r\n";
 };*/
 
 
-function sendMail(){
+/*function sendMail(){
 
 include('mail.php');
  
@@ -136,7 +133,7 @@ include('mail.php');
   }
   
 	
-};
+};*/
 
 /*function sendMail(){
 		
