@@ -65,7 +65,7 @@ function foo2()
     }
     
     
-    // Cierra la conexiÃ³n con la base de datos 
+    // Cierra la conexión con la base de datos 
     mysql_close($iden); 
    
    
@@ -73,4 +73,3 @@ function foo2()
 
 
 ?>
-
