@@ -16,7 +16,7 @@ function signIn(){
 		$.ajax({
             url: 'serverCall/loginF.php',
             dataType: "json",
-            data: {email:em, ps:hash(ps)},
+            data: {email:em, ps:ps},
             
             success: function(data) {
 				if (data.status == "ok") {
@@ -82,12 +82,11 @@ function signOut(){
 //Esta funcion se encarga de hacer el singUP
 function signUp(){
 	//action="registerF.php"
-	var nm=$('#name').val().toString().trim();
-	var sn=$('#surname').val().toString().trim();
-	var id=$('#enterprise').val().toString().trim();
-	var ps=$('#ps').val().toString().trim();
-	var ps2=$('#ps2').val().toString().trim();
-	var flag=true;
+	var nm=$('#name').val();
+	var sn=$('#surname').val();
+	var id=$('#enterprise').val();
+	var ps=hash($('#ps').val());
+	var ps2=hash($('#ps2').val());
 	
 	$('#errorName').html("");
 	$('#errorSurname').html("");
@@ -122,27 +121,35 @@ function signUp(){
 		$('#signUpForm').attr("class","col-lg-4 has-error");
 		$('#errorPs').html("Las contraseñas no coincidieron<br/>");
 		return;
-	}
+	
+   }else{
 	
 	$.ajax({
-            url: 'registerF.php',
+            url: 'serverCall/registerF.php',
             dataType: "json",
-            data: {enterprise:id},
-            
+            data: {name:nm, surname:sn, enterprise:id, ps:ps},
             success: function(data) {
-            	$('#signUpForm').attr("class","col-lg-4 has-error");
-				$('#errorPs').html("Registro OK<br/>");
-            }
+            	if(data.status=="OK"){
+            		console.log(data);
+            	}else{
+            		console.log(data);
+            	}
+            },error: function(error){
+            	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+				console.log(error);
+            }  
 
 	});
-
+	
+  }
 
 };
 
 //Esta funcion se encarga de generar el hsash para enviar la contraseña encriptada al servidor
 function hash(value){
-	//TODO poner funcion de encriptado
-	return value;
+
+	return passHash = Sha1.hash(value);
+	
 };
 
 
