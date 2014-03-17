@@ -4,7 +4,7 @@ var act = null;
 function signIn(){
 	//action="loginF.php"
 	var em=$('#email').val();
-	var ps=$('#ps').val();
+	var ps=hash($('#ps').val());
 	
 	
 	if(ps== "" || em ==""){
