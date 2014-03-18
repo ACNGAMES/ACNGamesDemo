@@ -24,7 +24,7 @@
     </nav>
  	<br /><br /><br /><br />
  <div class="container">
-
+      <div id="rest"></div>
       <div class="col-lg-4"> </div>
       <div class="col-lg-4" id="singInForm">
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -38,7 +38,7 @@
         	<input type="password" name="ps" onkeypress="checkEnter(event)" class="form-control" id="ps" placeholder="Password" required="">
         </div>
         
-        <a href="#">¿Olvidó su contraseña?</a>
+        <a onclick="restorePass()" href="#">¿Olvidó su contraseña?</a>
         <br/><br/>
         <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Sign in</button>      
       </div>
