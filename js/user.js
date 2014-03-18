@@ -129,15 +129,29 @@ function signUp(){
             dataType: "json",
             data: {name:nm, surname:sn, enterprise:id, ps:ps},
             success: function(data) {
-            	if(data.status=="OK"){
-            		console.log(data);
-            	}else{
-            		console.log(data);
+            	if (data.status == "ok") {
+                	$('#error').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-success">'
+            		+'Su cuenta ha sido creada <a class="alert-link" >exitosamente</a>! Vaya a su correo para activar la cuenta'  
+        			+'</div>'
+        			+'</div>');
+					
+                } else (data.status == "error"); {
+                	$('#pass').attr("class","form-group input-group has-error");
+					$('#error').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'La cuenta con el Enterprise que intenta crear <a class="alert-link" >ya existe!</a>!'  
+        			+'</div>'
+        			+'</div>');
             	}
-            },error: function(error){
+            },
+            
+            error: function(error){
             	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
 				console.log(error);
-            }  
+            }   
 
 	});
 	
