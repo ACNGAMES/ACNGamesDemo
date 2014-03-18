@@ -238,6 +238,7 @@ function changePs(){
 		var ps=$('#ps').val();
 		var new_ps=$('#new_ps').val();
 		var re_ps=$('#re_ps').val();
+		
 		//Borro los cuadrads de error
 		$('#singInForm').attr("class","container2");
 		$('#pass').attr("class","form-group input-group");
@@ -265,7 +266,7 @@ function changePs(){
 			$.ajax({
             url: 'serverCall/changePsF.php',
             dataType: "json",
-            data: {id:act.user_id, auth_token:act.auth_token, ps:hash(ps), new_ps:hash(new_ps)},
+            data: {id:act.user_id, auth_token:act.auth_token, ps:hash(ps), new_ps:hash(new_ps), enterprise:act.email},
             success: function(data) {
             	if (data.status == "ok") {
                 	$('#error').html(
