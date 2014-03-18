@@ -25,7 +25,7 @@ echo '<!DOCTYPE html>
     
    </head>
    
-  <body>
+  <body id="container">
     
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -42,8 +42,8 @@ echo '<!DOCTYPE html>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a><i class="fa fa-pencil"></i> Registrarse</a></li>
-                    <li><a><i class="fa fa-envelope"></i> Contactenos</a></li>
+                    <li><a href="#" onclick="loadRegister()"><i class="fa fa-pencil"></i> Registrarse</a></li>
+                    <li><a href="#"><i class="fa fa-envelope"></i> Contactenos</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -51,7 +51,37 @@ echo '<!DOCTYPE html>
         <!-- /.container -->
     </nav>
     <br /><br /><br /><br />
- <div class="container">';
+ <div class="container">
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Restaurar Contraseña</h4>
+      </div>
+      <div class="modal-body">
+        <div id="error-modal"></div>
+        <div class="row">
+            <div class="col-lg-1"></div>
+        Para blanquear la contraseña ingrese su enterprise Id.
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="form-group input-group col-lg-6">
+                <span class="input-group-addon">Enterprise</span>
+                <input type="email" name="email" class="form-control" id="enterprise" placeholder="Enterprise ID" required="" autofocus="true">
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" data-dismiss="modal" onclick="restorePass()" class="btn btn-primary">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>  
+ ';
 if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
    //Pantalla de error      
   echo '<div class="row">
@@ -115,7 +145,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
         </div>
 
         <br/>
-        <a>Olvido su contraseña?</a>
+        <a data-toggle="modal" href="#" data-target="#myModal">¿Olvidó su contraseña?</a>
         <br/><br/>
         <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Sign in</button>      
       </div>

@@ -300,3 +300,128 @@ function changePs(){
 		
 	}	
 };
+
+
+//Esta funcion sirve para enviar la solicitud de blanqueo de contraseña
+function restorePass(){
+	$('#error').html("");
+	enterprise = $('#enterprise').val();
+	if(enterprise==""){
+		$('#error').html(
+             '<div class="row">'
+            +'<div class="alert alert-danger">'
+            +'El enterprise Id para <a class="alert-link">blanquear contraseña</a> no puede ser <a class="alert-link" >vacio</a>!'  
+        	+'</div>'
+        	+'</div>');	
+	}else{
+		$.ajax({
+            url: 'serverCall/restoreF.php',
+            dataType: "json",
+            data: {enterprise:enterprise},
+            success: function(data) {
+            	if (data.status == "ok") {
+                	$('#error').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-success">'
+            		+'Se ha enviado un mail para finalizar el <a class="alert-link">blanqueo de contraseña</a>.<br/>' 
+            		+'Verifique que no se encuentre en la carpeta de Spam. Gracias!'  
+        			+'</div>'
+        			+'</div>');
+					
+                }else if(data.status == "error") {
+                	$('#pass').attr("class","form-group input-group has-error");
+					$('#error').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El enterprise Id ingresado es <a class="alert-link" >invalida</a>!'  
+        			+'</div>'
+        			+'</div>');
+				}else{
+                	$('#singInForm').attr("class","col-lg-4 has-error");
+                	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+                }
+            },error: function(error){
+            	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+				console.log(error);
+            } 
+
+	});
+		
+	}
+	
+};
+
+//Esta funcion se llama desde el link enviado
+function restorePs(){
+	
+	//console.log(window.location.search);
+	str=window.location.search;
+	var res = str.split("&");
+	id = res[0].split("=")[1];
+	at = res[1].split("=")[1];
+	$('#error').html("");
+		var new_ps=$('#new_ps').val();
+		var re_ps=$('#re_ps').val();
+		
+		//Borro los cuadrads de error
+		$('#singInForm').attr("class","container2");
+		$('#pass').attr("class","form-group input-group");
+		$('#new_pass').attr("class","form-group input-group");
+		$('#re_pass').attr("class","form-group input-group");
+		
+	if(new_ps =="" || re_ps==""){
+		$('#singInForm').attr("class","container2 has-error");
+		$('#error').html(
+             '<div class="row">'
+            +'<div class="alert alert-danger">'
+            +'Los campos de nueva contraseña y verificar nueva contraseña no pueden ser <a class="alert-link" >vacios</a>!'  
+        	+'</div>'
+        	+'</div>');
+	}else if(new_ps!=re_ps){
+			$('#new_pass').attr("class","form-group input-group has-error");
+			$('#re_pass').attr("class","form-group input-group has-error");
+			$('#error').html(
+             '<div class="row">'
+            +'<div class="alert alert-danger">'
+            +'Los campos nueva contraseña y verificar <a class="alert-link" >no coinciden</a>!'  
+        	+'</div>'
+        	+'</div>');
+	}else{
+			$.ajax({
+            url: 'serverCall/restorePsF.php',
+            dataType: "json",
+            data: {id:id,restore_token:at, new_ps:hash(new_ps)},
+            success: function(data) {
+            	if (data.status == "ok") {
+                	$('#error').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-success">'
+            		+'La contraseña se ha cambiado <a class="alert-link" >exitosamente</a>!'  
+        			+'</div>'
+        			+'</div>');
+					
+                }else if(data.status == "exp"){
+                	expire();
+                	
+                }else if(data.status == "error") {
+                	$('#pass').attr("class","form-group input-group has-error");
+					$('#error').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'La contraseña es <a class="alert-link" >invalida</a>!'  
+        			+'</div>'
+        			+'</div>');
+				}else{
+                	$('#singInForm').attr("class","col-lg-4 has-error");
+                	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+                }
+            },error: function(error){
+            	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+				console.log(error);
+            } 
+
+	});
+		
+	}	
+	
+};
