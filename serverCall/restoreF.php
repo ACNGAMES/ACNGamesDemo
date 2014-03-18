@@ -32,9 +32,7 @@
             mysql_query($sentencia, $iden); 
         }
         $FECHA = date("Y-m-d H:i:s");
-        $sentencia = "INSERT INTO u970955255_acn.CM_WHITENING_PASS VALUES('$userid','$res_token','Y','$FECHA')";  
-        mysql_query($sentencia, $iden);
-       
+        
         //Envio del mail
         $para      = "$enterprise@accenture.com";
         $titulo = 'ACN Games - Blanqueo de Contraseña';
@@ -50,7 +48,13 @@
         $cabeceras .= 'From: accounts@acngames.com.ar' . "\r\n" .
                     'Reply-To: accounts@acngames.com.ar' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
-        mail($para, $titulo, $mensaje, $cabeceras);
+        if(mail($para, $titulo, $mensaje, $cabeceras)){
+        	$sentencia = "INSERT INTO u970955255_acn.CM_WHITENING_PASS VALUES('$userid','$res_token','Y','$FECHA')";  
+        	mysql_query($sentencia, $iden);	
+        }else{
+        	$sentencia = "INSERT INTO u970955255_acn.CM_WHITENING_PASS VALUES('$userid','$res_token','N','$FECHA')";  
+        	mysql_query($sentencia, $iden);
+        }
 
         $data = array('status'=> 'ok');
         

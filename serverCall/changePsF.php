@@ -13,7 +13,7 @@ include('var.php');
 if(validate($id, $auth_token)){
 	
   $hash = db_hash($enterprise,$ps);
-		
+  $new_hash = 	db_hash($enterprise,$new_ps);
   if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
     die("Error: No se pudo conectar".mysql_error()); 
      
@@ -30,7 +30,7 @@ if(validate($id, $auth_token)){
         echo json_encode($data);
   }else{
 		mysql_free_result($resultado);        	
-        $sentencia = "UPDATE u970955255_acn.CM_USER SET PASSWORD='$new_ps' where user_id='$id' and password='$ps'"; 
+        $sentencia = "UPDATE u970955255_acn.CM_USER SET PASSWORD='$new_hash' where user_id='$id' and password='$hash'"; 
   		// Ejecuta la sentencia SQL 
   		mysql_query($sentencia, $iden); 
   		//Envio la respuesta por json

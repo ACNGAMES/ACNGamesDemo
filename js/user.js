@@ -390,7 +390,7 @@ function restorePs(){
 			$.ajax({
             url: 'serverCall/restorePsF.php',
             dataType: "json",
-            data: {id:id,restore_token:at, new_ps:hash(new_ps)},
+            data: {id:id,auth_token:at, new_ps:hash(new_ps)},
             success: function(data) {
             	if (data.status == "ok") {
                 	$('#error').html(
