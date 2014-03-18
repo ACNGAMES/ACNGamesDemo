@@ -5,15 +5,19 @@ $auth_token=$_GET["auth_token"];
 $ps = $_GET["ps"];
 //TODO tengo que aplicar key a las contraseñas
 $new_ps = $_GET["new_ps"];
-
+$enterprise = $_GET["enterprise"];
  
-include 'valF.php';
+include('valF.php');
+include('var.php');
+
 if(validate($id, $auth_token)){
+	
+  $hash = db_hash($enterprise,$ps);
 		
-	   if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
-        die("Error: No se pudo conectar".mysql_error()); 
+  if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
+    die("Error: No se pudo conectar".mysql_error()); 
      
-  $sentencia = "SELECT * FROM u970955255_acn.CM_USER where user_id='$id' and password='$ps'"; 
+  $sentencia = "SELECT * FROM u970955255_acn.CM_USER where user_id='$id' and password='$hash'"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
   if(!$resultado) 
