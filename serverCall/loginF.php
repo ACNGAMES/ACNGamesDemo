@@ -15,7 +15,7 @@ function foo2()
     global $ps;
    
     $hash = db_hash($email,$ps); 
-   
+  	 
      //if(!($iden = mysql_connect("127.0.0.1:3306", "cisuser", "cisuser"))) 
      if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
         die("Error: No se pudo conectar".mysql_error()); 
@@ -38,7 +38,7 @@ function foo2()
     $fila = mysql_fetch_assoc($resultado);
     //TODO aca tengo que genrar el token de authenticacion y subirlo al base
     $userid = $fila['USER_ID']; 
-    $auth_token = '1234';
+    $auth_token = $hash = db_hash(date("Y-m-d H:i:s").$userid,date("Y-m-d H:i:s").$hash);
     $data = array('status'=> 'ok',
                   'user_id'=>$userid,
                   'name'=>$fila['NAME'],
@@ -60,6 +60,10 @@ function foo2()
     }  
     mysql_free_result($resultado);
     //Envio la respuesta por json
+    $sentencia = "UPDATE u970955255_acn.CM_USER SET AUTH_TOKEN='$auth_token' where user_id='$userid'"; 
+  		// Ejecuta la sentencia SQL 
+  		mysql_query($sentencia, $iden);
+    
     echo json_encode($data);
     
     }else{
