@@ -127,7 +127,7 @@ function signUp(){
    }else{
 	
 	$.ajax({
-            url: 'serverCall/registerF.php',
+            url: 'serverCall/signUpF.php',
             dataType: "json",
             data: {name:nm, surname:sn, enterprise:id, ps:ps},
             success: function(data) {
