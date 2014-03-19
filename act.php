@@ -36,7 +36,7 @@ echo '<!DOCTYPE html>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">ACN Games</a>
+                <a class="navbar-brand" href="index.html">ACN Games</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
