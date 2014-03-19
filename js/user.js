@@ -92,6 +92,8 @@ function signUp(){
 	$('#errorSurname').html("");
 	$('#errorEnterprise').html("");
 	$('#errorPs').html("");
+	$('#msgError').html("");
+	$('#msgOk').html("");
 	
 	if(nm==""){
 		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
@@ -125,19 +127,37 @@ function signUp(){
    }else{
 	
 	$.ajax({
-            url: 'serverCall/registerF.php',
+            url: 'serverCall/signUpF.php',
             dataType: "json",
             data: {name:nm, surname:sn, enterprise:id, ps:ps},
             success: function(data) {
-            	if(data.status=="OK"){
-            		console.log(data);
-            	}else{
-            		console.log(data);
+            	if (data.status == "ok") {
+            		$('#signUpForm').attr("class","form-group input-group has-ok");
+                	$('#msgOk').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-success">'
+            		+'Su cuenta ha sido creada <a class="alert-link" >exitosamente</a>!. Vaya a su correo para activar la cuenta'  
+        			+'</div>'
+        			+'</div>');
+					console.log("Entro en el Ok");
+                } 
+                //if (data.status == "error");
+                else {
+                	$('#signUpForm').attr("class","form-group input-group has-error");
+					$('#msgError').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'La cuenta con el Enterprise que intenta crear <a class="alert-link" >ya existe!</a>!'  
+        			+'</div>'
+        			+'</div>');
+        			console.log("Entro en el Error");
             	}
-            },error: function(error){
+            },
+            
+            error: function(error){
             	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
 				console.log(error);
-            }  
+            }   
 
 	});
 	

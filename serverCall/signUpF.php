@@ -22,26 +22,42 @@ function insertAccount(){
 	
 	$hash = db_hash($enterprise,$password); 
 	
-		if(!($iden = db_connection()))
- 		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error())); 
+		if (!($iden = db_connection()))
+ 		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error()));
 		
- 		$sentencia = "INSERT INTO u970955255_acn.cm_user (USER_ID, ENTERPRISE_ID, NAME, SURNAME, PASSWORD, CRE_DTTM, AUTH_TOKEN) VALUES (FLOOR( 1 + ( RAND( ) * 9999999999)), '$enterprise', '$name', '$surname', '$hash', CURTIME(), '123456');";
- 	
-		//$enterprise, $name, $surname, $password	
-		$resultado = mysql_query($sentencia, $iden); 
-		  /*if(mysql_num_rows($resultado)== 0){
-		        $var = false;
-			  echo "Error";
-		  }else{
-		        $var=true;
-				echo "OK";
-		  }*/
+		$checkAccount = "SELECT * FROM u970955255_acn.cm_user WHERE enterprise_id= '$enterprise';";
 		
-		//mysql_free_result(true);
-    	//Envio la respuesta por json
-    	echo json_encode($resultado);
-	//sendMail();
- }
+		$resultado = mysql_query($checkAccount, $iden); 
+		
+		if (!$resultado) 
+		   die("Error: no se pudo realizar la consulta");
+		  
+		if (mysql_num_rows($resultado)==0) {
+		   $var=true;
+		}else{
+		   $var=false;
+		}
+		 
+		if ($var==true) {
+	 			
+	 	   $sentencia = "INSERT INTO u970955255_acn.cm_user (USER_ID, ENTERPRISE_ID, NAME, SURNAME, PASSWORD, CRE_DTTM, AUTH_TOKEN) VALUES (FLOOR( 1 + ( RAND( ) * 9999999999)), '$enterprise', '$name', '$surname', '$hash', CURTIME(), '123456');";
+			
+		   mysql_query($sentencia, $iden);	
+		   
+		   $data = array('status'=> 'ok');
+           //mysql_free_result($resultado);
+           //Envio la respuesta por json
+           echo json_encode($data);
+		
+		}else{
+         	 
+           $data = array('status'=> 'error');
+           mysql_free_result($resultado);
+           //Envio la respuesta por json
+           echo json_encode($data);
+    	}
+		
+ };
 
 /*function sendMail(){
 
