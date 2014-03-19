@@ -25,7 +25,7 @@ function insertAccount(){
 		if (!($iden = db_connection()))
  		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error()));
 		
-		$checkAccount = "SELECT * FROM u970955255_acn.cm_user WHERE enterprise_id= '$hash';";
+		$checkAccount = "SELECT * FROM u970955255_acn.cm_user WHERE enterprise_id= '$enterprise';";
 		
 		$resultado = mysql_query($checkAccount, $iden); 
 		
@@ -42,10 +42,10 @@ function insertAccount(){
 	 			
 	 	   $sentencia = "INSERT INTO u970955255_acn.cm_user (USER_ID, ENTERPRISE_ID, NAME, SURNAME, PASSWORD, CRE_DTTM, AUTH_TOKEN) VALUES (FLOOR( 1 + ( RAND( ) * 9999999999)), '$enterprise', '$name', '$surname', '$hash', CURTIME(), '123456');";
 			
-		   $resultado = mysql_query($sentencia, $iden);	
+		   mysql_query($sentencia, $iden);	
 		   
 		   $data = array('status'=> 'ok');
-           mysql_free_result($resultado);
+           //mysql_free_result($resultado);
            //Envio la respuesta por json
            echo json_encode($data);
 		
@@ -55,9 +55,9 @@ function insertAccount(){
            mysql_free_result($resultado);
            //Envio la respuesta por json
            echo json_encode($data);
-    }
+    	}
 		
- }
+ };
 
 /*function sendMail(){
 
