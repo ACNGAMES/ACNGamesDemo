@@ -364,13 +364,13 @@ function restorePs(){
 		var re_ps=$('#re_ps').val();
 		
 		//Borro los cuadrads de error
-		$('#singInForm').attr("class","container2");
+		$('#singInForm').attr("class","col-lg-4");
 		$('#pass').attr("class","form-group input-group");
 		$('#new_pass').attr("class","form-group input-group");
 		$('#re_pass').attr("class","form-group input-group");
 		
 	if(new_ps =="" || re_ps==""){
-		$('#singInForm').attr("class","container2 has-error");
+		$('#singInForm').attr("class","col-lg-4 has-error");
 		$('#error').html(
              '<div class="row">'
             +'<div class="alert alert-danger">'
@@ -393,6 +393,7 @@ function restorePs(){
             data: {id:id,auth_token:at, new_ps:hash(new_ps)},
             success: function(data) {
             	if (data.status == "ok") {
+					$('#container').html($.View("views/signIn.ejs"));                	
                 	$('#error').html(
              		'<div class="row">'
             		+'<div class="alert alert-success">'
@@ -400,15 +401,11 @@ function restorePs(){
         			+'</div>'
         			+'</div>');
 					
-                }else if(data.status == "exp"){
-                	expire();
-                	
                 }else if(data.status == "error") {
-                	$('#pass').attr("class","form-group input-group has-error");
-					$('#error').html(
+                	$('#error').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'La contraseña es <a class="alert-link" >invalida</a>!'  
+            		+'Ha ocurrido un error o el link ha <a class="alert-link" >expirado</a>!'  
         			+'</div>'
         			+'</div>');
 				}else{

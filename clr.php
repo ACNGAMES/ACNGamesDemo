@@ -137,20 +137,19 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
           </div>
         </div><!-- /.row -->
         <div class="col-lg-4"> </div>
-      <div class="col-lg-4" id="singInForm">
-        <font color="red" id="error"></font>
-        <div class="form-group input-group">
+      	<div class="col-lg-4" id="singInForm">
+        	<div id="error"></div>
+        		<div class="form-group input-group">
                     <span class="input-group-addon">New Password</span>
                     <input type="password" name="new_ps" class="form-control" id="new_ps" onkeypress="checkEnter2(event)" placeholder="New Password" required="">
-                </div>
-                <div class="form-group input-group">
+             	</div>
+             	<div class="form-group input-group">
                     <span class="input-group-addon">Re- Password</span>
                     <input type="password" name="re_ps" class="form-control" id="re_ps" onkeypress="checkEnter2(event)" placeholder="Re-New Password" required="">
-                </div>
-
-        <br/>
-        <button class="btn btn-lg btn-primary btn-block" onclick="restorePs()">Cambiar Contreña</button>      
-      </div>
+              	</div>
+	        <br/>
+    	    <button class="btn btn-lg btn-primary btn-block" onclick="restorePs()">Cambiar Contreña</button>      
+      	</div>
                     
         </body>
     </html>';
