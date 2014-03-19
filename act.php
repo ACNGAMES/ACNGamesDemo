@@ -97,7 +97,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
   $id = $_GET[1];
   $at = $_GET[2];
   include 'serverCall/valF.php';
-	if(validate($id, $at)){
+	if(validateAct($id, $at)){
 		
 	if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
         die("Error: No se pudo conectar".mysql_error()); 
