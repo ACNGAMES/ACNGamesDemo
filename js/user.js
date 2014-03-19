@@ -44,7 +44,7 @@ function signIn(){
                 	aux={};
                 	aux.auth_token=data.auth_token;
                 	aux.user_id=data.user_id;
-                	$('#singInForm').attr("class","col-lg-4");
+                	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4");
                 	$('#error').html(
                 	'<div class="row">'
             				+'<div class="alert alert-danger">'
@@ -54,9 +54,9 @@ function signIn(){
                 	
                 }else if(data.status == "error") {
                 	$('#error').html("El usuario y/o contraseña son invalidos<br/>");
-                	$('#singInForm').attr("class","col-lg-4 has-error");
+                	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 				}else{
-                	$('#singInForm').attr("class","col-lg-4 has-error");
+                	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
                 	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
                 }
             },
@@ -94,31 +94,31 @@ function signUp(){
 	$('#errorPs').html("");
 	
 	if(nm==""){
-		$('#signUpForm').attr("class","col-lg-4 has-error");
+		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#errorName').html("Campo nombre está vacio<br/>");
 		return;
 	}
 	
 	if(sn==""){
-		$('#signUpForm').attr("class","col-lg-4 has-error");
+		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#errorSurname').html("Campo apellido está vacio<br/>");
 		return;
 	}
 	
 	if(id==""){
-		$('#signUpForm').attr("class","col-lg-4 has-error");
+		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#errorEnterprise').html("Campo enterprise está vacio<br/>");
 		return;
 	}
 	
 	if(ps=="" || ps2==""){
-		$('#signUpForm').attr("class","col-lg-4 has-error");
+		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#errorPs').html("Campo contraseña está vacio<br/>");
 		return;
 	}
 	
 	if(ps!=ps2){
-		$('#signUpForm').attr("class","col-lg-4 has-error");
+		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#errorPs').html("Las contraseñas no coincidieron<br/>");
 		return;
 	
@@ -288,7 +288,7 @@ function changePs(){
         			+'</div>'
         			+'</div>');
 				}else{
-                	$('#singInForm').attr("class","col-lg-4 has-error");
+                	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
                 	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
                 }
             },error: function(error){
@@ -337,7 +337,7 @@ function restorePass(){
         			+'</div>'
         			+'</div>');
 				}else{
-                	$('#singInForm').attr("class","col-lg-4 has-error");
+                	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
                 	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
                 }
             },error: function(error){
@@ -364,13 +364,13 @@ function restorePs(){
 		var re_ps=$('#re_ps').val();
 		
 		//Borro los cuadrads de error
-		$('#singInForm').attr("class","col-lg-4");
+		$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4");
 		$('#pass').attr("class","form-group input-group");
 		$('#new_pass').attr("class","form-group input-group");
 		$('#re_pass').attr("class","form-group input-group");
 		
 	if(new_ps =="" || re_ps==""){
-		$('#singInForm').attr("class","col-lg-4 has-error");
+		$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#error').html(
              '<div class="row">'
             +'<div class="alert alert-danger">'
@@ -409,7 +409,7 @@ function restorePs(){
         			+'</div>'
         			+'</div>');
 				}else{
-                	$('#singInForm').attr("class","col-lg-4 has-error");
+                	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
                 	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
                 }
             },error: function(error){
