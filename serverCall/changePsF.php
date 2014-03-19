@@ -14,7 +14,8 @@ if(validate($id, $auth_token)){
 	
   $hash = db_hash($enterprise,$ps);
   $new_hash = 	db_hash($enterprise,$new_ps);
-  if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
+  
+  if (!($iden = db_connection()))
     die("Error: No se pudo conectar".mysql_error()); 
      
   $sentencia = "SELECT * FROM u970955255_acn.CM_USER where user_id='$id' and password='$hash'"; 

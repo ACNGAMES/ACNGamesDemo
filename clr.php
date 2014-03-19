@@ -118,7 +118,8 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
   $id = $_GET[1];
   $at = $_GET[2];
   //aca tengo uqe vlaidar que los aprrametros ingresados sean correctos
-  if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
+  include('serverCall/var.php');
+  if (!($iden = db_connection()))
     die("Error: No se pudo conectar".mysql_error()); 
   
   $sentencia = "SELECT * FROM u970955255_acn.CM_WHITENING_PASS where user_id='$id' and ACTIVATE_TOKEN='$at'"; 

@@ -3,8 +3,8 @@ $id=$_GET["id"];
 $auth_token=$_GET["auth_token"];
 
 
-     //if(!($iden = mysql_connect("127.0.0.1:3306", "cisuser", "cisuser"))) 
-     if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
+     include('var.php');
+  if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
     
     // Sentencia SQL: muestra todo el contenido de la tabla "user" 

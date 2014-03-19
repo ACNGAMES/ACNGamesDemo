@@ -98,8 +98,8 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
   $at = $_GET[2];
   include 'serverCall/valF.php';
 	if(validateAct($id, $at)){
-		
-	if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
+	include('serverCall/var.php');
+  	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
      
   	$sentencia = "DELETE from u970955255_acn.CM_ACTIVATE_ACCT where user_id='$id'"; 

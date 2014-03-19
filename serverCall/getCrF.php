@@ -5,7 +5,8 @@ $auth_token=$_GET["auth_token"];
 include 'valF.php';
 if(validate($id, $auth_token)){
 		
-	   if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
+	include('var.php');
+  	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
      
   $sentencia = "SELECT * FROM u970955255_acn.CM_COIN where user_id='$id'"; 

@@ -4,9 +4,7 @@
 	$id=$_GET["id"];
 	include('var.php');
 	 
-  	 
-     //if(!($iden = mysql_connect("127.0.0.1:3306", "cisuser", "cisuser"))) 
-     if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
+  	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error());
 
 	$email= getEnterprise();
