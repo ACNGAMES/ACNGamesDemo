@@ -8,7 +8,7 @@ function load(){
 		if(!valToken()){
 			expire();		
 		}else{
-			$('#container').html($.View("views/page.ejs",value));	
+			loadPageEstruct(value);	
 		};
 	}else{
 		$('#container').html($.View("views/signIn.ejs"));
