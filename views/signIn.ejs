@@ -24,7 +24,38 @@
     </nav>
  	<br /><br /><br /><br />
  <div class="container">
+		
 
+	 		<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Restaurar Contraseña</h4>
+      </div>
+      <div class="modal-body">
+        <div id="error-modal"></div>
+        <div class="row">
+        	<div class="col-lg-1"></div>
+        Para blanquear la contraseña ingrese su enterprise Id.
+        </div>
+        <br/>
+        <div class="row">
+        	<div class="col-lg-1"></div>
+        	<div class="form-group input-group col-lg-6">
+        		<span class="input-group-addon">Enterprise</span>
+        		<input type="email" name="enterprise" class="form-control" id="enterprise" placeholder="Enterprise ID" required="" autofocus="true">
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" data-dismiss="modal" onclick="restorePass()" class="btn btn-primary">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>		
       <div class="col-lg-4"> </div>
       <div class="col-lg-4" id="singInForm">
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -37,8 +68,7 @@
             <span class="input-group-addon">     Password</span>
         	<input type="password" name="ps" onkeypress="checkEnter(event)" class="form-control" id="ps" placeholder="Password" required="">
         </div>
-        
-        <a href="#">¿Olvidó su contraseña?</a>
+        <a data-toggle="modal" href="#" data-target="#myModal">¿Olvidó su contraseña?</a>
         <br/><br/>
         <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Sign in</button>      
       </div>

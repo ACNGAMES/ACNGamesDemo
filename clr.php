@@ -20,14 +20,14 @@ echo '<!DOCTYPE html>
     <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
     <!-- Core JS -->
     <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/actions.js"></script>
+    <script src="js/head.min.js"></script>
     <script src="js/jstorage.js"></script>
     <script src="js/jquerymx.min.js"></script>
     
     
    </head>
    
-  <body>
+  <body id="container">
     
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -44,8 +44,8 @@ echo '<!DOCTYPE html>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a><i class="fa fa-pencil"></i> Registrarse</a></li>
-                    <li><a><i class="fa fa-envelope"></i> Contactenos</a></li>
+                    <li><a href="#" onclick="loadRegister()"><i class="fa fa-pencil"></i> Registrarse</a></li>
+                    <li><a href="#"><i class="fa fa-envelope"></i> Contactenos</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -53,9 +53,38 @@ echo '<!DOCTYPE html>
         <!-- /.container -->
     </nav>
     <br /><br /><br /><br />
- <div class="container">';
+ <div class="container">
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Restaurar Contraseña</h4>
+      </div>
+      <div class="modal-body">
+        <div id="error-modal"></div>
+        <div class="row">
+            <div class="col-lg-1"></div>
+        Para blanquear la contraseña ingrese su enterprise Id.
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="form-group input-group col-lg-6">
+                <span class="input-group-addon">Enterprise</span>
+                <input type="email" name="email" class="form-control" id="enterprise" placeholder="Enterprise ID" required="" autofocus="true">
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" data-dismiss="modal" onclick="restorePass()" class="btn btn-primary">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>  ';
 if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
-   //TODO aca tengo que llamar a una pantalla de error      
+  //TODO aca tengo que llamar a una pantalla de error      
   echo '<div class="row">
             <div class="col-lg-3"></div>
           <div class="col-lg-6">
@@ -78,7 +107,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
         </div>
 
         <br/>
-        <a>Olvido su contraseña?</a>
+        <a data-toggle="modal" href="#" data-target="#myModal">¿Olvidó su contraseña?</a>
         <br/><br/>
         <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Sign in</button>      
       </div>
@@ -88,8 +117,18 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
 }else{
   $id = $_GET[1];
   $at = $_GET[2];
-  //echo $id.' '.$at;
-  echo '        <div class="row">
+  //aca tengo uqe vlaidar que los aprrametros ingresados sean correctos
+  if(!($iden = mysql_connect("localhost:3306", "u970955255_acn", "sys123")))
+    die("Error: No se pudo conectar".mysql_error()); 
+  
+  $sentencia = "SELECT * FROM u970955255_acn.CM_WHITENING_PASS where user_id='$id' and ACTIVATE_TOKEN='$at'"; 
+  // Ejecuta la sentencia SQL 
+  $resultado = mysql_query($sentencia, $iden); 
+  if(!$resultado) 
+     die("Error: no se pudo realizar la consulta");
+  
+  if(mysql_num_rows($resultado)!= 0){
+    echo '        <div class="row">
             <div class="col-lg-3"></div>
           <div class="col-lg-6">
             <div class="alert alert-info">
@@ -97,24 +136,57 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
             </div>
           </div>
         </div><!-- /.row -->
-		<div class="col-lg-4"> </div>
-      <div class="col-lg-4" id="singInForm">
-        <font color="red" id="error"></font>
-        <div class="form-group input-group">
-            		<span class="input-group-addon">New Password</span>
-        			<input type="password" name="new_ps" class="form-control" id="ps" onkeypress="checkEnter2(event)" placeholder="New Password" required="">
-        		</div>
-            	<div class="form-group input-group">
-            		<span class="input-group-addon">Re- Password</span>
-        			<input type="password" name="re_ps" class="form-control" id="ps" onkeypress="checkEnter2(event)" placeholder="Re-New Password" required="">
-        		</div>
-
-        <br/>
-        <button class="btn btn-lg btn-primary btn-block" onclick="restorePs()">Cambiar Contreña</button>      
-      </div>
-		            
+        <div class="col-lg-4"> </div>
+      	<div class="col-lg-4" id="singInForm">
+        	<div id="error"></div>
+        		<div class="form-group input-group">
+                    <span class="input-group-addon">New Password</span>
+                    <input type="password" name="new_ps" class="form-control" id="new_ps" onkeypress="checkEnter2(event)" placeholder="New Password" required="">
+             	</div>
+             	<div class="form-group input-group">
+                    <span class="input-group-addon">Re- Password</span>
+                    <input type="password" name="re_ps" class="form-control" id="re_ps" onkeypress="checkEnter2(event)" placeholder="Re-New Password" required="">
+              	</div>
+	        <br/>
+    	    <button class="btn btn-lg btn-primary btn-block" onclick="restorePs()">Cambiar Contreña</button>      
+      	</div>
+                    
         </body>
     </html>';
+  }else{
+     echo '<div class="row">
+            <div class="col-lg-3"></div>
+          <div class="col-lg-6">
+            <div class="alert alert-danger">
+              El link al que desea ingresar es <a class="alert-link" >incorrecto</a>! para empezar a jugar por favor inicie sesi&oacute;n o registrese 
+            </div>
+          </div>
+        </div><!-- /.row -->
+     <div class="col-lg-4"> </div>
+      <div class="col-lg-4" id="singInForm">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <font color="red" id="error"></font>
+        <div class="form-group input-group">
+            <span class="input-group-addon">Enterprise ID</span>
+            <input type="email" name="email" onkeypress="checkEnter(event)" class="form-control" id="email" placeholder="Email address" required="" autofocus="">
+        </div>
+        <div class="form-group input-group">
+            <span class="input-group-addon">     Password</span>
+            <input type="password" name="ps" onkeypress="checkEnter(event)" class="form-control" id="ps" placeholder="Password" required="">
+        </div>
+
+        <br/>
+        <a data-toggle="modal" href="#" data-target="#myModal">¿Olvidó su contraseña?</a>
+        <br/><br/>
+        <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Sign in</button>      
+      </div>
+        </div> <!-- /container -->
+        </body>
+    </html>';   
+  }
+  
+  
+  
         
   } 
 
