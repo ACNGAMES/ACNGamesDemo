@@ -15,3 +15,8 @@ function getCategories(){
 	
 	
 };
+
+function getEventsByCat(id){
+	$('#pagina_central').html($.View("views/eventsCat.ejs"));
+	
+};
