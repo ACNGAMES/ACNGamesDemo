@@ -59,3 +59,13 @@ function checkEnter2(event)
     }
 };
 
+//Esta funcion redibuja los creditos
+function reloadCredit(){
+
+   if(getCoins()) {
+       $('#credit').html(Number(act.silver)+Number(act.gold)+" Cr.");
+   }
+
+};
+
+

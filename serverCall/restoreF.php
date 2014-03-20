@@ -35,12 +35,24 @@
         //Envio del mail
         $para      = "$enterprise@accenture.com";
         $titulo = 'ACN Games - Blanqueo de Contraseña';
-        $mensaje = "Hola $username, <br/>
+        $mensaje = "<fieldset><lengend>
+
+        Hola <var>$username</var>, <br/>
+
         Para poder finalizar el proceso de blanqueo de contraseña Por favor haz click en el siguiente link.<br/><br/>
+
         <a href='http://acngames.com.ar/clr.php?1=$userid&2=$res_token'>http://acngames.com.ar/clr.php?1=$userid&2=$res_token<a> <br/><br/>
+
         Si tu no haz solicitado el blanqueo de contraseña por favor elimina este mail!<br/>
+
         Muchas Gracias<br/>
-        Equipo de ACN Games";
+
+        <strong size='14'>Equipo de ACN Games</strong>
+
+        </lengend></fieldset>";
+
+ 
+
         // To send HTML mail, the Content-type header must be set
         $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
         $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";

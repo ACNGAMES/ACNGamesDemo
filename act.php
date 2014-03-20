@@ -98,14 +98,17 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
   $at = $_GET[2];
   include 'serverCall/valF.php';
 	if(validateAct($id, $at)){
-	include('serverCall/var.php');
-  	if (!($iden = db_connection()))
+		
+	
+  	if (!($iden = db_connection())){
         die("Error: No se pudo conectar".mysql_error()); 
+  	}
+    
     $db="u157368432_acn"; 
   	$sentencia = "DELETE from $db.CM_ACTIVATE_ACCT where user_id='$id'"; 
    	mysql_query($sentencia, $iden);
-	$SILVER_INIT=5;
-	$GOLD_INIT=0;
+	$SILVER_INIT=0;
+	$GOLD_INIT=5;
 	$sentencia = "INSERT INTO $db.CM_COIN VALUES ('$id',$SILVER_INIT,$GOLD_INIT)"; 
    	mysql_query($sentencia, $iden); 
 	mysql_close($iden);	
