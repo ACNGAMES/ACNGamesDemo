@@ -101,7 +101,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
 	include('serverCall/var.php');
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
-    global $db; 
+    $db="u157368432_acn"; 
   	$sentencia = "DELETE from $db.CM_ACTIVATE_ACCT where user_id='$id'"; 
    	mysql_query($sentencia, $iden);
 	$SILVER_INIT=5;

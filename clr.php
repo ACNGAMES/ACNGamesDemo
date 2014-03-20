@@ -121,7 +121,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
   include('serverCall/var.php');
   if (!($iden = db_connection()))
     die("Error: No se pudo conectar".mysql_error()); 
-  global $db;
+  $db="u157368432_acn";
   $sentencia = "SELECT * FROM $db.CM_WHITENING_PASS where user_id='$id' and ACTIVATE_TOKEN='$at'"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 

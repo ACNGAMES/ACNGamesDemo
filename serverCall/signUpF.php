@@ -19,7 +19,7 @@ function insertAccount(){
 	global $surname;
 	global $enterprise;
 	global $password;
-	global $db;
+	$db="u157368432_acn";
 	$hash = db_hash($enterprise,$password); 
 	
 		if (!($iden = db_connection()))

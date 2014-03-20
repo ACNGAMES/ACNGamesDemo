@@ -3,7 +3,7 @@
 	$auth_token=$_GET["auth_token"];
 	$id=$_GET["id"];
 	include('var.php');
-	global $db; 
+	$db="u157368432_acn"; 
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error());
 

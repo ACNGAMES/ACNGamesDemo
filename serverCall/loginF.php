@@ -13,7 +13,7 @@ function foo2()
     $var;
     global $email;
     global $ps;
-   	global $db;
+   	$db="u157368432_acn";
     $hash = db_hash($email,$ps); 
   	 
     if (!($iden = db_connection()))

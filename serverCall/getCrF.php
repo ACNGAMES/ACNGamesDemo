@@ -8,7 +8,7 @@ if(validate($id, $auth_token)){
 	include('var.php');
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
-  global $db;   
+  $db="u157368432_acn";  
   $sentencia = "SELECT * FROM $db.CM_COIN where user_id='$id'"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 

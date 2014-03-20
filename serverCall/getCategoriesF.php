@@ -1,6 +1,6 @@
 <?php
-	include('var.php');
-  global $db;
+  include('var.php');
+  $db="u157368432_acn";
   if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
      

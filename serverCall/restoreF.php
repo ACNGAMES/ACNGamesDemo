@@ -1,7 +1,7 @@
 <?php 
     $enterprise= $_GET['enterprise'];
     include('var.php'); 
-    global $db;
+    $db="u157368432_acn";
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
     

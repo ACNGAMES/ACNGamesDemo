@@ -6,7 +6,7 @@ $ps = $_GET["ps"];
 //TODO tengo que aplicar key a las contraseñas
 $new_ps = $_GET["new_ps"];
 $enterprise = $_GET["enterprise"];
-global $db;
+$db="u157368432_acn";
 include('valF.php');
 include('var.php');
 
