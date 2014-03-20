@@ -1,10 +1,12 @@
 <?php
 	include('var.php');
+  global $db;
   if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
      
-  $sentencia = "SELECT * FROM u970955255_acn.CM_CATEGORY"; 
+  $sentencia = "SELECT * FROM $db.CM_CATEGORY"; 
   // Ejecuta la sentencia SQL 
+  
   $resultado = mysql_query($sentencia, $iden); 
   if(!$resultado) 
     die("Error: no se pudo realizar la consulta");

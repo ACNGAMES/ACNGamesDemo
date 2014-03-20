@@ -19,13 +19,13 @@ function insertAccount(){
 	global $surname;
 	global $enterprise;
 	global $password;
-	
+	global $db;
 	$hash = db_hash($enterprise,$password); 
 	
 		if (!($iden = db_connection()))
  		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error()));
 		
-		$checkAccount = "SELECT * FROM u970955255_acn.cm_user WHERE enterprise_id= '$enterprise';";
+		$checkAccount = "SELECT * FROM $db.cm_user WHERE enterprise_id= '$enterprise';";
 		
 		$resultado = mysql_query($checkAccount, $iden); 
 		
@@ -40,7 +40,7 @@ function insertAccount(){
 		 
 		if ($var==true) {
 	 			
-	 	   $sentencia = "INSERT INTO u970955255_acn.cm_user (USER_ID, ENTERPRISE_ID, NAME, SURNAME, PASSWORD, CRE_DTTM, AUTH_TOKEN) VALUES (FLOOR( 1 + ( RAND( ) * 9999999999)), '$enterprise', '$name', '$surname', '$hash', CURTIME(), '123456');";
+	 	   $sentencia = "INSERT INTO $db.cm_user (USER_ID, ENTERPRISE_ID, NAME, SURNAME, PASSWORD, CRE_DTTM, AUTH_TOKEN) VALUES (FLOOR( 1 + ( RAND( ) * 9999999999)), '$enterprise', '$name', '$surname', '$hash', CURTIME(), '123456');";
 			
 		   mysql_query($sentencia, $iden);	
 		   

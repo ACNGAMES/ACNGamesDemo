@@ -5,7 +5,7 @@ function validate($id, $auth_token){
   	if (!($iden = db_connection()))
     	die("Error: No se pudo conectar".mysql_error()); 
     
-  	$sentencia = "SELECT * FROM u970955255_acn.CM_USER where user_id='$id' and auth_token='$auth_token'";// where email='$email' and ps='$ps'"; 
+  	$sentencia = "SELECT * FROM $db.CM_USER where user_id='$id' and auth_token='$auth_token'";// where email='$email' and ps='$ps'"; 
   	$resultado = mysql_query($sentencia, $iden); 
   	if(!$resultado) 
     	die("Error: no se pudo realizar la consulta");
@@ -27,8 +27,8 @@ function validateAct($id, $auth_token){
 	include('var.php');
   	if (!($iden = db_connection()))
     	die("Error: No se pudo conectar".mysql_error()); 
-    
-  	$sentencia = "SELECT * FROM u970955255_acn.CM_ACTIVATE_ACCT where user_id='$id' and activate_token='$auth_token'";// where email='$email' and ps='$ps'"; 
+    global $db;
+  	$sentencia = "SELECT * FROM $db.CM_ACTIVATE_ACCT where user_id='$id' and activate_token='$auth_token'";// where email='$email' and ps='$ps'"; 
   	$resultado = mysql_query($sentencia, $iden); 
   	if(!$resultado) 
     	die("Error: no se pudo realizar la consulta");

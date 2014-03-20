@@ -6,9 +6,9 @@ $auth_token=$_GET["auth_token"];
      include('var.php');
   if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
-    
+     global $db;
     // Sentencia SQL: muestra todo el contenido de la tabla "user" 
-  $sentencia = "SELECT * FROM u970955255_acn.CM_USER where user_id='$id' and auth_token='$auth_token'";// where email='$email' and ps='$ps'"; 
+  $sentencia = "SELECT * FROM $db.CM_USER where user_id='$id' and auth_token='$auth_token'";// where email='$email' and ps='$ps'"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
   if(!$resultado) 

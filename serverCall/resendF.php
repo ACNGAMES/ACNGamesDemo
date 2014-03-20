@@ -4,12 +4,12 @@ $id=$_GET["id"];
 $auth_token=$_GET["auth_token"];
 include 'valF.php';
 if(validate($id, $auth_token)){
-		
+	global $db;	
 	include('var.php');
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
      
-  $sentencia = "UPDATE u970955255_acn.CM_ACTIVATE_ACCT SET SEND_MAIL_FLG='N' where user_id='$id'"; 
+  $sentencia = "UPDATE $db.CM_ACTIVATE_ACCT SET SEND_MAIL_FLG='N' where user_id='$id'"; 
    
   mysql_query($sentencia, $iden); 
   

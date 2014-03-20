@@ -13,14 +13,14 @@ function foo2()
     $var;
     global $email;
     global $ps;
-   
+   	global $db;
     $hash = db_hash($email,$ps); 
   	 
     if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
     
     // Sentencia SQL: muestra todo el contenido de la tabla "user" 
-  $sentencia = "SELECT * FROM u970955255_acn.CM_USER where enterprise_id='$email' and password='$hash'";// where email='$email' and ps='$ps'"; 
+  $sentencia = "SELECT * FROM $db.CM_USER where enterprise_id='$email' and password='$hash'";// where email='$email' and ps='$ps'"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
   if(!$resultado) 
@@ -46,7 +46,7 @@ function foo2()
                  );
     mysql_free_result($resultado);
       
-    $sentencia = "SELECT * FROM u970955255_acn.CM_ACTIVATE_ACCT where user_id='$userid'"; 
+    $sentencia = "SELECT * FROM $db.CM_ACTIVATE_ACCT where user_id='$userid'"; 
     // Ejecuta la sentencia SQL 
     $resultado = mysql_query($sentencia, $iden); 
     if(!$resultado) 
@@ -59,7 +59,7 @@ function foo2()
     }  
     mysql_free_result($resultado);
     //Envio la respuesta por json
-    $sentencia = "UPDATE u970955255_acn.CM_USER SET AUTH_TOKEN='$auth_token' where user_id='$userid'"; 
+    $sentencia = "UPDATE $db.CM_USER SET AUTH_TOKEN='$auth_token' where user_id='$userid'"; 
   		// Ejecuta la sentencia SQL 
   		mysql_query($sentencia, $iden);
     

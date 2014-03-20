@@ -1,11 +1,13 @@
 <?php
     	
 	//db_connection();
+	$db ="u970955255_acn";
 	
 	function db_connection(){
 		
 		$host="localhost:3306";
-		$db="u970955255_acn";
+		//$db="u970955255_acn";
+		global $db;
 		$password="sys123";
 		return mysql_connect($host, $db, $password);
 	};

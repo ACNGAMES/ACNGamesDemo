@@ -1,12 +1,12 @@
 <?php 
     $enterprise= $_GET['enterprise'];
     include('var.php'); 
-    
+    global $db;
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
     
     // Sentencia SQL: muestra todo el contenido de la tabla "user" 
-  $sentencia = "SELECT * FROM u970955255_acn.CM_USER where enterprise_id='$enterprise'";// where email='$email' and ps='$ps'"; 
+  $sentencia = "SELECT * FROM $db.CM_USER where enterprise_id='$enterprise'";// where email='$email' and ps='$ps'"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
   if(!$resultado) 
@@ -19,7 +19,7 @@
         $res_token = db_hash($userid,date("Y-m-d H:i:s"));
         mysql_free_result($resultado);
         
-        $sentencia = "SELECT * FROM u970955255_acn.CM_WHITENING_PASS where user_id='$userid'"; 
+        $sentencia = "SELECT * FROM $db.CM_WHITENING_PASS where user_id='$userid'"; 
         // Ejecuta la sentencia SQL 
         $resultado = mysql_query($sentencia, $iden); 
         if(!$resultado) 
@@ -27,7 +27,7 @@
   
         if(mysql_num_rows($resultado)!= 0){
             mysql_free_result($resultado);    
-            $sentencia = "DELETE FROM u970955255_acn.CM_WHITENING_PASS where user_id='$userid'";
+            $sentencia = "DELETE FROM $db.CM_WHITENING_PASS where user_id='$userid'";
             mysql_query($sentencia, $iden); 
         }
         $FECHA = date("Y-m-d H:i:s");
@@ -48,10 +48,10 @@
                     'Reply-To: accounts@acngames.com.ar' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
         if(mail($para, $titulo, $mensaje, $cabeceras)){
-        	$sentencia = "INSERT INTO u970955255_acn.CM_WHITENING_PASS VALUES('$userid','$res_token','Y','$FECHA')";  
+        	$sentencia = "INSERT INTO $db.CM_WHITENING_PASS VALUES('$userid','$res_token','Y','$FECHA')";  
         	mysql_query($sentencia, $iden);	
         }else{
-        	$sentencia = "INSERT INTO u970955255_acn.CM_WHITENING_PASS VALUES('$userid','$res_token','N','$FECHA')";  
+        	$sentencia = "INSERT INTO $db.CM_WHITENING_PASS VALUES('$userid','$res_token','N','$FECHA')";  
         	mysql_query($sentencia, $iden);
         }
 
