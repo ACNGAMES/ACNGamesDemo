@@ -5,7 +5,7 @@ $auth_token=$_GET["auth_token"];
 include 'valF.php';
 if(validate($id, $auth_token)){
 		
-	include('var.php');
+	//include('var.php');
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  

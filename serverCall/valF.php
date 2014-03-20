@@ -4,7 +4,7 @@ $db="u157368432_acn";
 
 function validate($id, $auth_token){
 	include('var.php');
-	
+	global $db;
   	if (!($iden = db_connection()))
     	die("Error: No se pudo conectar".mysql_error()); 
     
@@ -30,7 +30,7 @@ function validateAct($id, $auth_token){
 	include('var.php');
   	if (!($iden = db_connection()))
     	die("Error: No se pudo conectar".mysql_error()); 
-
+	global $db;
   	$sentencia = "SELECT * FROM $db.CM_ACTIVATE_ACCT where user_id='$id' and activate_token='$auth_token'";// where email='$email' and ps='$ps'"; 
   	$resultado = mysql_query($sentencia, $iden); 
   	if(!$resultado) 
