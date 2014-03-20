@@ -137,7 +137,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
    echo '<div class="col-lg-4"> </div>
       <div class="col-lg-4" id="singInForm">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <font color="red" id="error"></font>
+        <div id="error"></div>
         <div class="form-group input-group">
             <span class="input-group-addon">Enterprise ID</span>
         	<input type="email" name="email" onkeypress="checkEnter(event)" class="form-control" id="email" placeholder="Email address" required="" autofocus="">

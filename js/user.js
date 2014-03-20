@@ -92,8 +92,8 @@ function signUp(){
 	$('#errorSurname').html("");
 	$('#errorEnterprise').html("");
 	$('#errorPs').html("");
-	$('#msgError').html("");
-	$('#msgOk').html("");
+	$('#msg').html("");
+	
 	
 	if(nm==""){
 		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
@@ -132,25 +132,27 @@ function signUp(){
             data: {name:nm, surname:sn, enterprise:id, ps:ps},
             success: function(data) {
             	if (data.status == "ok") {
-            		$('#signUpForm').attr("class","form-group input-group has-ok");
-                	$('#msgOk').html(
+            		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4");
+            		//$('#signUpForm').attr("class","form-group input-group has-ok");
+                	$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-success">'
             		+'Su cuenta ha sido creada <a class="alert-link" >exitosamente</a>!. Vaya a su correo para activar la cuenta'  
         			+'</div>'
         			+'</div>');
-					console.log("Entro en el Ok");
+					
                 } 
                 //if (data.status == "error");
                 else {
-                	$('#signUpForm').attr("class","form-group input-group has-error");
-					$('#msgError').html(
+                	$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
+                	//$('#signUpForm').attr("class","form-group input-group has-error");
+					$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
             		+'La cuenta con el Enterprise que intenta crear <a class="alert-link" >ya existe!</a>!'  
         			+'</div>'
         			+'</div>');
-        			console.log("Entro en el Error");
+        			
             	}
             },
             
