@@ -137,7 +137,7 @@ function signUp(){
                 	$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-success">'
-            		+'Su cuenta ha sido creada <a class="alert-link" >exitosamente</a>!. Vaya a su correo para activar la cuenta'  
+            		+'Su cuenta de <a class="alert-link" >ACN Games</a> ha sido creada <a class="alert-link" >exitosamente</a>! Se ha enviado a su correo un mail de activaci&oacute;n de cuenta!'  
         			+'</div>'
         			+'</div>');
 					
