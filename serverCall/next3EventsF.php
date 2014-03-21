@@ -19,7 +19,7 @@ $array[] = array('oponent1img'=>'http://www.ole.com.ar/static/OLEOle/images/escu
                  );
 
 $array[] = array('category'=>'Premios Oscars 2014',
-				'subcategory'=>'',
+				'subcategory'=>'Entrega Premios 2014',
 				'event'=>'Mejor Pelicula',
 				'date'=>'28-02-2014 22:00',
 				'type'=>'N' //N significa que son varios rivales          
