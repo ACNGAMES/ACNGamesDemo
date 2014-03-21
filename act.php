@@ -136,11 +136,11 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
 
    echo '<div class="col-lg-4"> </div>
       <div class="col-lg-4" id="singInForm">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Por favor Inicie Sesi&oacute;n</h2>
         <div id="error"></div>
         <div class="form-group input-group">
             <span class="input-group-addon">Enterprise ID</span>
-        	<input type="email" name="email" onkeypress="checkEnter(event)" class="form-control" id="email" placeholder="Email address" required="" autofocus="">
+        	<input type="email" name="email" onkeypress="checkEnter(event)" class="form-control" id="email" placeholder="Enterprise ID" required="" autofocus="">
         </div>
         <div class="form-group input-group">
             <span class="input-group-addon">     Password</span>
@@ -150,7 +150,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
         <br/>
         <a data-toggle="modal" href="#" data-target="#myModal">¿Olvidó su contraseña?</a>
         <br/><br/>
-        <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Sign in</button>      
+        <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Iniciar Sesi&oacute;n</button>      
       </div>
         </div> <!-- /container -->
         <script src="js/bootstrap.js"></script>

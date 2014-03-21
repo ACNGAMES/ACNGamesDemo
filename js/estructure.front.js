@@ -4,3 +4,5 @@ function loadPageEstruct(){
 	getCategories();
 	getNext3Events();
 };
+
+

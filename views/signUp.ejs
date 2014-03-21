@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-                <a href="#" class="navbar-brand">ACN Games</a>
+                <a href="index.html" class="navbar-brand">ACN Games</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -27,17 +27,17 @@
 
       <div class="col-sm-6 col-md-4 col-lg-4"></div>
       <div class="col-sm-6 col-md-4 col-lg-4" id="signUpForm">
-          <h2 class="form-signin-heading">Sign Up</h2>
+          <h2 class="form-signin-heading">Registrar una nueva Cuenta</h2>
       	  <div id="msg"></div>
       	  
         <div class="form-group input-group">
-          	<span  class="input-group-addon">    Name             </span>
-          	<p><input type="name" name="name" class="form-control" id="name" placeholder="Name" required="" autofocus=""></p>
+          	<span  class="input-group-addon">    Nombre             </span>
+          	<p><input type="name" name="name" class="form-control" id="name" placeholder="Nombre" required="" autofocus=""></p>
         </div>
         	<font color="red" id="errorName"></font>
         <div class="form-group input-group">
-          	<span class="input-group-addon">  Surname</span>
-          	<p><input type="surname" name="surname" class="form-control" id="surname" placeholder="Surname" required="" autofocus=""></p>
+          	<span class="input-group-addon">  Apellido</span>
+          	<p><input type="surname" name="surname" class="form-control" id="surname" placeholder="Apellido" required="" autofocus=""></p>
         </div>
         	<font color="red" id="errorSurname"></font>
         <div class="form-group input-group">
@@ -47,14 +47,14 @@
         	<font color="red" id="errorEnterprise"></font>
         <div class="form-group input-group">
           	<span class="input-group-addon">  Password</span>
-        	<p><input type="password" name="ps" class="form-control" id="ps" placeholder="Password" required=""></p>
+        	<p><input type="password" name="ps" class="form-control" id="ps" placeholder="Password" data-toggle="tooltip" data-placement="left" title="No tiene que ser la misma que se utiliza para los sistemas coorportativos"></p>
         </div>
         <div class="form-group input-group">
           	<span class="input-group-addon">Re password</span>
         	<p><input type="password" name="ps2" class="form-control" id="ps2" placeholder="Confirm Password" required=""></p>
         </div>
         <font color="red" id="errorPs"></font>
-        <button class="btn btn-lg btn-primary btn-block" onclick="signUp()">Register</button>      
+        <button class="btn btn-lg btn-primary btn-block" onclick="signUp()">Registrase</button>      
       </div>
            
 </div> <!-- /container -->

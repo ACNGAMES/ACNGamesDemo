@@ -89,6 +89,8 @@ $mensaje .= "Si tienes problemas para acceder oprimiendo en el link, copia y peg
 $mensaje .= "<br/>";
 $mensaje .= "Si tu no has solicitado la creaci&oacute;n de una cuenta, desestim&aacute; este mail!<br/>";
 $mensaje .= "<br/>";
+$mensaje .= "Ten en cuenta que 48 horas luego de crear tu cuenta si la misma no se activa, sera dada de baja!";
+$mensaje .= "<br/>";
 $mensaje .= "Muchas Gracias!<br/>";
 $mensaje .= "<br/>";
 $mensaje .= "<strong size='14'>Equipo de ACN Games</strong>";

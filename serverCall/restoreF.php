@@ -34,21 +34,14 @@
         
         //Envio del mail
         $para      = "$enterprise@accenture.com";
-        $titulo = 'ACN Games - Blanqueo de Contraseña';
+        $titulo = 'ACN Games - Blanqueo de Contrase&ntilde;a';
         $mensaje = "<fieldset><lengend>
-
         Hola <var>$username</var>, <br/>
-
-        Para poder finalizar el proceso de blanqueo de contraseña Por favor haz click en el siguiente link.<br/><br/>
-
+        Para poder finalizar el proceso de blanqueo de contrase&ntilde;a Por favor haz click en el siguiente link.<br/><br/>
         <a href='http://acngames.com.ar/clr.php?1=$userid&2=$res_token'>http://acngames.com.ar/clr.php?1=$userid&2=$res_token<a> <br/><br/>
-
-        Si tu no haz solicitado el blanqueo de contraseña por favor elimina este mail!<br/>
-
+        Si tu no haz solicitado el blanqueo de contrase&ntilde;a por favor elimina este mail!<br/>
         Muchas Gracias<br/>
-
         <strong size='14'>Equipo de ACN Games</strong>
-
         </lengend></fieldset>";
 
  

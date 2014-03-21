@@ -8,7 +8,6 @@ $new_ps = $_GET["new_ps"];
 $enterprise = $_GET["enterprise"];
 $db="u157368432_acn";
 include('valF.php');
-include('var.php');
 
 if(validate($id, $auth_token)){
 	

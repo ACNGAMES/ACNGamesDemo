@@ -9,7 +9,13 @@ function signIn(){
 	
 	if(ps== "" || em ==""){
 		$('#singInForm').attr("class","col-lg-4 has-error");
-		$('#error').html("El usuario y/o contraseña no pueden ser vacios<br/>");
+		$('#error').html(
+             '<div class="row">'
+            +'<div class="alert alert-danger">'
+            +'El usuario y/o contraseña no pueden ser <a class="alert-link" >vacios</a>!'  
+        	+'</div>'
+        	+'</div>');
+		
 		
 	}else{
 		
@@ -53,11 +59,21 @@ function signIn(){
         		    +'</div>');
                 	
                 }else if(data.status == "error") {
-                	$('#error').html("El usuario y/o contraseña son invalidos<br/>");
+                	$('#error').html(
+             			'<div class="row">'
+          				  +'<div class="alert alert-danger">'
+            			  +'El usuario y/o contraseña son <a class="alert-link" >invalidos</a>!'  
+        				  +'</div>'
+        				  +'</div>');
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 				}else{
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
-                	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+                	$('#error').html(
+             			'<div class="row">'
+          				  +'<div class="alert alert-danger">'
+            			  +'Ocurio un error por favor intente nuevamente'  
+        				  +'</div>'
+        				  +'</div>');
                 }
             },
             error: function(error){
@@ -137,7 +153,8 @@ function signUp(){
                 	$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-success">'
-            		+'Su cuenta de <a class="alert-link" >ACN Games</a> ha sido creada <a class="alert-link" >exitosamente</a>! Se ha enviado a su correo un mail de activaci&oacute;n de cuenta!'  
+            		+'Su cuenta de <a class="alert-link" >ACN Games</a> ha sido creada <a class="alert-link" >exitosamente</a>!' 
+            		+'En minutos recibira un mail con el link de activaci&oacute;n. Por favor verifique que no este en la secci&oacute;n de spam'  
         			+'</div>'
         			+'</div>');
 					

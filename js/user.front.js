@@ -35,6 +35,9 @@ function changePass(){
 //Esta funcion dibuja el formulario para crear cuenta
 function loadRegister(){
 	$('#container').html($.View("views/signUp.ejs"));
+	$(function() {
+    	$('#ps').tooltip({placement: 'right'});
+	});
 };
 
 //Esta funcion dibuja la seccion de epxirado
@@ -44,7 +47,7 @@ function expire(){
 			$('#error').html(
                 	'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'Su sessi&oacute;n  ha  <a class="alert-link" >Expirado</a>! Por favor inicie sesi&oacute;n nuevamente'  
+            		+'Su sesi&oacute;n  ha  <a class="alert-link" >Expirado</a>! Por favor inicie sesi&oacute;n nuevamente'  
         	   		+'</div>'
         		    +'</div>');
 };
