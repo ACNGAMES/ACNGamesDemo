@@ -41,7 +41,7 @@ function insertAccount(){
 		
 		if ($var==true) {
 	 			
-	 	   $sentencia = "INSERT INTO $db.CM_USER (USER_ID, ENTERPRISE_ID, NAME, SURNAME, PASSWORD, CRE_DTTM, AUTH_TOKEN) VALUES (FLOOR( 1 + ( RAND( ) * 9999999999)), '$enterprise', '$name', '$surname', '$hash', CURTIME(), '123456');";
+	 	   $sentencia = "INSERT INTO $db.CM_USER (USER_ID, ENTERPRISE_ID, NAME, SURNAME, PASSWORD, CRE_DTTM, AUTH_TOKEN) VALUES (FLOOR( 1 + ( RAND( ) * 9999999999)), '$enterprise', '$name', '$surname', '$hash', TIMESTAMP(CURTIME(), '%d-%m-%Y %H:%i:%s'), ' ');";
 			
 		   $resultado = mysql_query($sentencia, $iden);
 		   
@@ -82,7 +82,7 @@ $para = "$enterprise@accenture.com";
 $titulo = 'Activacion de cuenta';
 $mensaje = "<fieldset><lengend>";
 $mensaje .= "Hola <var>$name</var>, te damos la bienvenida a <strong size='10''>ACN Games</strong>.<br/><br/>";
-$mensaje .= "Para activar tu cuenta por favor hacer click en el siguiente link:";
+$mensaje .= "Para activar tu cuenta por favor hacer click en el siguiente link: <br/>";
 $mensaje .= "<a href='http://acngames.com.ar/act.php?1=$userId&2=$activeToken'>http://acngames.com.ar/act.php?1=$userId&2=$activeToken<a>";
 $mensaje .= "<br/><br/>";
 $mensaje .= "Si tienes problemas para acceder oprimiendo en el link, copia y pegalo en el buscador de tu navegador web.";
