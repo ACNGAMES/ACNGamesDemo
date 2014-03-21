@@ -1,4 +1,5 @@
-function loadPageEstruct(value){
-	$('#container').html($.View("views/page.ejs",value));
+function loadPageEstruct(){
+	getCoins();
+	$('#container').html($.View("views/page.ejs",act));
 	getCategories();
 };
