@@ -1,0 +1,7 @@
+<% for (var i = 0; i < this.length; i++) { %>
+	<% if(this[i].type=='N') { %>            
+    		<%= $.View('views/eventNoRiv.ejs', this[i]) %>
+    <% }else{ %>
+    	    <%= $.View('views/eventRiv.ejs', this[i]) %>
+    <% } %>
+<% } %>
