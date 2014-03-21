@@ -1,6 +1,7 @@
 <?php
 
-$array[] = array('oponent1img'=>'http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/20.png',
+$array[] = array('id' => '5',
+				'oponent1img'=>'http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/20.png',
 				'oponent2img'=>'http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/5.png',
 				'category'=>'1era División Torneo Final 2014',
 				'subcategory'=>'Fecha 5',
@@ -9,7 +10,8 @@ $array[] = array('oponent1img'=>'http://www.ole.com.ar/static/OLEOle/images/escu
 				'type'=>'E' //E significa que son dos rivales y acepta Empates          
                  );
 	
-$array[] = array('oponent1img'=>'http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/7.png',
+$array[] = array('id' => '1',
+				'oponent1img'=>'http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/7.png',
 				'oponent2img'=>'http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/13.png',
 				'category'=>'Copa Libertadores 2014',
 				'subcategory'=>'Grupos IDA',
@@ -18,7 +20,8 @@ $array[] = array('oponent1img'=>'http://www.ole.com.ar/static/OLEOle/images/escu
 				'type'=>'D' //D significa que son dos rivales          
                  );
 
-$array[] = array('category'=>'Premios Oscars 2014',
+$array[] = array('id' => '12',
+				'category'=>'Premios Oscars 2014',
 				'subcategory'=>'Entrega Premios 2014',
 				'event'=>'Mejor Pelicula',
 				'date'=>'28-02-2014 22:00',
