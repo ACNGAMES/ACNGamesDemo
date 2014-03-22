@@ -182,8 +182,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
         <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Iniciar Sesi&oacute;n</button>      
       </div>
         </div> <!-- /container -->
-        <script src="js/bootstrap.js"></script>
-    	<script src="js/modern-business.js"></script>
+        
         </body>
     </html>';   
   }
