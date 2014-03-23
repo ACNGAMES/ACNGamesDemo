@@ -39,3 +39,20 @@ function getNext3Events(){
 	
 	
 };
+
+function getResults(){
+		$.ajax({
+            url: 'serverCall/getResultsF.php',
+            dataType: "json",
+            success: function(data) {
+            	if(data.status=="ok"){
+					$('#myCarousel2').html($.View("views/results.ejs",data.results));					            		
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
+	
+};
