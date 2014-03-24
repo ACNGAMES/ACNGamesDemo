@@ -1,0 +1,32 @@
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <% for (var i = 0; i < this.length; i++) { %>
+				<li data-target="#myCarousel2" data-slide-to="<%=i%>"
+				<% if(i==0) { %>            
+    				class="active"
+    			<% } %>
+    			></li>
+			<% } %>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <% for (var i = 0; i < this.length; i++) { %>
+				<div class="item<% if(i==0) { %> active<% } %>">
+				<% if(this[i].type=='N') { %>
+					<%= $.View('views/resultNoRiv.ejs', this[i]) %>
+				<% }else{%>
+					<%= $.View('views/resultRiv.ejs', this[i]) %>
+				<% } %>
+				</div>
+			<% } %>
+            	
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel2" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel2" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
