@@ -7,7 +7,11 @@ function signIn(){
 	var ps=hash($('#ps').val());
 	
 	
+	$('#signInBot').attr("disabled","disabled");
+	$('#signInBot').html('<i class="fa fa-spinner fa-spin"></i> Iniciando'); 
 	if(ps== "" || em ==""){
+		$('#signInBot').removeAttr("disabled");
+		$('#signInBot').html('Iniciar Sesi&oacute;n'); 
 		$('#singInForm').attr("class","col-lg-4 has-error");
 		$('#error').html(
              '<div class="row">'
@@ -51,6 +55,8 @@ function signIn(){
                 	aux.auth_token=data.auth_token;
                 	aux.user_id=data.user_id;
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4");
+                	$('#signInBot').removeAttr("disabled");
+					$('#signInBot').html('Iniciar Sesi&oacute;n'); 
                 	$('#error').html(
                 	'<div class="row">'
             				+'<div class="alert alert-danger">'
@@ -59,6 +65,8 @@ function signIn(){
         		    +'</div>');
                 	
                 }else if(data.status == "error") {
+                	$('#signInBot').removeAttr("disabled");
+					$('#signInBot').html('Iniciar Sesi&oacute;n'); 
                 	$('#error').html(
              			'<div class="row">'
           				  +'<div class="alert alert-danger">'
@@ -67,6 +75,8 @@ function signIn(){
         				  +'</div>');
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 				}else{
+                	$('#signInBot').removeAttr("disabled");
+					$('#signInBot').html('Iniciar Sesi&oacute;n');
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
                 	$('#error').html(
              			'<div class="row">'
@@ -110,34 +120,45 @@ function signUp(){
 	$('#errorPs').html("");
 	$('#msg').html("");
 	
-	
+	$('#signUpBot').attr("disabled","disabled");
+	$('#signUpBot').html('<i class="fa fa-spinner fa-spin"></i> Registrando'); 
 	if(nm==""){
 		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#errorName').html("Campo nombre está vacio<br/>");
+		$('#signUpBot').removeAttr("disabled");
+		$('#signUpBot').html('Registrarse');
 		return;
 	}
 	
 	if(sn==""){
 		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#errorSurname').html("Campo apellido está vacio<br/>");
+		$('#signUpBot').removeAttr("disabled");
+		$('#signUpBot').html('Registrarse');
 		return;
 	}
 	
 	if(id==""){
 		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#errorEnterprise').html("Campo enterprise está vacio<br/>");
+		$('#signUpBot').removeAttr("disabled");
+		$('#signUpBot').html('Registrarse');
 		return;
 	}
 	
 	if(ps=="" || ps2==""){
 		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#errorPs').html("Campo contraseña está vacio<br/>");
+		$('#signUpBot').removeAttr("disabled");
+		$('#signUpBot').html('Registrarse');
 		return;
 	}
 	
 	if(ps!=ps2){
 		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#errorPs').html("Las contraseñas no coincidieron<br/>");
+		$('#signUpBot').removeAttr("disabled");
+		$('#signUpBot').html('Registrarse');
 		return;
 	
    }else{
@@ -150,6 +171,8 @@ function signUp(){
             	if (data.status == "ok") {
             		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4");
             		//$('#signUpForm').attr("class","form-group input-group has-ok");
+                	$('#signUpBot').removeAttr("disabled");
+					$('#signUpBot').html('Registrarse');
                 	$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-success">'
@@ -163,6 +186,8 @@ function signUp(){
                 else {
                 	$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
                 	//$('#signUpForm').attr("class","form-group input-group has-error");
+					$('#signUpBot').removeAttr("disabled");
+					$('#signUpBot').html('Registrarse');
 					$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
@@ -175,6 +200,8 @@ function signUp(){
             
             error: function(error){
             	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+				$('#signUpBot').removeAttr("disabled");
+				$('#signUpBot').html('Registrarse');
 				console.log(error);
             }   
 
@@ -278,6 +305,9 @@ function changePs(){
 		var new_ps=$('#new_ps').val();
 		var re_ps=$('#re_ps').val();
 		
+		
+		$('#changePsBot').attr("disabled","disabled");
+		$('#changePsBot').html('<i class="fa fa-spinner fa-spin"></i> Cambiando'); 
 		//Borro los cuadrads de error
 		$('#singInForm').attr("class","container2");
 		$('#pass').attr("class","form-group input-group");
@@ -285,6 +315,8 @@ function changePs(){
 		$('#re_pass').attr("class","form-group input-group");
 		
 	if(ps== "" || new_ps =="" || re_ps==""){
+		$('#changePsBot').removeAttr("disabled");
+		$('#changePsBot').html('Cambiar Contreña'); 
 		$('#singInForm').attr("class","container2 has-error");
 		$('#error').html(
              '<div class="row">'
@@ -293,6 +325,8 @@ function changePs(){
         	+'</div>'
         	+'</div>');
 	}else if(new_ps!=re_ps){
+			$('#changePsBot').removeAttr("disabled");
+			$('#changePsBot').html('Cambiar Contreña'); 
 			$('#new_pass').attr("class","form-group input-group has-error");
 			$('#re_pass').attr("class","form-group input-group has-error");
 			$('#error').html(
@@ -308,6 +342,8 @@ function changePs(){
             data: {id:act.user_id, auth_token:act.auth_token, ps:hash(ps), new_ps:hash(new_ps), enterprise:act.email},
             success: function(data) {
             	if (data.status == "ok") {
+                	$('#changePsBot').removeAttr("disabled");
+					$('#changePsBot').html('Cambiar Contreña');
                 	$('#error').html(
              		'<div class="row">'
             		+'<div class="alert alert-success">'
@@ -319,6 +355,8 @@ function changePs(){
                 	expire();
                 	
                 }else if(data.status == "error") {
+                	$('#changePsBot').removeAttr("disabled");
+					$('#changePsBot').html('Cambiar Contreña');
                 	$('#pass').attr("class","form-group input-group has-error");
 					$('#error').html(
              		'<div class="row">'
@@ -329,6 +367,8 @@ function changePs(){
 				}else{
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
                 	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+                	$('#changePsBot').removeAttr("disabled");
+					$('#changePsBot').html('Cambiar Contreña');
                 }
             },error: function(error){
             	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
@@ -345,13 +385,19 @@ function changePs(){
 function restorePass(){
 	$('#error').html("");
 	enterprise = $('#enterprise').val();
+	
+	$('#processRestBot').attr("disabled","disabled");
+	$('#processRestBot').html('<i class="fa fa-spinner fa-spin"></i> Procesando'); 
 	if(enterprise==""){
+		$('#processRestBot').removeAttr("disabled");
+		$('#processRestBot').html('Continuar');
 		$('#error').html(
              '<div class="row">'
             +'<div class="alert alert-danger">'
             +'El enterprise Id para <a class="alert-link">blanquear contraseña</a> no puede ser <a class="alert-link" >vacio</a>!'  
         	+'</div>'
-        	+'</div>');	
+        	+'</div>');
+        $('#myModal').modal('hide');	
 	}else{
 		$.ajax({
             url: 'serverCall/restoreF.php',
@@ -359,6 +405,8 @@ function restorePass(){
             data: {enterprise:enterprise},
             success: function(data) {
             	if (data.status == "ok") {
+                	$('#processRestBot').removeAttr("disabled");
+					$('#processRestBot').html('Continuar');
                 	$('#error').html(
              		'<div class="row">'
             		+'<div class="alert alert-success">'
@@ -366,8 +414,10 @@ function restorePass(){
             		+'Verifique que no se encuentre en la carpeta de Spam. Gracias!'  
         			+'</div>'
         			+'</div>');
-					
+					$('#myModal').modal('hide');
                 }else if(data.status == "error") {
+                	$('#processRestBot').removeAttr("disabled");
+					$('#processRestBot').html('Continuar');
                 	$('#pass').attr("class","form-group input-group has-error");
 					$('#error').html(
              		'<div class="row">'
@@ -375,12 +425,19 @@ function restorePass(){
             		+'El enterprise Id ingresado es <a class="alert-link" >invalida</a>!'  
         			+'</div>'
         			+'</div>');
+        			$('#myModal').modal('hide');
 				}else{
+					$('#processRestBot').removeAttr("disabled");
+					$('#processRestBot').html('Continuar');
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
                 	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+                	$('#myModal').modal('hide');
                 }
             },error: function(error){
             	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+            	$('#processRestBot').removeAttr("disabled");
+				$('#processRestBot').html('Continuar');
+				$('#myModal').modal('hide');
 				console.log(error);
             } 
 
@@ -399,16 +456,20 @@ function restorePs(){
 	id = res[0].split("=")[1];
 	at = res[1].split("=")[1];
 	$('#error').html("");
-		var new_ps=$('#new_ps').val();
-		var re_ps=$('#re_ps').val();
+	var new_ps=$('#new_ps').val();
+	var re_ps=$('#re_ps').val();
 		
-		//Borro los cuadrads de error
-		$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4");
-		$('#pass').attr("class","form-group input-group");
-		$('#new_pass').attr("class","form-group input-group");
-		$('#re_pass').attr("class","form-group input-group");
+	$('#restoreBot').attr("disabled","disabled");
+	$('#restoreBot').html('<i class="fa fa-spinner fa-spin"></i> Cambiando'); 
+	//Borro los cuadrads de error
+	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4");
+	$('#pass').attr("class","form-group input-group");
+	$('#new_pass').attr("class","form-group input-group");
+	$('#re_pass').attr("class","form-group input-group");
 		
 	if(new_ps =="" || re_ps==""){
+		$('#restoreBot').removeAttr("disabled");
+		$('#restoreBot').html('Cambiar Contreña'); 
 		$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
 		$('#error').html(
              '<div class="row">'
@@ -417,9 +478,11 @@ function restorePs(){
         	+'</div>'
         	+'</div>');
 	}else if(new_ps!=re_ps){
-			$('#new_pass').attr("class","form-group input-group has-error");
-			$('#re_pass').attr("class","form-group input-group has-error");
-			$('#error').html(
+		$('#restoreBot').removeAttr("disabled");
+		$('#restoreBot').html('Cambiar Contreña');
+		$('#new_pass').attr("class","form-group input-group has-error");
+		$('#re_pass').attr("class","form-group input-group has-error");
+		$('#error').html(
              '<div class="row">'
             +'<div class="alert alert-danger">'
             +'Los campos nueva contraseña y verificar <a class="alert-link" >no coinciden</a>!'  
@@ -432,6 +495,8 @@ function restorePs(){
             data: {id:id,auth_token:at, new_ps:hash(new_ps)},
             success: function(data) {
             	if (data.status == "ok") {
+					$('#restoreBot').removeAttr("disabled");
+					$('#restoreBot').html('Cambiar Contreña');
 					$('#container').html($.View("views/signIn.ejs"));                	
                 	$('#error').html(
              		'<div class="row">'
@@ -441,6 +506,8 @@ function restorePs(){
         			+'</div>');
 					
                 }else if(data.status == "error") {
+                	$('#restoreBot').removeAttr("disabled");
+					$('#restoreBot').html('Cambiar Contreña');
                 	$('#error').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
@@ -448,6 +515,8 @@ function restorePs(){
         			+'</div>'
         			+'</div>');
 				}else{
+                	$('#restoreBot').removeAttr("disabled");
+					$('#restoreBot').html('Cambiar Contreña');
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
                 	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
                 }

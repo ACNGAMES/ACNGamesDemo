@@ -1,0 +1,49 @@
+************************************************************************************************************************************************************
+FUNCIONALIDADES NUEVAS
+************************************************************************************************************************************************************
++ Botones Bloqeuados mientras esta en progreso la accion. (SignIn, SignUp, Olvidar Contraseña, Cambiar Contraseña, Blanquear Contraseña) 
++ SignUpF.php funcion NOW() para cre_dttm
+
+************************************************************************************************************************************************************
+FUNCIONALIDADES EXISTENTES
+************************************************************************************************************************************************************
+
+- Cargar en la base de datos las Categorias
+- Poder generar las categorias de forma dinamica
+- Poder generar los ultimos resultados de forma dinamica
+- Funcion PHP busca Categorias
+- Funcion js dibuja Categorias
+- Funcion js dibuja Resultados
+- Funcion js dibuja Proximos Eventos
+- Corregir error de superposición de texto en Últimos Resultados
+- Dibujar categoria
+- En IE no se ven los placeholders
+- Llamar a la pagina registro desde la pagina login
+- Insertar datos de registro
+- Crear como cuenta no activada
+- Pantalla de aviso para digirirse a su cuenta de mail
+- Avisar que el link de activacion puede estar en el spam
+- Validar que la cuenta no exista (Enterprise ID)
+- Corregir el ancho de mensaje sucess 
+- Generación de link par envio por mail
+- Carga de credito inicial
+- Creada la cta, se envia mail de activación. Si la direccion es invalida se borra la cuenta
+- Al ingresar al link marcar la cuenta como activada
+- Generar el token de conexión
+- Validar si la cuenta esta activada
+- Encryptar datos
+- Verificar cuenta activada
+- Verificar cookies existentes
+- Fetch Credit
+- Solicitar envio de mail si no activo
+- Bind de acción
+- Funcion de Servidor que cambie password
+- Mensajes de error o success
+- Falta al hacer click que pida un entreprise ID
+- Genere un token de validación y envie el mail 
+- El link pide que se ingrese la nueva contraseña
+- Al poner submit nueva contraseña accion servidor
+- Mensajes de error o success
+- Bind action submit
+- Cuando se solicite un blanqueo de contraseña, se agregará un registro a la tabla de blanqueo de contraseña.
+- Funcion que cada X tiempo se encargue de refrescar el saldo de la cuenta
