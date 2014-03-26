@@ -64,3 +64,6 @@ function newMessage(){
 
 	});
 };
+
+
+function loadMsg(id){}; 

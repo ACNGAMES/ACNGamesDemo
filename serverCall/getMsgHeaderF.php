@@ -16,17 +16,13 @@ if(validate($id, $auth_token)){
     die("Error: no se pudo realizar la consulta");
   $array=array();
   while($fila = mysql_fetch_assoc($resultado)){
-		if($fila['FROM_ID']==null){
+		if($fila['FROM_ID']==0){
 			$from='Equipo de ACN Games';			
 		}else{
 			$from=$fila['FROM_ID'];
 		}
 		
-		if($fila['SUBJECT']!= null){
-			$subject=$fila['SUBJECT'];
-		}else{
-			$subject="";
-		}
+		
 	$array[] = array('id'=> $fila['MSG_ID'],
 	    			'from'=>$from,
 	    			'subject' => $subject,
