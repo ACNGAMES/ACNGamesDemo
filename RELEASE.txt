@@ -5,6 +5,7 @@ FUNCIONALIDADES NUEVAS
 + funcion crear mensaje PHP
 + tablas BD de mensajes
 + Barra de usuairo con mensajes neuvos dinamico
++ SE agreo la opcion de abri mensaje y marcarlo como leido
 
 ************************************************************************************************************************************************************
 FUNCIONALIDADES EXISTENTES
