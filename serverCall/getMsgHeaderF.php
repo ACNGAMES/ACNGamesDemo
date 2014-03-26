@@ -22,7 +22,11 @@ if(validate($id, $auth_token)){
 			$from=$fila['FROM_ID'];
 		}
 		
-		
+		if($fila['SUBJECT']!= null){
+			$subject=$fila['SUBJECT'];
+		}else{
+			$subject="";
+		}
 	$array[] = array('id'=> $fila['MSG_ID'],
 	    			'from'=>$from,
 	    			'subject' => $subject,

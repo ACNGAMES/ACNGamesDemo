@@ -23,7 +23,7 @@ function getUnreadMsg(){
 };
 
 
-function newMsg(){
+function newMsg(id){
 	$('#pagina_central').html($.View("views/newMsg.ejs"));
 };
 
@@ -66,4 +66,7 @@ function newMessage(){
 };
 
 
-function loadMsg(id){}; 
+function loadMsg(id){
+	
+	$('#pagina_central').html($.View("views/viewMsg.ejs"));
+}; 
