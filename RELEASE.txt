@@ -1,13 +1,17 @@
 ************************************************************************************************************************************************************
 FUNCIONALIDADES NUEVAS
 ************************************************************************************************************************************************************
-+ Botones Bloqeuados mientras esta en progreso la accion. (SignIn, SignUp, Olvidar Contraseña, Cambiar Contraseña, Blanquear Contraseña) 
-+ SignUpF.php funcion NOW() para cre_dttm
++ Se creo el formulario para nuevo mensaje
++ funcion crear mensaje PHP
++ tablas BD de mensajes
++ Barra de usuairo con mensajes neuvos dinamico
 
 ************************************************************************************************************************************************************
 FUNCIONALIDADES EXISTENTES
 ************************************************************************************************************************************************************
 
+- Botones Bloqeuados mientras esta en progreso la accion. (SignIn, SignUp, Olvidar Contraseña, Cambiar Contraseña, Blanquear Contraseña) 
+- SignUpF.php funcion NOW() para cre_dttm
 - Cargar en la base de datos las Categorias
 - Poder generar las categorias de forma dinamica
 - Poder generar los ultimos resultados de forma dinamica
