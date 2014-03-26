@@ -1,0 +1,18 @@
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Mensajes <span class="badge"><%=this.length%></span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" onclick="newMsg()" ><i class="fa fa-file-text-o"></i> Nueva Sugerencia</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">
+                	<%if(this.length==1){%>
+                		<%=this.length%> Nuevo Mensaje
+                	<%}else if(this.length>1){%>
+                		<%=this.length%> Nuevos Mensajes
+                	<%}%>
+                	</li>
+                
+               <%for(i=0;i<this.length;i++){%>
+               	 <%= $.View('views/msgPreviewHeader.ejs', this[i]) %>
+               <%}%>
+                
+                <li><a href="#"><i class="fa fa-inbox"></i> Inbox <span class="badge"><%=this.length%></span></a></li>
+              </ul>

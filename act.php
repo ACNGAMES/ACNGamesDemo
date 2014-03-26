@@ -76,7 +76,7 @@ echo '<!DOCTYPE html>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" data-dismiss="modal" onclick="restorePass()" class="btn btn-primary">Continuar</button>
+        <button id="processRestBot" type="button" data-dismiss="modal" onclick="restorePass()" class="btn btn-primary">Continuar</button>
       </div>
     </div>
   </div>
@@ -140,7 +140,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
         <div id="error"></div>
         <div class="form-group input-group">
             <span class="input-group-addon">Enterprise ID</span>
-        	<input type="email" name="email" onkeypress="checkEnter(event)" class="form-control" id="email" placeholder="Enterprise ID" required="" autofocus="">
+        	<input type="email" name="email" onkeypress="checkEnter(event)" class="form-control" id="email" placeholder="Enterprise ID" required="" autofocus="true">
         </div>
         <div class="form-group input-group">
             <span class="input-group-addon">     Password</span>
@@ -150,7 +150,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
         <br/>
         <a data-toggle="modal" href="#" data-target="#myModal">¿Olvidó su contraseña?</a>
         <br/><br/>
-        <button class="btn btn-lg btn-primary btn-block" onclick="signIn()">Iniciar Sesi&oacute;n</button>      
+        <button id="signInBot" class="btn btn-lg btn-primary btn-block" onclick="signIn()">Iniciar Sesi&oacute;n</button>      
       </div>
         </div> <!-- /container -->
   

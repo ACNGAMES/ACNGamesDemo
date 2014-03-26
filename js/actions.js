@@ -3,7 +3,7 @@
  		//Aca recarago los creditos
     		if(act!=null){
     			reloadCredit();
-    			
+    			getUnreadMsg();
     		}
  };
 
