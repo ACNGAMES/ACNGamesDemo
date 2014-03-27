@@ -14,5 +14,5 @@
                	 <%= $.View('views/msgPreviewHeader.ejs', this[i]) %>
                <%}%>
                 
-                <li><a href="#"><i class="fa fa-inbox"></i> Inbox <span class="badge"><%=this.length%></span></a></li>
+                <li><a href="#" onclick="viewInbox()"><i class="fa fa-inbox"></i> Inbox <span class="badge"><%=this.length%></span></a></li>
               </ul>

@@ -3,6 +3,10 @@ FUNCIONALIDADES NUEVAS
 ************************************************************************************************************************************************************
 
 + Vista de un mensaje desde la barra de navegacion
++ Vista de un mensaje desde la lista de enviados
++ Vista de un mensaje desde la lista de inbox
++ Vista de inbox
++ Vista de mensajes enviados
 
 ************************************************************************************************************************************************************
 FUNCIONALIDADES EXISTENTES

@@ -90,3 +90,25 @@ function loadMsg(id){
 	
 	
 }; 
+
+function viewInbox(){
+	$.ajax({
+            url: 'serverCall/getMsgInboxF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llaamr al view q	uw dibuje los mensajes
+					$('#pagina_central').html($.View("views/inboxView.ejs",data.msgs));
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
+	
+};
