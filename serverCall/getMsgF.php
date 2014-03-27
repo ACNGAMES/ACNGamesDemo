@@ -10,7 +10,7 @@ if(validate($id, $auth_token)){
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  
-  $sentencia = "SELECT * FROM $db.CM_MSG LEFT JOIN $db.CM_USER ON from_id=user_id where msg_id='$msg_id'"; 
+  $sentencia = "SELECT * FROM $db.CM_MSG LEFT JOIN $db.CM_USER ON from_id=user_id where msg_id='$msg_id' and to_id='$id'"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
   if(!$resultado) 
@@ -42,7 +42,7 @@ if(validate($id, $auth_token)){
 	
  	//Envio la respuesta por json
  	echo json_encode($data);
-  	$sentencia = "UPDATE $db.CM_MSG SET CHECK_SW='Y' where msg_id='$msg_id'"; 
+  	$sentencia = "UPDATE $db.CM_MSG SET CHECK_SW='Y' where msg_id='$msg_id' and to_id='$id'"; 
   	// Ejecuta la sentencia SQL 
   	$resultado = mysql_query($sentencia, $iden);
   // Cierra la conexión con la base de datos 

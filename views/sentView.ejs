@@ -1,0 +1,49 @@
+<div class="col-sm-1 col-md-2 col-lg-2">
+	<div class="jumbotron">
+		<br />
+		<ul class="nav nav-pills nav-stacked">
+	  		<li><a href="#" onclick="viewInbox()">Inbox</a></li>
+	 		<li class="active"><a href="#" onclick="viewSent()">Enviados</a></li>
+	 	</ul>
+	</div>
+</div>
+<div class="col-sm-10 col-md-8 col-lg-8">
+  <div class="jumbotron">
+    <h2>Enviados</h2>
+    <div id="error"></div>
+    <div class="container2">
+   		<div class="panel panel-info">
+  			<div class="panel-body">
+	    	
+	    	<div class="list-group">
+                 <%for(i=0;i<this.length;i++){%>
+               	 		<a onclick="loadSent('<%=this[i].id%>')" href="#" class="list-group-item">
+               	 		<div class="row">
+               	 		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    		<%=this[i].to%>
+                    	</div>
+                    	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    		<%=this[i].subject%>
+                    	</div>
+                    	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 pull-right">
+                    		<%=this[i].date%>
+               	 		</div>
+                    	</div>
+                  		</a>
+               	<%}%>
+	    	</div>
+	    	<!-- CIERRO EL PANEL BODY-->
+  			</div>
+			
+		</div>
+        
+  </div>
+ </div>
+</div>
+              
+      
+      
+      
+      
+        
+ 

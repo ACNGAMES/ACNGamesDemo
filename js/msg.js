@@ -112,3 +112,51 @@ function viewInbox(){
 	});
 	
 };
+
+function loadSent(id){
+	//todo tengo uqe ir a buscar el contenido del mensaje y marcarlo como leido
+	$.ajax({
+            url: 'serverCall/getSentF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, msg_id:id},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llaamr al view q	uw dibuje los mensajes
+					$('#pagina_central').html($.View("views/viewMsgSent.ejs",data));
+					getUnreadMsg();          		
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
+	
+	
+}; 
+
+
+function viewSent(){
+	$.ajax({
+            url: 'serverCall/getMsgSentF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llaamr al view q	uw dibuje los mensajes
+					$('#pagina_central').html($.View("views/sentView.ejs",data.msgs));
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
+	
+};
