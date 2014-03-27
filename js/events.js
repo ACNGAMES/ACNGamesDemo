@@ -56,3 +56,12 @@ function getResults(){
 	});
 	
 };
+
+function viewResults(){
+	
+};
+
+
+function viewNextEvents(){
+	$('#pagina_central').html($.View("views/nextEvents.ejs"));
+};
