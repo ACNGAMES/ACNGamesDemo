@@ -8,35 +8,34 @@
 		</ul>
 	</div>
 </div>
-      <div class="col-sm-10 col-md-8 col-lg-8">
-        <div class="jumbotron">
-        <div class="container2">
-            <div class="col-sm-9 col-md-9 col-lg-9">
-	        	<strong>Asunto:<%=this.subject%></strong>	
-			</div>
-            <div class="col-sm-3 col-md-3 col-lg-3">
-            	<i class="fa fa-clock-o"></i><%=this.date%>
-            </div>
-            <div class="row">
-            	<div id="pass" class="form-group input-group">
-            		<span class="input-group-addon">De</span>
-        			<input type="text" name="subject" class="form-control" id="subject"  value="<%=this.from%>" disabled="disabled">
-        		</div>
-            </div>
-            <br/>
-            <textarea class="form-control" id="body" cols="50" disabled="disabled" rows="10"><%=this.body%></textarea>
-        	<br/>
-	        <br/>
-	        <div class="col-sm-offset-2 col-md-offset-9 col-lg-offset-9 col-sm-10 col-md-3 col-lg-3">
-	        	<button id="newMsgBot" class="btn btn-lg btn-danger btn-block pull-right" onclick="deleteMessage()">Borrar Mensaje</button>	
-			</div>
-        </div>
-            
-        </div>
-        </div>
+<div class="col-sm-10 col-md-8 col-lg-8">
+  <div class="jumbotron">
+    <br /><br /><br /><br />
+    <div class="container2">
+   		<div class="panel panel-info">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">Asunto: <strong><%=this.subject%></strong></h3>
+  			</div>
+  			<div class="panel-body">
+	    		<div class="col-sm-9 col-md-9 col-lg-9">
+	    			<strong>De: </strong><%=this.from%>	
+				</div>
+            	<div class="col-sm-3 col-md-3 col-lg-3">
+            		<i class="fa fa-clock-o"></i> <%=this.date%>
+            	</div>
+	    		<hr>
+	    		<%=this.body%>
+  				<div class="col-sm-offset-2 col-md-offset-9 col-lg-offset-9 col-sm-10 col-md-3 col-lg-3">
+	      			<button id="newMsgBot" class="btn btn-danger btn-block pull-right" onclick="deleteMessage()">Borrar Mensaje</button>	
+				</div>
+  			</div>
+			
+		</div>
+        
+  </div>
+ </div>
+</div>
               
-      </div>
-      </div>
       
       
       

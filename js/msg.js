@@ -76,7 +76,7 @@ function loadMsg(id){
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los mensajes
 					$('#pagina_central').html($.View("views/viewMsg.ejs",data));
-					            		
+					getUnreadMsg();          		
             	}else if(data.status=="exp"){
             		expire();
             	}else{

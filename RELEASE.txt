@@ -1,16 +1,18 @@
 ************************************************************************************************************************************************************
 FUNCIONALIDADES NUEVAS
 ************************************************************************************************************************************************************
-+ Se creo el formulario para nuevo mensaje
-+ funcion crear mensaje PHP
-+ tablas BD de mensajes
-+ Barra de usuairo con mensajes neuvos dinamico
-+ SE agreo la opcion de abri mensaje y marcarlo como leido
+
++ Vista de un mensaje desde la barra de navegacion
 
 ************************************************************************************************************************************************************
 FUNCIONALIDADES EXISTENTES
 ************************************************************************************************************************************************************
 
+- Se creo el formulario para nuevo mensaje
+- funcion crear mensaje PHP
+- tablas BD de mensajes
+- Barra de usuairo con mensajes neuvos dinamico
+- SE agreo la opcion de abri mensaje y marcarlo como leido
 - Botones Bloqeuados mientras esta en progreso la accion. (SignIn, SignUp, Olvidar Contraseña, Cambiar Contraseña, Blanquear Contraseña) 
 - SignUpF.php funcion NOW() para cre_dttm
 - Cargar en la base de datos las Categorias
