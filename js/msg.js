@@ -91,7 +91,7 @@ function loadMsg(id){
 	
 }; 
 
-function viewInbox(){
+function viewInbox(ok){
 	$.ajax({
             url: 'serverCall/getMsgInboxF.php',
             dataType: "json",
@@ -100,6 +100,15 @@ function viewInbox(){
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los mensajes
 					$('#pagina_central').html($.View("views/inboxView.ejs",data.msgs));
+					if(ok==true){
+						$('#error').html(
+                		'<div class="row">'
+                		+'<div class="alert alert-success alert-dismissable">'
+  						+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+              			+'El mensaje se ha borrado <a class="alert-link" >Exitosamente</a>!' 
+        		    	+'</div>'
+        		    	+'</div>');						
+					}
             	}else if(data.status=="exp"){
             		expire();
             	}else{
@@ -139,7 +148,7 @@ function loadSent(id){
 }; 
 
 
-function viewSent(){
+function viewSent(ok){
 	$.ajax({
             url: 'serverCall/getMsgSentF.php',
             dataType: "json",
@@ -148,6 +157,15 @@ function viewSent(){
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los mensajes
 					$('#pagina_central').html($.View("views/sentView.ejs",data.msgs));
+					if(ok==true){
+						$('#error').html(
+                		'<div class="row">'
+                		+'<div class="alert alert-success alert-dismissable">'
+  						+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+              			+'El mensaje se ha borrado <a class="alert-link" >Exitosamente</a>!' 
+        		    	+'</div>'
+        		    	+'</div>');						
+					}
             	}else if(data.status=="exp"){
             		expire();
             	}else{
@@ -159,4 +177,63 @@ function viewSent(){
 
 	});
 	
+};
+
+function deleteMessage(id){
+	
+	$('#delMsgBot').attr("disabled","disabled");
+	$('#delMsgBot').html('<i class="fa fa-spinner fa-spin"></i> Borrando');
+	$.ajax({
+            url: 'serverCall/deleteMsgF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, msg_id:id},
+            success: function(data) {
+            	if(data.status=="ok"){
+					viewInbox(true);
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		$('#delMsgBot').removeAttr("disabled");
+					$('#delMsgBot').html('Borrar Mensaje'); 
+					$('#error').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'Ocurrio un <a class="alert-link" >error</a>. Por favor intente nuevamente!'  
+        			+'</div>'
+        			+'</div>');
+            		}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});	
+	
+};
+
+function deleteMessageSent(id){
+
+	$('#delMsgBot').attr("disabled","disabled");
+	$('#delMsgBot').html('<i class="fa fa-spinner fa-spin"></i> Borrando');
+	$.ajax({
+            url: 'serverCall/deleteSentF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, msg_id:id},
+            success: function(data) {
+            	if(data.status=="ok"){
+					viewSent(true);
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		$('#delMsgBot').removeAttr("disabled");
+					$('#delMsgBot').html('Borrar Mensaje'); 
+					$('#error').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'Ocurrio un <a class="alert-link" >error</a>. Por favor intente nuevamente!'  
+        			+'</div>'
+        			+'</div>');
+            		}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
 };
