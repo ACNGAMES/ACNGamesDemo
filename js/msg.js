@@ -92,6 +92,7 @@ function loadMsg(id){
 }; 
 
 function viewInbox(ok){
+	getUnreadMsg();
 	$.ajax({
             url: 'serverCall/getMsgInboxF.php',
             dataType: "json",

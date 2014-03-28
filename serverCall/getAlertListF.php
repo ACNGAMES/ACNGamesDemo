@@ -9,7 +9,7 @@ if(validate($id, $auth_token)){
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  
-  $sentencia = "SELECT * FROM $db.CM_ALERT where user_id='$id' and check_sw='N' order by ALERT_DTTM desc"; 
+  $sentencia = "SELECT * FROM $db.CM_ALERT where user_id='$id' order by ALERT_DTTM desc"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
   if(!$resultado) 
@@ -21,6 +21,7 @@ if(validate($id, $auth_token)){
 	    			'alert_cd'=>$fila['ALERT_CD'],
 	    			'nav_key' => $fila['NAV_KEY'],
 	    			'descr' =>  $fila['DESCR'],
+	    			'check_sw' => $fila['CHECK_SW'],
 	    			'date' =>  $fila['ALERT_DTTM']
                  );
 	}

@@ -110,6 +110,8 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
 	$SILVER_INIT=0;
 	$GOLD_INIT=5;
 	$sentencia = "INSERT INTO $db.CM_COIN VALUES ('$id',$SILVER_INIT,$GOLD_INIT)"; 
+   	mysql_query($sentencia, $iden);
+	$sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$id','AG','Gracias por activar su cuenta.',NOW())"; 
    	mysql_query($sentencia, $iden); 
 	mysql_close($iden);	
 	echo '        <div class="row">
