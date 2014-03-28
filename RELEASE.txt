@@ -2,17 +2,18 @@
 FUNCIONALIDADES NUEVAS
 ************************************************************************************************************************************************************
 
-+ Vista de un mensaje desde la barra de navegacion
-+ Vista de un mensaje desde la lista de enviados
-+ Vista de un mensaje desde la lista de inbox
-+ Vista de inbox
-+ Vista de mensajes enviados
-+ Borrar mensajes enviados y recibidos
++ Vista de todas las alertas
 
 ************************************************************************************************************************************************************
 FUNCIONALIDADES EXISTENTES
 ************************************************************************************************************************************************************
 
+- Vista de un mensaje desde la barra de navegacion
+- Vista de un mensaje desde la lista de enviados
+- Vista de un mensaje desde la lista de inbox
+- Vista de inbox
+- Vista de mensajes enviados
+- Borrar mensajes enviados y recibidos
 - Se creo el formulario para nuevo mensaje
 - funcion crear mensaje PHP
 - tablas BD de mensajes

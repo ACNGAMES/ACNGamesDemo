@@ -5,6 +5,7 @@ function loadPageEstruct(){
 	getUnreadMsg();
 	getNext3Events();
 	getResults();
+	getNewAlerts();
 };
 
 
