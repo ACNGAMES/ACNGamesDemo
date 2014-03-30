@@ -568,7 +568,7 @@ function startRound() {
   dealRound();
   	//TODO aca tengo que actualizar el credito
   	getCoins();
-  	makeBet(player[0].bet/100,'Jugo al Blackjack');
+  	makeBet(player[0].bet/100,'Jugo al Blackjack',false);
 	reloadCrBJ();
 	//console.log('UPDATE Credit:'+credits);
 }
@@ -643,7 +643,7 @@ function playRound() {
 
   // Enable/disable buttons.
 
-  if (canSplit() && (credits-credits)>0)
+  if (canSplit() && (credits-defaultBet)>0)
     document.forms["controls"].elements["split"].disabled = false;
   if(credits-defaultBet>0)
   	document.forms["controls"].elements["double"].disabled    = false;
@@ -671,14 +671,14 @@ if(credits>(player[0].bet / 2)){
 	
     // If the dealer has blackjack, show the down card and pay player at 2 to 1.
 	getCoins();
-	makeBet(amount/100, 'Blackjack apuesta a seguro');
+	makeBet(amount/100, 'Blackjack apuesta a seguro',true);
 	reloadCrBJ();
     if (dealer.getScore() == 21)
     {
       dealer.cardsNode.firstChild.firstChild.style.visibility = "";
       credits += player[0].bet;
       alert("El Crupier tiene Balckjack, ganaste " + formatDollar(player[0].bet));
-      payBet(player[0].bet/100,'Blackjack Pago Seguro');
+      payBet(player[0].bet/100,'Blackjack Pago Seguro',true);
       reloadCrBJ();
     }
     else
@@ -727,7 +727,7 @@ function playerSplit() {
   credits -= player[n].bet;
   //TODO separa cartas
   getCoins();
-  makeBet(player[n].bet/100, 'Blackjack separa cartas');
+  makeBet(player[n].bet/100, 'Blackjack separa cartas',false);
   reloadCrBJ();
   updateBetDisplay(n);
   updateBetDisplay(n + 1);
@@ -745,7 +745,7 @@ function playerDouble() {
   credits -= defaultBet;
   //TODO aca tengo que volve a apostar
   getCoins();
-  makeBet(defaultBet/100,'Dobla apuesta Blackjack');
+  makeBet(defaultBet/100,'Dobla apuesta Blackjack',false);
   updateBetDisplay(curPlayerHand);
   player[curPlayerHand].doubled = true;
   player[curPlayerHand].top = 0;
@@ -971,21 +971,25 @@ function endRound() {
       credits += player[i].bet;
       auxamount+= player[i].bet;
     }
-    updateBetDisplay(i);
+    
   }
   //TODO aca tengo que actualizar el credito
   if(auxamount>0){
-  	payBet(auxamount/100,'Blackjack Paga Apuesta');
-  	reloadCrBJ();
+  	payBet(auxamount/100,'Blackjack Paga Apuesta',false);
+  	
   }
   //console.log('UPDATE END Credit:'+credits);
-	if(credits>=minBet && credits <=defaultBet){
+  if(credits==minBet){
 		defaultBet=minBet;
 		changeBet(0);
 		document.forms["controls"].elements["deal"].disabled = false;
 	}else if(credits>=defaultBet){
 	 	 document.forms["controls"].elements["deal"].disabled = false;
 	}
+	reloadCrBJ();
+	updateBetDisplay(0);
+	creditsTextNode.nodeValue = "Credito: " + formatDollar(credits);
+	
 }
 
 function canSplit() {

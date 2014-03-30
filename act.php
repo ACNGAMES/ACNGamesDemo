@@ -111,7 +111,7 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
 	$GOLD_INIT=5;
 	$sentencia = "INSERT INTO $db.CM_COIN VALUES ('$id',$SILVER_INIT,$GOLD_INIT)";
 	mysql_query($sentencia, $iden);
-	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, SILVER, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(), ,$SILVER_INIT,$GOLD_INIT,$SILVER_INIT,$GOLD_INIT)";
+	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, SILVER, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'C','ACN GAMES le envia credito',$SILVER_INIT,$GOLD_INIT,$SILVER_INIT,$GOLD_INIT)";
 	mysql_query($sentencia, $iden);
 	//$sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$id','AG','Gracias por activar su cuenta.',NOW())"; 
    	//mysql_query($sentencia, $iden); 
