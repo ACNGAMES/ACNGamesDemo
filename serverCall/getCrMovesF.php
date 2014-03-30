@@ -16,14 +16,21 @@ if(validate($id, $auth_token)){
     die("Error: no se pudo realizar la consulta");
   $array=array();
   while($fila = mysql_fetch_assoc($resultado)){
-		
+		$tot_gold = $fila['TOT_GOLD'];
+	  	$tot_silver = $fila['TOT_SILVER'];
+		if($tot_gold==null){
+			$tot_gold=0;
+		}
+		if($tot_silver==null){
+			$tot_silver=0;
+		}
 	$array[] = array('move_cd'=>$fila['MOVE_CD'],
 	    			'date' =>  $fila['MOVE_DTTM'],
-	    			'event_id' => $fila['EVENT_ID'],
+	    			'descr' => $fila['DESCR'],
 	    			'gold' =>  $fila['GOLD'],
 	    			'silver' =>  $fila['SILVER'],
-	    			'tot_gold' =>  $fila['TOT_GOLD'],
-	    			'tot_silver' =>  $fila['TOT_SILVER']
+	    			'tot_gold' =>  $tot_gold,
+	    			'tot_silver' =>  $tot_silver
                  );
 	}
   $data = array('status'=> 'ok',

@@ -59,14 +59,13 @@ function navBet(id){
 	                	
 function navCred(id){
 	if(markCheck(id)){
-		console.log('navega a mi saldo de credito');
+		creditMoves();
 	}
 };
 	                	
 function navRead(id){
-	if(markCheck(id)){
-		console.log('navega a la pantalla principal');
-	}
+	markCheck(id);
+
 };
 
 function markCheck(id){
