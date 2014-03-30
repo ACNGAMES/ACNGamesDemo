@@ -2,14 +2,15 @@
 FUNCIONALIDADES NUEVAS
 ************************************************************************************************************************************************************
 
-+ Vista de todas las alertas 
-+ vista de las nuevas alarmas
-+ marcar alarma como vista
++ Vista de movimeinto de saldos
 
 ************************************************************************************************************************************************************
 FUNCIONALIDADES EXISTENTES
 ************************************************************************************************************************************************************
 
+- Vista de todas las alertas 
+- vista de las nuevas alarmas
+- marcar alarma como vista
 - Vista de un mensaje desde la barra de navegacion
 - Vista de un mensaje desde la lista de enviados
 - Vista de un mensaje desde la lista de inbox

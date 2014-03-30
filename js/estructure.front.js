@@ -9,3 +9,7 @@ function loadPageEstruct(){
 };
 
 
+function getGames(){
+	playBlackJack();
+	
+};
