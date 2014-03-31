@@ -96,7 +96,7 @@ function creditMoves(){
 };
 
 
-function pricesView(){
+function pricesView(msg){
 	$.ajax({
             url: 'serverCall/getPricesF.php',
             dataType: "json",
@@ -104,7 +104,22 @@ function pricesView(){
             success: function(data) {
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
-					$('#pagina_central').html($.View("views/pricesView.ejs",{products:data.products, silver:act.silver}));				            		
+					$('#pagina_central').html($.View("views/pricesView.ejs",{products:data.products, silver:act.silver}));
+					if(msg==true){
+						$('#error').html(
+             			'<div class="row">'
+            			+'<div class="alert alert-success">'
+            			+'Su pedido se ha realizado <a class="alert-link" >exitosamente</a>! En cuesti&oacute;n de d&iacute;as le estaremos entregando su premio. Muchas Gracia.'  
+        				+'</div>'
+        				+'</div>');
+					}else if(msg==false){
+						$('#error').html(
+             			'<div class="row">'
+            			+'<div class="alert alert-danger">'
+            			+'Su pedido <a class="alert-link" >no</a> se ha realizado! Puede que no posee credito suficiente o se encuentre agotado. Disculpe las molestias, muchas Gracias.'  
+        				+'</div>'
+        				+'</div>');
+					}				            		
             	}else if(data.status=="exp"){
             		expire();
             	}else{

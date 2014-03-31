@@ -530,3 +530,30 @@ function restorePs(){
 	}	
 	
 };
+
+
+function requestPrd(prod_id){
+	$.ajax({
+            url: 'serverCall/reqPricesF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, prod_id:prod_id},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llamar al view q	uw dibuje los movimientos
+					pricesView(true);
+					reloadCredit();      		
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else if(data.status=="disp"){
+            		pricesView(false);
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            	
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});	
+	
+};
