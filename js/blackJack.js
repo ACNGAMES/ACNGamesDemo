@@ -967,7 +967,7 @@ function endRound() {
       addClassName(player[i].betTextNode.parentNode, "lost");
     }
     else {
-      player[i].resultTextNode.nodeValue = "Push";
+      player[i].resultTextNode.nodeValue = "Empate";
       credits += player[i].bet;
       auxamount+= player[i].bet;
     }

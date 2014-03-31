@@ -94,3 +94,25 @@ function creditMoves(){
 
 	});
 };
+
+
+function pricesView(){
+	$.ajax({
+            url: 'serverCall/getPricesF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llaamr al view q	uw dibuje los movimientos
+					$('#pagina_central').html($.View("views/pricesView.ejs",{products:data.products, silver:act.silver}));				            		
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
+};
