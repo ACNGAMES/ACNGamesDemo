@@ -63,5 +63,23 @@ function viewResults(){
 
 
 function viewNextEvents(){
-	$('#pagina_central').html($.View("views/nextEvents.ejs"));
-};
+	
+	$.ajax({
+            url: 'serverCall/nextEventsF.php',
+            dataType: "json",
+            data: {id:act.user_id},
+            
+            success: function(data) {
+            	if(data.status=="ok"){
+					$('#pagina_central').html($.View("views/nextEvents.ejs"));
+            		
+            	}else{
+            		
+            	}
+            },error: function(error){
+            	
+            } 
+
+	});
+};	
+
