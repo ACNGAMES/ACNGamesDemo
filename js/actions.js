@@ -4,6 +4,7 @@
     		if(act!=null){
     			reloadCredit();
     			getUnreadMsg();
+    			getNewAlerts();
     		}
  };
 

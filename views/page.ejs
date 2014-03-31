@@ -17,26 +17,14 @@
 		            <li class="dropdown user-dropdown">
 		              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="credit" class="badge"><%= Number(this.silver)+Number(this.gold)%> Cr.</span> <b class="caret"></b></a>
 		              <ul class="dropdown-menu">
-		                <li><a href="#"><i class="fa fa-usd"></i> Saldo Credito</a></li>
+		                <li><a href="#" onclick="creditMoves()"><i class="fa fa-usd"></i> Saldo Credito</a></li>
 		                <li class="divider"></li>
-		                <li><a href="#"><i class="fa fa-gift"></i> Premios</a></li>
+		                <li><a href="#" onclick="pricesView()"><i class="fa fa-gift"></i> Premios</a></li>
 		              </ul>
 		            </li>
             
             <li id="mensajes" class="dropdown messages-dropdown"></li>
-            <li id="alertas" class="dropdown alerts-dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Alertas <span class="badge">3</span> <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <!--<li><a href="#">Gano <span class="label label-default">Su apuesta a 12 años de Esclavitud</span></a></li>-->
-                <li><a href="#"><span class="label label-primary">Desafio</span> Jose lo ha Desafiado</a></li>
-                <li><a href="#"><span class="label label-success">Gano</span> Su apuesta a 12 años de Esclavitud</a></li>
-                <li><a href="#"><span class="label label-info">Desafio Ganado</span> Le ha ganado el dasfio a Pedro por 10 Cr.</a></li>
-                <li><a href="#"><span class="label label-warning">Donaciones</span> Se han acreditado 3 Cr.</a></li>
-                <li><a href="#"><span class="label label-danger">ACNGames</span> Su cuenta ha sido activada</a></li>
-                <li class="divider"></li>
-                <li><a href="#">View All</a></li>
-              </ul>
-            </li>
+            <li id="alertas" class="dropdown alerts-dropdown"></li>
             <li><a href="#" i class="fa fa-heart"></i> Donaciones</a></li>
             <li class="dropdown user-dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=this.name%> <%=this.surname%> <b class="caret"></b></a>

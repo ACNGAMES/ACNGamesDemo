@@ -5,6 +5,11 @@ function loadPageEstruct(){
 	getUnreadMsg();
 	getNext3Events();
 	getResults();
+	getNewAlerts();
 };
 
 
+function getGames(){
+	playBlackJack();
+	
+};

@@ -1,0 +1,74 @@
+<div class="col-sm-1 col-md-2 col-lg-2"></div>
+<div class="col-sm-10 col-md-8 col-lg-8">
+  <div class="jumbotron">
+    <h2>Alertas</h2>
+    <div id="error"></div>
+    <div class="container2">
+   		<div class="panel panel-info">
+  			<div class="panel-body">
+	    	
+	    	<div class="list-group">
+                  	<%for(i=0;i<this.length;i++){%>
+                  		
+                  		<a 
+                  		<%if(this[i].alert_cd=='DE'){%>
+	                		onclick="navEvent('<%=this[i].nav_key%>','<%=this[i].id%>')"	
+	                	<%}else if(this[i].alert_cd=='AP'){%>	
+	                		onclick="navBet('<%=this[i].id%>')"
+	                	<%}else if(this[i].alert_cd=='DG'){%>
+	                		onclick="navBet('<%=this[i].id%>')"
+	                	<%}else if(this[i].alert_cd=='DO'){%>
+	                        onclick="navCred('<%=this[i].id%>')"
+	                	<%}else if(this[i].alert_cd=='AG'){%>
+	                		onclick="navRead('<%=this[i].id%>')"
+	                	<%}%>
+                  		<%if(this[i].check_sw=='N'){%>
+                  		 	href="#" class="list-group-item list-group-item-info">
+                  		 	<div class="row">
+		      					<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+		      						<font color="orange">
+		                    			<i title="No Leido" class="fa fa-bell fa-lg pull-left"></i>
+		                    		</font>
+		                    	</div>
+                  		 <%}else{%>
+                  		 	href="#" class="list-group-item">
+                  		 	<div class="row">
+		      					<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                  		 <%}%>
+      					
+      					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    		<%if(this[i].alert_cd=='DE'){%>
+		                		<span class="label label-primary">Desafio</span> <%=this[i].descr%>	
+		                	<%}else if(this[i].alert_cd=='AP'){%>	
+		                		<span class="label label-success">Gano</span> <%=this[i].descr%>
+		                	<%}else if(this[i].alert_cd=='DG'){%>
+		                		<span class="label label-info">Desafio Ganado</span> <%=this[i].descr%>
+		                	<%}else if(this[i].alert_cd=='DO'){%>
+		                        <span class="label label-warning">Donaciones</span> <%=this[i].descr%>
+		                	<%}else if(this[i].alert_cd=='AG'){%>
+		                		<span class="label label-danger">ACNGames</span> <%=this[i].descr%>
+		                	<%}%>
+                    	</div>
+                    	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    		<%=this[i].date%>
+               	 		</div>
+               	 		</div>
+                    	</a>
+                  	<%}%>
+                  		
+                  			</div>
+	    	<!-- CIERRO EL PANEL BODY-->
+  			</div>
+			
+		</div>
+        
+  </div>
+ </div>
+</div>
+              
+      
+      
+      
+      
+        
+ 

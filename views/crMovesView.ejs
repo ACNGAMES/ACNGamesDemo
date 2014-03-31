@@ -1,0 +1,97 @@
+<div class="col-sm-1 col-md-1 col-lg-1"></div>
+<div class="col-sm-10 col-md-10 col-lg-10">
+  <div class="jumbotron">
+    <h2>Movimientos</h2>
+    <div id="error"></div>
+    <div class="container2">
+   		<div class="panel panel-info">
+  			<div class="panel-body">
+	    	
+	    	<div class="list-group">
+	    		<a href="#" class="list-group-item list-group-item-success">
+	          		 	<div class="row">
+							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    			<div class="text-center">FECHA</div>
+               	 			</div>				                  		
+	       	 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    			DESCRIPCION
+               	 			</div>
+               	 			<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    			<div class="text-center">SILVER</div>
+               	 			</div>
+               	 			<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    			<div class="text-center">GOLD</div>
+               	 			</div>
+               	 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    			<div class="text-center">CREDITO TOTAL</div> 
+               	 			</div> 
+	       	 			</div>
+	            	</a>
+	          	<%for(i=0;i<this.length;i++){%>
+	          		<a href="#" class="list-group-item">
+	          		 	<div class="row">
+							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    			<%=this[i].date%>
+               	 			</div>				                  		
+	       	 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    			<%=this[i].descr%>
+               	 			</div>
+               	 			<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    			<%if(this[i].silver!=null){%>
+                    				<font color="silver">
+		                    			<i title="Silver" class="fa fa-certificate fa-lg pull-left"></i>
+		                    		</font>
+		                    		<%=this[i].silver%>
+		                    		<%}%>
+               	 			</div>
+               	 			<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    			<%if(this[i].gold!=null){%>
+                    				<font color="gold">
+                    					<i title="Gold" class="fa fa-certificate fa-lg pull-left"></i>
+		                    		</font>
+                    				<%=this[i].gold%>
+		                    	<%}%>
+               	 			</div>
+               	 			<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    			<font color="silver">
+		                    		<i title="Silver" class="fa fa-certificate fa-lg pull-left"></i>
+		                    	</font>
+                    			<%=this[i].tot_silver%>
+               	 			</div> 
+               	 			<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    			<font color="gold">
+			                    	<i title="Gold" class="fa fa-certificate fa-lg pull-left"></i>
+		                    	</font>
+                    			<%=this[i].tot_gold%>
+               	 			</div>
+							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    			<%if(this[i].move_cd=='B' || this[i].move_cd=='M' || this[i].move_cd=='P' || this[i].move_cd=='A'){%>
+                					<font color="red">
+		                    			<i class="fa fa-arrow-down fa-lg pull-left"></i>
+		                    		</font>
+                				<%}else{%>	
+                					<font color="green">
+		                    			<i class="fa fa-arrow-up fa-lg pull-left"></i>
+		                    		</font>
+                				<%}%>
+                				<%=Number(this[i].tot_silver)+Number(this[i].tot_gold)%> Cr.
+               	 			</div>
+	       	 			</div>
+	            	</a>
+	          	<%}%>
+            </div>
+	    	<!-- CIERRO EL PANEL BODY-->
+  			</div>
+			
+		</div>
+        
+  </div>
+ </div>
+</div>
+              
+      
+      
+      
+      
+        
+ 

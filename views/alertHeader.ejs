@@ -1,0 +1,21 @@
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Alertas <span class="badge"><%=this.length%></span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+              	<% if(this.length==0){%>
+              		<li class="dropdown-header">No hay nuevas Alertas</li>
+              	<%}%>
+                <% for(i=0;i<this.length;i++){%>
+                	<%if(this[i].alert_cd=='DE'){%>
+                		<li><a onclick="navEvent('<%=this[i].nav_key%>','<%=this[i].id%>')" href="#"><span class="label label-primary">Desafio</span> <%=this[i].descr%></a></li>	
+                	<%}else if(this[i].alert_cd=='AP'){%>	
+                		<li><a onclick="navBet('<%=this[i].id%>')" href="#"><span class="label label-success">Gano</span> <%=this[i].descr%></a></li>
+                	<%}else if(this[i].alert_cd=='DG'){%>
+                		<li><a onclick="navBet('<%=this[i].id%>')" href="#"><span class="label label-info">Desafio Ganado</span> <%=this[i].descr%></a></li>
+                	<%}else if(this[i].alert_cd=='DO'){%>
+                        <li><a onclick="navCred('<%=this[i].id%>')" href="#"><span class="label label-warning">Donaciones</span> <%=this[i].descr%></a></li>
+                	<%}else if(this[i].alert_cd=='AG'){%>
+                		<li><a onclick="navRead('<%=this[i].id%>')" href="#"><span class="label label-danger">ACNGames</span> <%=this[i].descr%></a></li>
+                	<%}%>
+              	<%}%>
+                <li class="divider"></li>
+                <li><a href="#" onclick="viewAlerts()">Ver todas las Alertas</a></li>
+              </ul>
