@@ -19,7 +19,7 @@ if(validate($id, $auth_token)){
 				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
-  echo $sentencia;
+  
   if(!$resultado) 
     die("Error: no se pudo realizar la consulta");
   $array=array();
@@ -45,11 +45,6 @@ if(validate($id, $auth_token)){
      		if($cat != $aux_cat){
      			//Si entra aca es una categoria nueva
      			
-     			$array_sub = array();
-     			$array[]= array('cat_id' => $cat,
-						'cat_descr' => $fila['DESC'],
-						'subcategories' => $array_sub
-				);
      			//Dejo la marca de subcategoria nueva
      			$aux_sub_cat = 0;
      			$aux_cat = $cat;
@@ -59,16 +54,11 @@ if(validate($id, $auth_token)){
 			//grabo el header de la subcategoria
      		if($subcat!=$aux_sub_cat && $cat == $aux_cat){
      			//Si entra aca es una subcategoria nueva.
-     			$array_evt = array();
      			
-     			$array[$i-1]['subcategories'][]= array('subcat_id' => $subcat,
-														'subcat_descr' => $fila['DESCRIPTION'],
-														'events' => $array_evt				
-														);
      			//Dejo la marca del evento nuevo
      			$aux_event = 0;
 				$aux_sub_cat=$subcat;
-				$j++;			
+				
      		}
      		
 			//Verifico si el evento es nuevo
@@ -76,15 +66,15 @@ if(validate($id, $auth_token)){
      		if($event!=$aux_event && $subcat==$aux_sub_cat && $cat == $aux_cat){
      			//Si es del tipo N grabo el encabezao	
      			if($event_type=='N'){
-     				$bet=$fila['USER_ID'];	
-     				if($bet==null){
-     					$bet=0;
-     				}
-     				$array[$i-1]['subcategories'][$j-1]['events']= array('event_id' => $event,
-																		'event_type' => $event_type,
-																		'event'=>$fila['EVENT'],
-																		'off_dttm'=>$fila['OFF_DTTM'],
-																		'bet' => $bet													
+     				$array[]= array('cat_id' => $cat,
+								'cat_descr' => $fila['DESC'],
+								'subcat_id' => $subcat,
+								'subcat_descr' => $fila['DESCRIPTION'],
+								'event_id' => $event,
+								'event_type' => $event_type,
+								'event'=>$fila['EVENT'],
+								'off_dttm'=>$fila['OFF_DTTM']
+																					
 																		);
      			}else{
      				//grabo la url
@@ -95,25 +85,31 @@ if(validate($id, $auth_token)){
 			}else if($event==$aux_event && $subcat==$aux_sub_cat && $cat == $aux_cat){
 				//Si es de un tipo distinto de N, grabo el encabezado del evento
 				if($event_type!='N'){
-     				$bet=$fila['USER_ID'];	
-     				if($bet==null){
-     					$bet=0;
-     				}	
-     				$array[$i-1]['subcategories'][$j-1]['events']= array('event_id' => $event,
-																		'event_type' => $event_type,
-																		'url1' => $url1,
-																		'url2'=>$fila['URL'],
-																		'event'=>$fila['EVENT'],
-																		'off_dttm'=>$fila['OFF_DTTM'],
-																		'bet' => $bet				
-																		);
+     				//TODO falta la parte de los odds segun a quien se haya apostado
+     				$fila['ODDS'];
+     				$fila['OPP_USER_ID'];
+     				$fila['SELECTION'];
+     				$fila['BET_DTTM'];
+					$fila['AMOUNT'];
+     				
+     				$array[]= array('cat_id' => $cat,
+								'cat_descr' => $fila['DESC'],
+								'subcat_id' => $subcat,
+								'subcat_descr' => $fila['DESCRIPTION'],
+								'event_id' => $event,
+								'event_type' => $event_type,
+								'event'=>$fila['EVENT'],
+								'off_dttm'=>$fila['OFF_DTTM'],
+								'url1' => $url1,
+								'url2'=>$fila['URL'],
+								'odd'=>$fila['ODDS']
+								);
      			}
 			}	
-				
 		 		     	
      }
   $data = array('status'=> 'ok',
-					'alerts'=> $array                  
+					'bets'=> $array                  
     );
   mysql_free_result($resultado);
  	//Envio la respuesta por json
