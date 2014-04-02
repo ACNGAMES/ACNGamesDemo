@@ -67,7 +67,7 @@ function viewNextEvents(){
 	$.ajax({
             url: 'serverCall/nextEventsF.php',
             dataType: "json",
-            data: {id:act.user_id},
+            data: {id:act.user_id, auth_token:act.auth_token},
             
             success: function(data) {
             	if(data.status=="ok"){
