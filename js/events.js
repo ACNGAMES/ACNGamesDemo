@@ -70,11 +70,16 @@ function viewNextEvents(){
             data: {id:act.user_id, auth_token:act.auth_token},
             
             success: function(data) {
+            	
             	if(data.status=="ok"){
-					$('#pagina_central').html($.View("views/nextEvents.ejs"));
+					$('#pagina_central').html($.View("views/nextEvents.ejs", data.next_events));
+				
+				}else if(data.status=="exp"){
+            		expire();
             		
             	}else{
             		
+					console.log("error");
             	}
             },error: function(error){
             	

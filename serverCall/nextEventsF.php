@@ -1,17 +1,17 @@
 <?php
 
 $userId=$_GET["id"];
-//$userId=$_GET["auth_token"];
-include('var.php');
+$userId=$_GET["auth_token"];
+include('valF.php');
 $db="u157368432_acn";
 
-
-if (!($conn = db_connection()))
+if(validate($id, $auth_token)){
+  if (!($conn = db_connection()))
     die("Error: No se pudo conectar".mysql_error());
 	
 	
     $sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID FROM $db.CM_EVENT ev  
-				  LEFT JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID 
+				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID 
 			   	  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
 				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
 				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
@@ -20,6 +20,7 @@ if (!($conn = db_connection()))
 				  AND ev.EVENT_STATUS_FLG = 'O'
 				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM";
 	 $resultado = mysql_query($sentencia, $conn); 
+	 
 	 
 	 //Inicializo las varialbes
 	 $array = array();
@@ -78,9 +79,9 @@ if (!($conn = db_connection()))
      				if($bet==null){
      					$bet=0;
      				}
-     				$array[$i-1]['subcategories'][$j-1]['events']= array('event_id' => $event,
+     				$array[$i-1]['subcategories'][$j-1]['events'][]= array('event_id' => $event,
 																		'event_type' => $event_type,
-																		'event'=>$fila['EVENT'],
+																		'event_d'=>$fila['EVENT'],
 																		'off_dttm'=>$fila['OFF_DTTM'],
 																		'bet' => $bet													
 																		);
@@ -97,11 +98,11 @@ if (!($conn = db_connection()))
      				if($bet==null){
      					$bet=0;
      				}	
-     				$array[$i-1]['subcategories'][$j-1]['events']= array('event_id' => $event,
+     				$array[$i-1]['subcategories'][$j-1]['events'][]= array('event_id' => $event,
 																		'event_type' => $event_type,
 																		'url1' => $url1,
 																		'url2'=>$fila['URL'],
-																		'event'=>$fila['EVENT'],
+																		'event_d'=>$fila['EVENT'],
 																		'off_dttm'=>$fila['OFF_DTTM'],
 																		'bet' => $bet				
 																		);
@@ -110,11 +111,18 @@ if (!($conn = db_connection()))
 				
 		 		     	
      }
+
      $data = array('status'=> 'ok',
 					'next_events'=> $array                  
 					);
-	mysql_free_result($resultado);
-	//Envio la respuesta por json
+	 	 
+	 mysql_free_result($resultado);
+	 //Envio la respuesta por json
 	 echo json_encode($data);
+	 
+}else{
+	$data = array('status'=> 'exp');
+    echo json_encode($data);
+}
 
 ?>

@@ -1,0 +1,89 @@
+<div class="container">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <h1>Proximos <small>Eventos</small></h1>
+          </div>
+        </div><!-- /.row -->
+	<div class="row"><br/></div>
+    <div class="row">
+		<div class="col-lg-2"></div>
+          <div class="col-lg-8">
+            <!-- Nav tabs -->
+     <% if(this.length==0){%>
+        <span> No hay eventos pr&oacute;ximos</span>
+     <%}%>
+     <% for(i=0;i<this.length;i++){%>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+    			<h3 class="panel-title"><strong><%=this[i].cat_descr%></strong></h3>
+  			</div>
+			<div class="panel-body">
+				<ul class="nav nav-tabs">
+					<!-- ESTE ES EL FOR DEL HEADER DEL TAB -->
+					<% for(j=0;j<this[i].subcategories.length;j++){%>
+					<% if(j==0){%>
+			  		   <li class="active"><a href="#<%='c'+this[i].cat_id+'s'+this[i].subcategories[j].subcat_id%>" data-toggle="tab"><%=this[i].subcategories[j].subcat_descr%></a></li>
+			  		<%}else{%>
+			  		<li><a href="#<%='c'+this[i].cat_id+'s'+this[i].subcategories[j].subcat_id%>" data-toggle="tab"><%=this[i].subcategories[j].subcat_descr%></a></li>
+			  	   <%}%>
+			  	 <%}%>  <!-- CIERRE FOR DEL HEADER DEL TAB -->
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content">
+				<% for(j=0;j<this[i].subcategories.length;j++){%>
+				<div class="tab-pane <% if(j==0){%>active<%}%>" id="<%='c'+this[i].cat_id+'s'+this[i].subcategories[j].subcat_id%>">
+					<!-- LISTA Y EVENTOS -->
+					<div class="list-group">
+			   <% for(k=0;k<this[i].subcategories[j].events.length;k++){%>
+                                  	
+                  	<a href="#" class="list-group-item">
+					    <div class="row">
+					    	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					    	<% if(this[i].subcategories[j].events[k].event_type!='N'){%>
+					    		<img src="<%=this[i].subcategories[j].events[k].url1%>"/>
+					    	<%}%>
+					    	<%=this[i].subcategories[j].events[k].event_d%>
+					    	<% if(this[i].subcategories[j].events[k].event_type!='N'){%>
+					    	<img src="<%=this[i].subcategories[j].events[k].url2%>"/>
+					    	<%}%>
+					    	</div>
+					    	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><%=this[i].subcategories[j].events[k].off_date%>
+								
+								<% if(this[i].subcategories[j].events[k].bet>0){%>
+										<font color="red">
+							    			<i onclick="alert('<%=this[i].subcategories[j].events[k].event_id%>')" 
+							    				title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
+							    		</font>                    			
+							    		<font color="blue">
+							    			<i onclick="alert('<%=this[i].subcategories[j].events[k].event_id%>')" 
+							    				title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
+							    		</font>
+								<%} else {%>
+								<font color="blue">
+                    			<i onclick="alert('<%=this[i].subcategories[j].events[k].event_id%>')" 
+                    				title="Apostar" class="fa fa-usd fa-lg pull-right"></i>
+                    			<i onclick="alert('<%=this[i].subcategories[j].events[k].event_id%>')" 
+                    				title="Desafiar un amigo" class="fa fa-trophy fa-lg pull-right"></i>
+                    			<i onclick="alert('<%=this[i].subcategories[j].events[k].event_id%>')" 
+                    			title="Compartir" class="fa fa-envelope-o fa-lg pull-right"></i>
+                    		</font>
+								<%}%>  
+					    		</div>	
+					    </div>
+					  </a>          
+                <%}%>
+                </div>
+                <!-- CIERRE LISTA DE EVENTOS -->
+					
+					</div>
+				 <%}%>	<!--Cierra for -->
+				</div>
+         	</div>
+		</div>
+		<%}%>
+		</div>
+      </div><!-- /.row -->
+	
+      </div>
+      
