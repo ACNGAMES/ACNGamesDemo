@@ -1,11 +1,11 @@
 <?php
 
 $userId=$_GET["id"];
-$userId=$_GET["auth_token"];
+$authToken=$_GET["auth_token"];
 include('valF.php');
 $db="u157368432_acn";
 
-if(validate($id, $auth_token)){
+if(validate($userId, $authToken)){
   if (!($conn = db_connection()))
     die("Error: No se pudo conectar".mysql_error());
 	
@@ -19,8 +19,27 @@ if(validate($id, $auth_token)){
 				  WHERE ev.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL 1 DAY)
 				  AND ev.EVENT_STATUS_FLG = 'O'
 				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM";
-	 $resultado = mysql_query($sentencia, $conn); 
-	 
+	$resultado = mysql_query($sentencia, $conn);
+	
+	$count = mysql_num_rows($resultado);
+	
+	if($count<20){
+		
+	$sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID FROM $db.CM_EVENT ev  
+				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID 
+			   	  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
+				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
+				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
+				  LEFT  JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $userId
+				  WHERE ev.OFF_DTTM > SYSDATE()
+				  AND ev.EVENT_STATUS_FLG = 'O'
+				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM
+				  LIMIT 30";
+				  
+				  //TODO Pasar valor 30 a la tabla de configuración
+	$resultado = mysql_query($sentencia, $conn);
+		
+	} 
 	 
 	 //Inicializo las varialbes
 	 $array = array();
@@ -37,7 +56,7 @@ if(validate($id, $auth_token)){
      			
      		$cat=$fila['CATEGORY_ID'];
      		$subcat=$fila['SUB_CATEGORY_ID'];
-     		$event=$fila['EVENT_ID'];	
+     		$event=$fila['EVENT_ID'];
 			$event_type=$fila['EVENT_TYPE'];     							
      		
      		//Grabo el header de la categoria
@@ -117,8 +136,8 @@ if(validate($id, $auth_token)){
 					);
 	 	 
 	 mysql_free_result($resultado);
-	 //Envio la respuesta por json
 	 echo json_encode($data);
+	 mysql_close($conn); 
 	 
 }else{
 	$data = array('status'=> 'exp');
