@@ -341,7 +341,7 @@ function initGame() {
   // Initialize card deck.
 if(credits<minBet){
 	document.forms["controls"].elements["deal"].disabled      = true;
-	alert('No posee credito suficiente para jugar')
+	alert('No posee credito suficiente para jugar');
 	
 }
   deck = new Stack();
