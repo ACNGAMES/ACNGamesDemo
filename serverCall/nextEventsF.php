@@ -19,6 +19,7 @@ if(validate($userId, $authToken)){
 				  WHERE ev.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL 1 DAY)
 				  AND ev.EVENT_STATUS_FLG = 'O'
 				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM";
+				  
 	$resultado = mysql_query($sentencia, $conn);
 	
 	$count = mysql_num_rows($resultado);
