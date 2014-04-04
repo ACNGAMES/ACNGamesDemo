@@ -47,13 +47,13 @@ function getNewAlerts(){
 
 function navEvent(nav_key,id){
 	if(markCheck(id)){
-		console.log('navega al Evento del desafio');	
+		chlgPendingView();	
 	}
 };	
 	                		
 function navBet(id){
 	if(markCheck(id)){
-		console.log('navega a mis apuestas');
+		endBetsView();
 	}
 };
 	                	
