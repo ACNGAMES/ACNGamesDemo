@@ -13,12 +13,16 @@ if(validate($id, $auth_token)){
   $db="u157368432_acn";  
   
   
-  $sentencia = "SELECT * FROM $db.CM_CHALLENGE INNER JOIN $db.CM_USER ON CM_USER.USER_ID=CM_CHALLENGE.USER_ID WHERE CM_CHALLENGE.USER_ID=$id and EVENT_ID=$event_id"; 
+  $sentencia = "SELECT * FROM $db.CM_CHALLENGE 
+  				INNER JOIN $db.CM_USER ON CM_USER.USER_ID=CM_CHALLENGE.USER_ID 
+  				INNER JOIN $db.CM_EVENT ON CM_EVENT.EVENT_ID=CM_CHALLENGE.EVENT_ID
+  				WHERE CM_CHALLENGE.USER_ID=$id and CM_CHALLENGE.EVENT_ID=$event_id"; 
   // Ejecuta la sentencia SQL 
   $resultado=mysql_query($sentencia, $iden);
   $fila = mysql_fetch_assoc($resultado);
   $user_opp_id=$fila['USER_OPP_ID'];
   $name=$fila['NAME'];
+  $event_d=$fila['EVENT'];
   $amount=$fila['AMOUNT'];
   mysql_free_result($resultado);
   
@@ -28,7 +32,7 @@ if(validate($id, $auth_token)){
   
   
   
-  $sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$user_opp_id','DE','$name cancelo el desafio.',NOW())"; 
+  $sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$user_opp_id','DE','$name cancelo el desafio $event_d.',NOW())"; 
   mysql_query($sentencia, $iden); 
   
   
