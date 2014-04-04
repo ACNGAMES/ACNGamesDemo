@@ -134,16 +134,17 @@ function pricesView(msg){
 
 
 function betsView(){
-	$('#pagina_central').html($.View("views/betsView.ejs"));
-	/*
+	
+	
 	$.ajax({
-            url: 'serverCall/getPricesF.php',
+            url: 'serverCall/getActiveBetsF.php',
             dataType: "json",
             data: {id:act.user_id, auth_token:act.auth_token},
             success: function(data) {
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
-					$('#pagina_central').html($.View("views/pricesView.ejs",{products:data.products, silver:act.silver}));
+					console.log(data);
+					$('#pagina_central').html($.View("views/betsView.ejs",data.bets));
 					if(msg==true){
 						$('#error').html(
              			'<div class="row">'
@@ -168,5 +169,5 @@ function betsView(){
             	console.log(error);
             } 
 
-	});*/
+	});
 };
