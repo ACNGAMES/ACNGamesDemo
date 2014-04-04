@@ -63,12 +63,14 @@ function insertAccount(){
 		    
 		   	  $data = array('status'=> 'ok');
               echo json_encode($data);
+              mysql_close($iden);
 		
 		}else{
          	 
            $data = array('status'=> 'error');
            mysql_free_result($resultado);
            echo json_encode($data);
+		   mysql_close($iden); 
     	}
 		
 };
