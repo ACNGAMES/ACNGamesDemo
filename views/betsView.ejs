@@ -14,15 +14,24 @@
     <h2>Apuestas Vigentes</h2><br/>
     <div id="error"></div>
     <div class="container2">
+			
+			  	
+			
+			
 			<div class="panel-group" id="accordion">
+			  <% for(i=0;i<this.length;i++){%>
 			  <div class="panel panel-info">
 			    <div class="panel-heading">
-			      <div style="cursor:pointer" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+			      <div style="cursor:pointer" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#<%=this[i].event_id%>">
 			        <div class="row">
                     	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    	<img src="http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/17.png"/>
-                    	River Plate vs  San Lorenzo
-                    	<img src="http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/19.png"/>
+                    	<%if(this[i].event_type != 'N'){%>
+			        		<img src="<%=this[i].url1%>"/>
+			        	<%}%>
+                    	<%=this[i].event_d%>
+                    	<%if(this[i].event_type != 'N'){%>
+			        		<img src="<%=this[i].url2%>"/>
+			        	<%}%>
                     	</div>
                     	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     		02-03-2014 18:15               		
@@ -31,37 +40,39 @@
 			        
 			      </div>
 			    </div>
-			    <div id="collapseOne" class="panel-collapse collapse">
+			    <div id="<%=this[i].event_id%>" class="panel-collapse collapse">
 			      <div class="panel-body">
 			        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 						<div class="row"><strong>Categoria</strong></div>
 						<div class="row"><strong>Subcategoria</strong></div>
-			        	<div class="row"><strong>Elecci&oacute;:n</strong></div>
+			        	<div class="row"><strong>Elecci&oacute;n</strong></div>
 			        	<div class="row"><strong>Apuesta:</strong></div>
 			        	<div class="row"><strong>Paga:</strong></div>
-			        	<div class="row"><strong>Desafio:</strong></div>
+			        	<%if(this[i].name != null && this[i].surname!=null){%>
+			        		<div class="row"><strong>Desafio:</strong></div>
+			        	<%}%>
 			        	<div class="row"><strong>Fecha:</strong></div>
 			        	
 			        </div>
-			        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-						<div class="row">Futbol Argentino</div>
-						<div class="row">Fecha 14</div>
-			        	<div class="row">San Lorenzo</div>
-			        	<div class="row">15 cr.</div>
-			        	<div class="row">x 1.25</div>
-			        	<div class="row">Jonatan Bahut</div>
-			        	<div class="row">02-03-2014 14:15</div>
+			        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<div class="row"><%=this[i].cat_descr%></div>
+						<div class="row"><%=this[i].subcat_descr%></div>
+			        	<div class="row"><%=this[i].selection%></div>
+			        	<div class="row"><%=this[i].amount%> cr.</div>
+			        	<div class="row">x <%=this[i].odds%></div>
+			        	<%if(this[i].name!=null && this[i].surname!=null){%>
+			        		<div class="row"><%=this[i].name%> <%=this[i].surname%></div>
+			        	<%}%>
+			        	<div class="row"><%=this[i].bet_dttm%></div>
 			        </div>
-			        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-			        	<div class="row"><br/></div>
-			        </div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
 			        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 			        	<div class="row">
 			        		<font style="cursor:pointer" color="red">
-                    			<i onclick="alert('link')" title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
+                    			<i onclick="alert('<%=this[i].event_id%>')" title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
                     		</font>                    			
                     		<font style="cursor:pointer" color="blue">
-                    			<i onclick="alert('link')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
+                    			<i onclick="alert('<%=this[i].event_id%>')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
                     		</font>
                     		
                     	</div>
@@ -69,48 +80,8 @@
 			      </div>
 			    </div>
 			  </div>
-			  <div class="panel panel-info">
-			    <div class="panel-heading">
-			    <div style="cursor:pointer" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-			         <div class="row">
-                    	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    	<img src="http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/7.png"/>
-                    	Estudiantes  vs  Newell´s
-                    	<img src="http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/13.png"/>
-                    	</div>
-                    	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    		02-03-2014 21:30               		
-                    	</div>	
-                    </div>
-			      </div>
-			    </div>
-			    <div id="collapseTwo" class="panel-collapse collapse">
-			      <div class="panel-body">
-			        Anim pariatur
-			      </div>
-			    </div>
-			  </div>
-			  <div class="panel panel-info">
-			    <div class="panel-heading">
-			      <div style="cursor:pointer" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-			        <div class="row">
-                    	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    	<img src="http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/20.png"/>
-                    	Velez Sarfield  vs  Boca Juniors
-                    	<img src="http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/5.png"/>
-                    	</div>
-                    	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    		01-03-2014 18:00 
-                    	</div>	
-                    </div>
-			      </div>
-			    </div>
-			    <div id="collapseThree" class="panel-collapse collapse">
-			      <div class="panel-body">
-			        Anim pariatur 
-			      </div>
-			    </div>
-			  </div>
+			  <%}%>
+			  
 			</div>   			
 			</div>
         

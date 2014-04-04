@@ -9,12 +9,14 @@ if(validate($id, $auth_token)){
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  
-  $sentencia = "SELECT ev.EVENT_ID, op.URL, op.OPPONENT_ID, ope.ODDS, bet.OPP_USER_ID, bet.SELECTION, cat.CATEGORY_ID, bet.BET_DTTM, bet.AMOUNT ,cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE FROM $db.CM_EVENT ev  
+  $sentencia = "SELECT ev.EVENT_ID, op.URL, opb.OPPONENT_NAME  'opb.OPPONENT_NAME', NAME, SURNAME, opb.URL 'opb.URL', ope.ODDS, bet.OPP_USER_ID, cat.CATEGORY_ID, bet.BET_DTTM, bet.AMOUNT ,cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID
 				  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
 				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
 				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
 				  INNER JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $id 
+				  INNER JOIN $db.CM_OPPONENT opb ON bet.SELECTION=opb.OPPONENT_ID
+				  LEFT JOIN $db.CM_USER usr ON bet.OPP_USER_ID=usr.USER_ID
 				  WHERE ev.EVENT_STATUS_FLG = 'O'
 				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM"; 
   // Ejecuta la sentencia SQL 
@@ -32,9 +34,8 @@ if(validate($id, $auth_token)){
 	 $aux_event = 0;
 	 $url1 = '';
 	 $url2 = '';
-	 $i = 0;
-	 $j = 0;
-     while ($fila = mysql_fetch_assoc($resultado)) {
+	 $i = -1;
+	 while ($fila = mysql_fetch_assoc($resultado)) {
      			
      		$cat=$fila['CATEGORY_ID'];
      		$subcat=$fila['SUB_CATEGORY_ID'];
@@ -48,8 +49,8 @@ if(validate($id, $auth_token)){
      			//Dejo la marca de subcategoria nueva
      			$aux_sub_cat = 0;
      			$aux_cat = $cat;
-     			$j=0;
-     			$i++;
+     			
+     			
      		}
 			//grabo el header de la subcategoria
      		if($subcat!=$aux_sub_cat && $cat == $aux_cat){
@@ -65,46 +66,32 @@ if(validate($id, $auth_token)){
 			//echo "$cat:$aux_cat->$subcat:$aux_sub_cat->$event:$aux_event <br/>"; 
      		if($event!=$aux_event && $subcat==$aux_sub_cat && $cat == $aux_cat){
      			//Si es del tipo N grabo el encabezao	
-     			if($event_type=='N'){
-     				$array[]= array('cat_id' => $cat,
-								'cat_descr' => $fila['DESC'],
-								'subcat_id' => $subcat,
-								'subcat_descr' => $fila['DESCRIPTION'],
-								'event_id' => $event,
-								'event_type' => $event_type,
-								'event'=>$fila['EVENT'],
-								'off_dttm'=>$fila['OFF_DTTM']
-																					
-																		);
-     			}else{
-     				//grabo la url
-     				$url1=$fila['URL'];	
-     			}
-				$aux_event=$event;
+     			
+    			$array[]= array('cat_id' => $cat,
+    						'cat_descr' => $fila['DESC'],
+    						'subcat_id' => $subcat,
+    						'subcat_descr' => $fila['DESCRIPTION'],
+    						'event_id' => $event,
+    						'event_type' => $event_type,
+    						'event_d'=>$fila['EVENT'],
+    						'off_dttm'=>$fila['OFF_DTTM'],
+    						'odds'=>$fila['ODDS'],
+                            //'opp_user'=>$fila['OPP_USER_ID'],
+                            'name'=>$fila['NAME'],
+                            'surname'=>$fila['SURNAME'],
+                            'selection'=>$fila['opb.OPPONENT_NAME'],
+                            'selection_url'=>$fila['opb.URL'],
+                            'bet_dttm'=>$fila['BET_DTTM'],
+                            'url1'=>$fila['URL'],
+                            'amount'=>$fila['AMOUNT']													
+    						);
+                    $i++;
+                    $aux_event=$event;
 			//Verifico si el evento es viejo	
 			}else if($event==$aux_event && $subcat==$aux_sub_cat && $cat == $aux_cat){
 				//Si es de un tipo distinto de N, grabo el encabezado del evento
-				if($event_type!='N'){
-     				//TODO falta la parte de los odds segun a quien se haya apostado
-     				$fila['ODDS'];
-     				$fila['OPP_USER_ID'];
-     				$fila['SELECTION'];
-     				$fila['BET_DTTM'];
-					$fila['AMOUNT'];
-     				
-     				$array[]= array('cat_id' => $cat,
-								'cat_descr' => $fila['DESC'],
-								'subcat_id' => $subcat,
-								'subcat_descr' => $fila['DESCRIPTION'],
-								'event_id' => $event,
-								'event_type' => $event_type,
-								'event'=>$fila['EVENT'],
-								'off_dttm'=>$fila['OFF_DTTM'],
-								'url1' => $url1,
-								'url2'=>$fila['URL'],
-								'odd'=>$fila['ODDS']
-								);
-     			}
+				$array[$i]['url2'] =($fila['URL']);
+     			
 			}	
 		 		     	
      }
