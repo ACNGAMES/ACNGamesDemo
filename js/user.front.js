@@ -134,8 +134,6 @@ function pricesView(msg){
 
 
 function betsView(){
-	
-	
 	$.ajax({
             url: 'serverCall/getActiveBetsF.php',
             dataType: "json",
@@ -143,23 +141,8 @@ function betsView(){
             success: function(data) {
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
-					console.log(data);
 					$('#pagina_central').html($.View("views/betsView.ejs",data.bets));
-					if(msg==true){
-						$('#error').html(
-             			'<div class="row">'
-            			+'<div class="alert alert-success">'
-            			+'Su pedido se ha realizado <a class="alert-link" >exitosamente</a>! En cuesti&oacute;n de d&iacute;as le estaremos entregando su premio. Muchas Gracia.'  
-        				+'</div>'
-        				+'</div>');
-					}else if(msg==false){
-						$('#error').html(
-             			'<div class="row">'
-            			+'<div class="alert alert-danger">'
-            			+'Su pedido <a class="alert-link" >no</a> se ha realizado! Puede que no posee credito suficiente o se encuentre agotado. Disculpe las molestias, muchas Gracias.'  
-        				+'</div>'
-        				+'</div>');
-					}				            		
+									            		
             	}else if(data.status=="exp"){
             		expire();
             	}else{
@@ -168,6 +151,27 @@ function betsView(){
             },error: function(error){
             	console.log(error);
             } 
+	});
+};
 
+
+function endBetsView(){
+	$.ajax({
+            url: 'serverCall/getEndBetsF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llaamr al view q	uw dibuje los movimientos
+					$('#pagina_central').html($.View("views/endBetsView.ejs",data.bets));
+									            		
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
 	});
 };

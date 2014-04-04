@@ -2,8 +2,8 @@
 	<div class="jumbotron">
 		<br />
 		<ul class="nav nav-pills nav-stacked">
-	  		<li class="active"><a href="#" onclick="betsView()">Apuestas Vigentes</a></li>
-	 		<li><a href="#" onclick="endBetsView()">Apuestas Finalizadas</a></li>
+	  		<li><a href="#" onclick="betsView()">Apuestas Vigentes</a></li>
+	 		<li class="active"><a href="#" onclick="endBetsView()">Apuestas Finalizadas</a></li>
 	 		<li><a href="#" onclick="viewSent()">Desafios Pendientes</a></li>
 	 		<li><a href="#" onclick="viewSent()">Solicitud de Desafios</a></li>
 	 	</ul>
@@ -11,7 +11,7 @@
 </div>
 <div class="col-sm-8 col-md-6 col-lg-6">
   <div class="jumbotron">
-    <h2>Apuestas Vigentes</h2><br/>
+    <h2>Apuestas Finalizadas</h2><br/>
     <div id="error"></div>
     <div class="container2">
 			
@@ -45,6 +45,7 @@
 			        	<div class="row"><strong>Elecci&oacute;n</strong></div>
 			        	<div class="row"><strong>Apuesta:</strong></div>
 			        	<div class="row"><strong>Paga:</strong></div>
+			        	<div class="row"><strong>Estado:</strong></div>
 			        	<%if(this[i].name != null && this[i].surname!=null){%>
 			        		<div class="row"><strong>Desafio:</strong></div>
 			        	<%}%>
@@ -57,23 +58,14 @@
 			        	<div class="row"><%=this[i].selection%></div>
 			        	<div class="row"><%=this[i].amount%> cr.</div>
 			        	<div class="row">x <%=this[i].odds%></div>
+			        	<div class="row"><%=this[i].win_status%></div>
 			        	<%if(this[i].name!=null && this[i].surname!=null){%>
 			        		<div class="row"><%=this[i].name%> <%=this[i].surname%></div>
 			        	<%}%>
 			        	<div class="row"><%=this[i].bet_dttm%></div>
 			        </div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-			        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-			        	<div class="row">
-			        		<font style="cursor:pointer" color="red">
-                    			<i onclick="alert('<%=this[i].event_id%>')" title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
-                    		</font>                    			
-                    		<font style="cursor:pointer" color="blue">
-                    			<i onclick="alert('<%=this[i].event_id%>')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
-                    		</font>
-                    		
-                    	</div>
-			        </div>
+			        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
 			      </div>
 			    </div>
 			  </div>
