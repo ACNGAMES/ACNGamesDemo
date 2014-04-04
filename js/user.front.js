@@ -177,7 +177,7 @@ function endBetsView(){
 };
 
 
-function challengeView(){
+function challengeView(msg){
 	$.ajax({
             url: 'serverCall/getChallengesF.php',
             dataType: "json",
@@ -186,7 +186,14 @@ function challengeView(){
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
 					$('#pagina_central').html($.View("views/challengeView.ejs",data.challenges));
-									            		
+					if(msg==true){
+						$('#error').html(
+	                	'<div class="row">'
+	                	+'<div class="alert alert-success">'
+	              		+'El desafio se ha cancelado <a class="alert-link" >Exitosamente</a>!'  
+	        		    +'</div>'
+	        		    +'</div>');	
+					}
             	}else if(data.status=="exp"){
             		expire();
             	}else{

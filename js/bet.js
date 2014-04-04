@@ -68,3 +68,24 @@ function acetpChlg(event_id, user_id){
 	
 };
 
+function cancelChlg(event_id, user_id){
+	$.ajax({
+            url: 'serverCall/cancelChlgF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id},
+            success: function(data) {
+            	if(data.status=="ok"){
+            			reloadStructs();
+    					challengeView(true);
+    						
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
+};
