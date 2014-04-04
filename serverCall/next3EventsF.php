@@ -1,41 +1,96 @@
 <?php
 
-$array[] = array('id' => '5',
-				'oponent1img'=>'http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/20.png',
-				'oponent2img'=>'http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/5.png',
-				'category'=>'1era División Torneo Final 2014',
-				'subcategory'=>'Fecha 5',
-				'event'=>'Velez Sarfield  vs  Boca Juniors',
-				'date'=>'01-03-2014 18:00',
-				'type'=>'E' //E significa que son dos rivales y acepta Empates          
-                 );
-	
-$array[] = array('id' => '1',
-				'oponent1img'=>'http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/7.png',
-				'oponent2img'=>'http://www.ole.com.ar/static/OLEOle/images/escudos/escudos_g/png/13.png',
-				'category'=>'Copa Libertadores 2014',
-				'subcategory'=>'Grupos IDA',
-				'event'=>'Estudiantes  vs  Newell´s',
-				'date'=>'02-03-2014 21:30',
-				'type'=>'D' //D significa que son dos rivales          
-                 );
+include('var.php');
+$db="u157368432_acn";
 
-$array[] = array('id' => '12',
-				'category'=>'Premios Oscars 2014',
-				'subcategory'=>'Entrega Premios 2014',
-				'event'=>'Mejor Pelicula',
-				'date'=>'28-02-2014 22:00',
-				'type'=>'N' //N significa que son varios rivales          
-                 );
-
-
-  $data = array('status'=> 'ok',
-					'events'=> $array                  
-           );
+  if (!($conn = db_connection()))
+    die("Error: No se pudo conectar".mysql_error());
   
-  //Envio la respuesta por json
-  echo json_encode($data);
-  
+    $sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE FROM $db.CM_EVENT ev  
+				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID 
+				  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
+				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
+				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
+				  WHERE ev.OFF_DTTM > SYSDATE()
+				  AND ev.EVENT_STATUS_FLG = 'O'
+				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM";
+				  
+	$resultado = mysql_query($sentencia, $conn);
+
+	//Inicializo las varialbes
+	 $array = array();
+	 $aux_cat = 0;
+	 $aux_sub_cat = 0;
+	 $aux_event = 0;
+	 $i = -1;
+	 $threeEvents=0;
+	 
+     while (($fila = mysql_fetch_assoc($resultado)) && $threeEvents<4) {
+     			
+     		$cat=$fila['CATEGORY_ID'];
+     		$subcat=$fila['SUB_CATEGORY_ID'];
+     		$event=$fila['EVENT_ID'];	
+			$event_type=$fila['EVENT_TYPE'];     							
+     		
+     		//Grabo el header de la categoria
+     		if($cat != $aux_cat){
+     			//Si entra aca es una categoria nueva
+     			
+     			//Dejo la marca de subcategoria nueva
+     			$aux_sub_cat = 0;
+     			$aux_cat = $cat;
+     			
+     			
+     		}
+			//grabo el header de la subcategoria
+     		if($subcat!=$aux_sub_cat && $cat == $aux_cat){
+     			//Si entra aca es una subcategoria nueva.
+     			
+     			//Dejo la marca del evento nuevo
+     			$aux_event = 0;
+				$aux_sub_cat=$subcat;
+				
+     		}
+     		
+			
+			//Verifico si el evento es nuevo
+			//echo "$cat:$aux_cat->$subcat:$aux_sub_cat->$event:$aux_event <br/>"; 
+     		if($event!=$aux_event && $subcat==$aux_sub_cat && $cat == $aux_cat){
+     			//Si es del tipo N grabo el encabezao	
+     			
+     			$threeEvents++;
+				if ($threeEvents<=3) {
+					
+				    $array[]= array('cat_id' => $cat,
+    						'category' => $fila['DESC'],
+    						'subcat_id' => $subcat,
+    						'subcategory' => $fila['DESCRIPTION'],
+    						'id' => $event,
+    						'type' => $event_type,
+    						'event'=>$fila['EVENT'],
+    						'date'=>$fila['OFF_DTTM'],
+    						'oponent1img'=>$fila['URL']
+                            );
+                    $i++;
+                    $aux_event=$event;
+				}
+				
+			//Verifico si el evento es viejo	
+			}else if($event==$aux_event && $subcat==$aux_sub_cat && $cat == $aux_cat){
+				//Si es de un tipo distinto de N, grabo el encabezado del evento
+				$array[$i]['oponent2img'] = ($fila['URL']);
+     			
+			}		
+
+     }
+
+     $data = array('status'=> 'ok',
+					'next_events'=> $array                  
+					);
+	 	 
+	 mysql_free_result($resultado);
+	 echo json_encode($data);
+	 mysql_close($conn); 
+	 
+	   
 ?>
-
-

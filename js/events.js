@@ -28,7 +28,7 @@ function getNext3Events(){
             dataType: "json",
             success: function(data) {
             	if(data.status=="ok"){
-					$('#next3Events').html($.View("views/next3Events.ejs",data.events));					            		
+					$('#next3Events').html($.View("views/next3Events.ejs",data.next_events));					            		
             	}else{
             		alert('ocurrio un error');
             	}
