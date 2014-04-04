@@ -4,8 +4,8 @@
 		<ul class="nav nav-pills nav-stacked">
 	  		<li><a href="#" onclick="betsView()">Apuestas Vigentes</a></li>
 	 		<li class="active"><a href="#" onclick="endBetsView()">Apuestas Finalizadas</a></li>
-	 		<li><a href="#" onclick="viewSent()">Desafios Pendientes</a></li>
-	 		<li><a href="#" onclick="viewSent()">Solicitud de Desafios</a></li>
+	 		<li><a href="#" onclick="challengeView()"><span id="pending" class="badge pull-right"></span>Desafios Pendientes</a></li>
+	 		<li><a href="#" onclick="chlgPendingView()"><span id="requests" class="badge pull-right"></span>Solicitud de Desafios</a></li>
 	 	</ul>
 	</div>
 </div>
@@ -40,9 +40,9 @@
 			    <div id="<%=this[i].event_id%>" class="panel-collapse collapse">
 			      <div class="panel-body">
 			        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-						<div class="row"><strong>Categoria</strong></div>
-						<div class="row"><strong>Subcategoria</strong></div>
-			        	<div class="row"><strong>Elecci&oacute;n</strong></div>
+						<div class="row"><strong>Categoria:</strong></div>
+						<div class="row"><strong>Subcategoria:</strong></div>
+			        	<div class="row"><strong>Elecci&oacute;n:</strong></div>
 			        	<div class="row"><strong>Apuesta:</strong></div>
 			        	<div class="row"><strong>Paga:</strong></div>
 			        	<div class="row"><strong>Estado:</strong></div>

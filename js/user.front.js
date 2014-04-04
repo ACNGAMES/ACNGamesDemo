@@ -142,7 +142,7 @@ function betsView(){
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
 					$('#pagina_central').html($.View("views/betsView.ejs",data.bets));
-									            		
+					chlgBadges();				            		
             	}else if(data.status=="exp"){
             		expire();
             	}else{
@@ -164,6 +164,80 @@ function endBetsView(){
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
 					$('#pagina_central').html($.View("views/endBetsView.ejs",data.bets));
+					chlgBadges();	            		
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
+};
+
+
+function challengeView(msg){
+	$.ajax({
+            url: 'serverCall/getChallengesF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llaamr al view q	uw dibuje los movimientos
+					$('#pagina_central').html($.View("views/challengeView.ejs",data.challenges));
+					chlgBadges();
+					if(msg==true){
+						$('#error').html(
+	                	'<div class="row">'
+	                	+'<div class="alert alert-success">'
+	              		+'El desafio se ha cancelado <a class="alert-link" >Exitosamente</a>!'  
+	        		    +'</div>'
+	        		    +'</div>');	
+					}
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
+};
+
+function chlgPendingView(){
+	$.ajax({
+            url: 'serverCall/getChlgPendingF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llaamr al view q	uw dibuje los movimientos
+					$('#pagina_central').html($.View("views/chlgPendingView.ejs",data.challenges));
+					chlgBadges();				            		
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
+};
+
+
+function chlgBadges(){
+	$.ajax({
+            url: 'serverCall/getChlgQtyF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token},
+            success: function(data) {
+            	if(data.status=="ok"){
+					
+					$('#pending').html(data.pending);
+					$('#requests').html(data.request);
 									            		
             	}else if(data.status=="exp"){
             		expire();
