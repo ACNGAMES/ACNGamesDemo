@@ -9,7 +9,7 @@ if(validate($id, $auth_token)){
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  
-  $sentencia = "SELECT ev.EVENT_ID, op.URL ,opb.OPPONENT_NAME  'opb.OPPONENT_NAME', NAME, SURNAME, opb.URL 'opb.URL', ope.ODDS, bet.USER_OPP_ID, cat.CATEGORY_ID, bet.CHLG_DTTM, bet.AMOUNT ,cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE FROM $db.CM_EVENT ev  
+  $sentencia = "SELECT ev.EVENT_ID, op.URL ,opb.OPPONENT_NAME  'opb.OPPONENT_NAME', NAME, SURNAME, opb.URL 'opb.URL', bet.USER_OPP_ID, cat.CATEGORY_ID, bet.CHLG_DTTM, bet.AMOUNT ,cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID
 				  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
 				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
@@ -75,7 +75,6 @@ if(validate($id, $auth_token)){
     						'event_type' => $event_type,
     						'event_d'=>$fila['EVENT'],
     						'off_dttm'=>$fila['OFF_DTTM'],
-    						'odds'=>$fila['ODDS'],
     						'name'=>$fila['NAME'],
                             'surname'=>$fila['SURNAME'],
                             'selection'=>$fila['opb.OPPONENT_NAME'],
@@ -83,7 +82,7 @@ if(validate($id, $auth_token)){
                             'bet_dttm'=>$fila['CHLG_DTTM'],
                             'url1'=>$fila['URL'],
                             'amount'=>$fila['AMOUNT'],
-                            'user'=>$id													
+                            'id'=>$id													
     						);
                     $i++;
                     $aux_event=$event;

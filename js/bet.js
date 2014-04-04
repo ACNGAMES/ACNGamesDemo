@@ -60,3 +60,11 @@ function payBet(amount,descr, newID){
 	});
 }
 
+function rejectChlg(event_id, user_id){
+	
+};
+
+function acetpChlg(event_id, user_id){
+	
+};
+
