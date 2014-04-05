@@ -251,5 +251,21 @@ function chlgBadges(){
 };
 
 function openEvent(id){
-	$('#pagina_central').html($.View("views/eventView.ejs",data.challenges));
+	$.ajax({
+            url: 'serverCall/getEventF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:id},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llaamr al view q	uw dibuje los movimientos
+					$('#pagina_central').html($.View("views/eventView.ejs", data.evt[0]));
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
 };
