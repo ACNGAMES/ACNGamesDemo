@@ -249,3 +249,7 @@ function chlgBadges(){
             } 
 	});
 };
+
+function openEvent(id){
+	$('#pagina_central').html($.View("views/eventView.ejs",data.challenges));
+};
