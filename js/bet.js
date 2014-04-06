@@ -125,3 +125,24 @@ function cancelChlg(event_id, user_id){
 
 	});
 };
+
+
+function cancelBet(event_id){
+	
+};
+
+function makeBet(event_id){
+	
+};
+
+function editBet(event_id){
+	
+};
+
+function sendBet(event_id){
+	
+};
+
+function makeChlg(event_id){
+	
+};
