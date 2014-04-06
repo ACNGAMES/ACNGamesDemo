@@ -206,7 +206,7 @@ function challengeView(msg){
 	});
 };
 
-function chlgPendingView(){
+function chlgPendingView(msg){
 	$.ajax({
             url: 'serverCall/getChlgPendingF.php',
             dataType: "json",
@@ -215,7 +215,15 @@ function chlgPendingView(){
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
 					$('#pagina_central').html($.View("views/chlgPendingView.ejs",data.challenges));
-					chlgBadges();				            		
+					chlgBadges();
+					if(msg==true){
+						$('#error').html(
+	                	'<div class="row">'
+	                	+'<div class="alert alert-success">'
+	              		+'El desafio se ha rechazado <a class="alert-link" >Exitosamente</a>!'  
+	        		    +'</div>'
+	        		    +'</div>');	
+					}				            		
             	}else if(data.status=="exp"){
             		expire();
             	}else{

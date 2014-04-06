@@ -60,12 +60,48 @@ function payBet(amount,descr, newID){
 	});
 }
 
-function rejectChlg(event_id, user_id){
-	
+function rejectChlg(event_id, chall_user_id){
+	$.ajax({
+            url: 'serverCall/rejectChlgF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id, chlg_user_id:chall_user_id},
+            success: function(data) {
+            	if(data.status=="ok"){
+            			reloadStructs();
+    					challengeView(true);
+    						
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
 };
 
 function acetpChlg(event_id, user_id){
-	
+	$.ajax({
+            url: 'serverCall/rejectChlgF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id},
+            success: function(data) {
+            	if(data.status=="ok"){
+            			reloadStructs();
+    					challengeView(true);
+    						
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
 };
 
 function cancelChlg(event_id, user_id){
@@ -76,7 +112,7 @@ function cancelChlg(event_id, user_id){
             success: function(data) {
             	if(data.status=="ok"){
             			reloadStructs();
-    					challengeView(true);
+    					chlgPendingView(true);
     						
             	}else if(data.status=="exp"){
             		expire();
