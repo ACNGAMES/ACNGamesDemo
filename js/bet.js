@@ -128,7 +128,24 @@ function cancelChlg(event_id, user_id){
 
 
 function cancelBet(event_id){
-	
+	$.ajax({
+            url: 'serverCall/cancelBetF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id},
+            success: function(data) {
+            	if(data.status=="ok"){
+            			reloadStructs();
+    					betsView(1);
+    						
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
 };
 
 function makeBet(event_id){

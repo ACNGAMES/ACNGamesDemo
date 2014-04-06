@@ -133,7 +133,7 @@ function pricesView(msg){
 };
 
 
-function betsView(){
+function betsView(action){
 	$.ajax({
             url: 'serverCall/getActiveBetsF.php',
             dataType: "json",
@@ -142,7 +142,15 @@ function betsView(){
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
 					$('#pagina_central').html($.View("views/betsView.ejs",data.bets));
-					chlgBadges();				            		
+					chlgBadges();
+					if(action==1){
+						$('#error').html(
+	                	'<div class="row">'
+	                	+'<div class="alert alert-success">'
+	              		+'La apuesta se ha cancelado <a class="alert-link" >Exitosamente</a>!'  
+	        		    +'</div>'
+	        		    +'</div>');	
+					}				            		
             	}else if(data.status=="exp"){
             		expire();
             	}else{
