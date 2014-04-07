@@ -14,6 +14,7 @@ function load(){
 	}else{
 		$('#container').html($.View("views/signIn.ejs"));
 	}
+	
 };
 
 //Esta funcion verifica el enter en un formulario de login
@@ -224,6 +225,7 @@ function chlgPendingView(msg){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
 					$('#pagina_central').html($.View("views/chlgPendingView.ejs",data.challenges));
 					chlgBadges();
+					$('#myPopover').popover();
 					if(msg==true){
 						$('#error').html(
 	                	'<div class="row">'
