@@ -11,7 +11,7 @@ if(validate($id, $auth_token)){
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  
-  $sentencia = "SELECT EVENT, OPPONENT_NAME, ODDS, AMOUNT, ope.OPPONENT_ID 'OPP_ID'   
+  $sentencia = "SELECT EVENT, OPPONENT_NAME, AMOUNT, ope.OPPONENT_ID 'OPP_ID'   
   				  FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID
 				  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
@@ -35,8 +35,7 @@ if(validate($id, $auth_token)){
      		$array[]= array('opp_name' => $fila['OPPONENT_NAME'],
     						'opp_id' => $fila['OPP_ID'],
     						'amount'=>$fila['AMOUNT'],
-    						'odd'=>$fila['ODD'],
-                            'event_id'=>$event_id,
+    						'event_id'=>$event_id,
                             'opp_user' => $opp_user													
     						);
              		     	
