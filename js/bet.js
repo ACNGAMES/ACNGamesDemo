@@ -61,6 +61,7 @@ function payBet(amount,descr, newID){
 }
 
 function rejectChlg(event_id, chall_user_id){
+	
 	$.ajax({
             url: 'serverCall/rejectChlgF.php',
             dataType: "json",
@@ -82,13 +83,21 @@ function rejectChlg(event_id, chall_user_id){
 	});
 };
 
-function acetpChlg(event_id, user_id){
+function aceptChlg(event_id, opp_user){
+	//TODO hacer un fetch del evento y deibujar la apuesta tengo que traer
+	//TODO: monto apuesta
+	//TODO oponentes
+	//TODO descripcion  
+	
 	$.ajax({
-            url: 'serverCall/rejectChlgF.php',
+            url: 'serverCall/getChlgInfoF.php',
             dataType: "json",
-            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id},
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id, opp_user:opp_user},
             success: function(data) {
             	if(data.status=="ok"){
+            			//TODO aca tengo que dibujar la view
+            			$('#myModalLabel').html(data.descr);
+            			$('#myModal').modal('show');
             			reloadStructs();
     					challengeView(true);
     						
