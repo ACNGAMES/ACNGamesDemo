@@ -15,16 +15,17 @@ if(validate($id, $auth_token)){
   $db="u157368432_acn";  
   
   //TODO chequear que no exista otra apuesta para ese evento
-	$sentencia = "SELECT * FROM $db.CM_EVENT WHERE user_id='$id' and event_id=$event_id"; 
+	$sentencia = "SELECT * FROM $db.CM_BET WHERE user_id='$id' and event_id=$event_id"; 
   	// Ejecuta la sentencia SQL 
+		
 	$resultado=mysql_query($sentencia, $iden);
   
   	if(mysql_num_rows($resultado)== 0){
-  		
+  		mysql_free_result($resultado);
   		//Busco el monto de la apuesta en la tabla de cm_challenge
   		$sentencia = "SELECT * FROM $db.CM_CHALLENGE chg 
   					  INNER JOIN $db.CM_EVENT ev ON ev.EVENT_ID=chg.EVENT_ID
-  					  WHERE user_id='$id' and event_id=$event_id AND user_opp_id=$user_opp"; 
+  					  WHERE user_id=$user_opp and ev.event_id=$event_id AND user_opp_id=$id"; 
   		// Ejecuta la sentencia SQL 
 		$resultado=mysql_query($sentencia, $iden);
 		$fila = mysql_fetch_assoc($resultado);
@@ -69,29 +70,36 @@ if(validate($id, $auth_token)){
 		  }
 		  // Ejecuta la sentencia SQL 
 		  mysql_query($sentencia, $iden);
-		  //Borro el regitro de la tabla de pagos
-		  
+		
 		  //Le envio una alerta de que se acepto el desafio al otro usuario
 		  $sentencia = "SELECT * FROM $db.CM_USER WHERE user_id='$id'"; 
-  		// Ejecuta la sentencia SQL 
-		$resultado=mysql_query($sentencia, $iden);
+  		// Ejecuta la sentencia SQL
+  		$resultado=mysql_query($sentencia, $iden);
 		$fila = mysql_fetch_assoc($resultado);
 		$name=$fila['NAME'];
 		mysql_free_result($resultado);
 		  
 		$sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$user_opp','DE','$name Acepto el desafio $descr.',NOW())"; 
   		mysql_query($sentencia, $iden);
-		  
+		
+		//GENERO LAS APUESTAS CRUZADAS
+	  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$user_opp',NOW(),'$id','$opponent','$amount')"; 
+  	  
+  	  mysql_query($sentencia, $iden);
+  	  //GENERO LAS APUESTAS CRUZADAS
+	  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$id',NOW(),'$user_opp','$selection','$amount')"; 
+  	  mysql_query($sentencia, $iden);
+		
+		//Borro el chalenge   
+		$sentencia = "DELETE FROM $db.CM_CHALLENGE WHERE user_id=$user_opp and event_id=$event_id AND user_opp_id=$id"; 
+  		// Ejecuta la sentencia SQL 
+		$resultado=mysql_query($sentencia, $iden);
+		
 		$data = array('status'=> 'ok');
 	  }else{
 	  	$data = array('status'=> 'credit');	
 	  }
-	  //gEENRO LAS APUESTAS CRUZADAS
-	  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$user_opp',NOW(),'$id','$opponent','$amount')"; 
-  	  mysql_query($sentencia, $iden);
-  	  //gEENRO LAS APUESTAS CRUZADAS
-	  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$id',NOW(),'$user_opp','$selection','$amount')"; 
-  	  mysql_query($sentencia, $iden);
+	  
   	  
 	  //Envio la respuesta por json
 	   echo json_encode($data);

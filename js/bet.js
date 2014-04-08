@@ -175,11 +175,9 @@ function makeChlg(event_id){
 function processChallenge(event_id, user_opp){
 	$('#processChallenge').attr("disabled","disabled");
 	$('#processChallenge').html('<i class="fa fa-spinner fa-spin"></i> Aceptando');
-	//TODO obtener la seleccion del radiio button
-	var selection = $('#radios').val();
 	
-	console.log(selection);
-	/*
+	var selection = $('input[name="optionsRadios"]:checked').val();
+	
 	$.ajax({
             url: 'serverCall/aceptChlgF.php',
             dataType: "json",
@@ -226,5 +224,5 @@ function processChallenge(event_id, user_opp){
             	console.log(error);
             } 
 	});
-	*/
+	
 };
