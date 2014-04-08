@@ -13,7 +13,8 @@ $db="u157368432_acn";
 				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
 				  WHERE ev.OFF_DTTM > SYSDATE()
 				  AND ev.EVENT_STATUS_FLG = 'O'
-				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM";
+				  AND ope.OPPONENT_ID <> 0
+				  ORDER BY ev.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID";
 				  
 	$resultado = mysql_query($sentencia, $conn);
 

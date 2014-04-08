@@ -18,7 +18,8 @@ if(validate($userId, $authToken)){
 				  LEFT  JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $userId
 				  WHERE ev.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL 1 DAY)
 				  AND ev.EVENT_STATUS_FLG = 'O'
-				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM";
+				  AND ope.OPPONENT_ID <> 0
+				  ORDER BY ev.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID";
 				  
 	$resultado = mysql_query($sentencia, $conn);
 	
@@ -34,7 +35,7 @@ if(validate($userId, $authToken)){
 				  LEFT  JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $userId
 				  WHERE ev.OFF_DTTM > SYSDATE()
 				  AND ev.EVENT_STATUS_FLG = 'O'
-				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM
+				  ORDER BY ev.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID
 				  LIMIT 30";
 				  
 				  //TODO Pasar valor 30 a la tabla de configuración

@@ -17,7 +17,21 @@ function getCategories(){
 };
 
 function getEventsByCat(id){
-	$('#pagina_central').html($.View("views/eventsCat.ejs"));
+	$.ajax({
+            url: 'serverCall/getEventsByCatF.php',
+            dataType: "json",
+            data: {userId:act.user_id, auth_token:act.auth_token, category_id:id},
+            success: function(data) {
+            	if(data.status=="ok"){
+					$('#pagina_central').html($.View("views/eventsCat.ejs"), data.events);					            		
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
+	
 	
 };
 
@@ -28,6 +42,7 @@ function getNext3Events(){
             dataType: "json",
             success: function(data) {
             	if(data.status=="ok"){
+					
 					$('#next3Events').html($.View("views/next3Events.ejs",data.next_events));					            		
             	}else{
             		alert('ocurrio un error');
@@ -46,6 +61,7 @@ function getResults(){
             dataType: "json",
             success: function(data) {
             	if(data.status=="ok"){
+            		
 					$('#myCarousel2').html($.View("views/results.ejs",data.results));					            		
             	}else{
             		alert('ocurrio un error');
