@@ -1,5 +1,6 @@
 <?php
 
+putenv("TZ=America/Buenos_Aires");
 searchAccounts();
 
 function searchAccounts() {

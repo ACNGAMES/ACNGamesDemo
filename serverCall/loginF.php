@@ -1,4 +1,6 @@
 <?php
+
+putenv("TZ=America/Buenos_Aires");
 $ps=$_GET["ps"];
 $email=$_GET["email"];
 

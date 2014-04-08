@@ -1,5 +1,6 @@
 <?php
 
+putenv("TZ=America/Buenos_Aires");
 $db="u157368432_acn";
 
 function validate($id, $auth_token){

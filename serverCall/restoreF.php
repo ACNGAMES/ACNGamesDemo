@@ -1,4 +1,6 @@
 <?php 
+    
+    putenv("TZ=America/Buenos_Aires");
     $enterprise= $_GET['enterprise'];
     include('var.php'); 
     $db="u157368432_acn";

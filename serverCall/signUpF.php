@@ -1,4 +1,6 @@
 <?php
+
+putenv("TZ=America/Buenos_Aires");
 $name=$_GET["name"];
 $surname=$_GET["surname"];
 $enterprise=$_GET["enterprise"];

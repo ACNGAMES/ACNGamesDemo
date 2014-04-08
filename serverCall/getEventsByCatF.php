@@ -1,5 +1,6 @@
 <?php
 
+putenv("TZ=America/Buenos_Aires");
 $userId=$_GET["userId"];
 //$auth_token=$_GET["auth_token"];
 $catId=$_GET["category_id"];

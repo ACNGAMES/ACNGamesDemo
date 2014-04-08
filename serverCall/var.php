@@ -1,5 +1,6 @@
 <?php
 	
+	putenv("TZ=America/Buenos_Aires");
 	function db_connection(){
 		
 		$host="localhost:3306";

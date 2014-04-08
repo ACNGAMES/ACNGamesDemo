@@ -1,5 +1,6 @@
 <?php
 
+putenv("TZ=America/Buenos_Aires");
 $userId=$_GET["id"];
 $authToken=$_GET["auth_token"];
 include('valF.php');

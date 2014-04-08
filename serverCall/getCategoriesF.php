@@ -1,4 +1,6 @@
 <?php
+
+  putenv("TZ=America/Buenos_Aires");
   include('var.php');
   $db="u157368432_acn";
   if (!($iden = db_connection()))

@@ -1,4 +1,6 @@
 <?php
+
+    putenv("TZ=America/Buenos_Aires");
 	$new_ps=$_GET["new_ps"];
 	$auth_token=$_GET["auth_token"];
 	$id=$_GET["id"];
