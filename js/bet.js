@@ -173,6 +173,7 @@ function makeChlg(event_id){
 };
 
 function processChallenge(event_id, user_opp){
+	$('#error').html("");
 	$('#processChallenge').attr("disabled","disabled");
 	$('#processChallenge').html('<i class="fa fa-spinner fa-spin"></i> Aceptando');
 	
@@ -183,10 +184,10 @@ function processChallenge(event_id, user_opp){
             dataType: "json",
             data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id, user_opp:user_opp, selection:selection},
             success: function(data) {
+            	$('#myModal').modal('hide');
             	if(data.status=="ok"){
             			reloadStructs();
-						$('#myModal').modal('hide');
-    					reloadChallengeView();
+						reloadChallengeView();
     					$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-success">'
@@ -195,8 +196,6 @@ function processChallenge(event_id, user_opp){
 					        	+'</div>');
 					        	
     			}else if(data.status=="credit"){		
-    				$('#processChallenge').removeAttr("disabled");
-					$('#processChallenge').html('Aceptar Desafio');
     					$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
@@ -204,8 +203,6 @@ function processChallenge(event_id, user_opp){
 					        	+'</div>'
 					        	+'</div>');
 				}else if(data.status=="bet"){
-					$('#processChallenge').removeAttr("disabled");
-					$('#processChallenge').html('Aceptar Desafio');
 					    $('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
@@ -216,8 +213,6 @@ function processChallenge(event_id, user_opp){
             	}else if(data.status=="exp"){
             		expire();
             	}else{
-            		$('#processChallenge').removeAttr("disabled");
-					$('#processChallenge').html('Aceptar Desafio');
             		alert('ocurrio un error');
             	}
             },error: function(error){

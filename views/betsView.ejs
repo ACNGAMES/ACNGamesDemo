@@ -56,7 +56,11 @@
 						<div class="row"><%=this[i].subcat_descr%></div>
 			        	<div class="row"><%=this[i].selection%></div>
 			        	<div class="row"><%=this[i].amount%> cr.</div>
-			        	<div class="row">x <%=this[i].odds%></div>
+			        	<%if(this[i].name!=null && this[i].surname!=null){%>
+			        		<div class="row">x 2.00</div>
+			        	<%}else{%>
+			        		<div class="row">x <%=this[i].odds%></div>
+			        	<%}%>
 			        	<%if(this[i].name!=null && this[i].surname!=null){%>
 			        		<div class="row"><%=this[i].name%> <%=this[i].surname%></div>
 			        	<%}%>
