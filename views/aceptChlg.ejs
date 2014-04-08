@@ -16,16 +16,23 @@
         <br/>
         <div class="row">
         	<div class="col-sm-1 col-md-1 col-lg-1"></div>
-        	<div class="form-group input-group col-sm-8 col-md-6 col-lg-6">
+        	<div  class="form-group input-group col-sm-8 col-md-6 col-lg-6">
+        		<form id="radios">
         		<% for(i=0;i<this.opponents.length;i++){ %>
         			<div class="radio">
 	  				<label>
-	    				<input type="radio" name="optionsRadios" id="optionsRadios1" value="<%=this.opponents[i].opp_id%>" checked>
+	    				<input type="radio" name="optionsRadios" id="optionsRadios1" value="<%=this.opponents[i].opp_id%>" <%if(i==0){%>checked<%}%>>
 	    				<%=this.opponents[i].opp_name%>
 	  				</label>
 				</div>
 				<% } %>
+				<div class="radio">
+	  				<label>
+	    				<input type="radio" name="optionsRadios" id="optionsRadios1" value="0" >
+	    				Empate
+	  				</label>
 			</div>
+			</form>
 		</div>
 </div>
 <div class="modal-footer">

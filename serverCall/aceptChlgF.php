@@ -4,6 +4,7 @@ $id=$_GET["id"];
 $auth_token=$_GET["auth_token"];
 $event_id=$_GET["event_id"];
 $user_opp=$_GET["user_opp"];
+$selection=$_GET["selection"];
 
 include 'valF.php';
 if(validate($id, $auth_token)){
@@ -29,6 +30,7 @@ if(validate($id, $auth_token)){
 		$fila = mysql_fetch_assoc($resultado);
 		$amount=$fila['AMOUNT'];
 		$descr=$fila['EVENT'];
+		$opponent=$fila['OPPONENT_ID'];
 		mysql_free_result($resultado);
 		
 		
@@ -84,7 +86,13 @@ if(validate($id, $auth_token)){
 	  }else{
 	  	$data = array('status'=> 'credit');	
 	  }
-	  
+	  //gEENRO LAS APUESTAS CRUZADAS
+	  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$user_opp',NOW(),'$id','$opponent','$amount')"; 
+  	  mysql_query($sentencia, $iden);
+  	  //gEENRO LAS APUESTAS CRUZADAS
+	  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$id',NOW(),'$user_opp','$selection','$amount')"; 
+  	  mysql_query($sentencia, $iden);
+  	  
 	  //Envio la respuesta por json
 	   echo json_encode($data);
 	  
