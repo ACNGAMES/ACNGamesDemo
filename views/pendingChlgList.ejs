@@ -1,29 +1,4 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div id="modal-body"></div> 
-    </div>
-  </div>
-</div>
-
-<div class="col-sm-2 col-md-3 col-lg-3">
-	<div class="jumbotron">
-		<br />
-		<ul class="nav nav-pills nav-stacked">
-	  		<li><a href="#" onclick="betsView()">Apuestas Vigentes</a></li>
-	 		<li><a href="#" onclick="endBetsView()">Apuestas Finalizadas</a></li>
-	 		<li><a href="#" onclick="challengeView()"><span id="pending" class="badge pull-right"></span>Desafios Pendientes</a></li>
-	 		<li class="active"><a href="#" onclick="chlgPendingView()"><span id="requests" class="badge pull-right"></span>Solicitud de Desafios</a></li>
-	 	</ul>
-	</div>
-</div>
-<div class="col-sm-8 col-md-6 col-lg-6">
-  <div class="jumbotron">
-    <h2>Solicitudes de Desafios Pendientes</h2><br/>
-    <div id="error"></div>
-    <div id="container2" class="container2">
-			
-			<div class="panel-group" id="accordion">
+		<div class="panel-group" id="accordion">
 			  <% for(i=0;i<this.length;i++){%>
 			  <div class="panel panel-info">
 			    <div class="panel-heading">
@@ -84,16 +59,4 @@
 			  </div>
 			  <%}%>
 			  
-			</div>   			
-			</div>
-        
-  </div>
-</div>
-
-              
-      
-      
-      
-      
-        
- 
+			</div> 

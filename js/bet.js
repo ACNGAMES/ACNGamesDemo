@@ -60,19 +60,12 @@ function payBet(amount,descr, newID){
 	});
 }
 
-function rejectChlg(event_id, user_id){
+function rejectChlg(event_id, chall_user_id){
 	
-};
-
-function acetpChlg(event_id, user_id){
-	
-};
-
-function cancelChlg(event_id, user_id){
 	$.ajax({
-            url: 'serverCall/cancelChlgF.php',
+            url: 'serverCall/rejectChlgF.php',
             dataType: "json",
-            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id},
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id, chlg_user_id:chall_user_id},
             success: function(data) {
             	if(data.status=="ok"){
             			reloadStructs();
@@ -88,4 +81,143 @@ function cancelChlg(event_id, user_id){
             } 
 
 	});
+};
+
+function aceptChlg(event_id, opp_user){
+	//TODO hacer un fetch del evento y deibujar la apuesta tengo que traer
+	//TODO: monto apuesta
+	//TODO oponentes
+	//TODO descripcion  
+	$.ajax({
+            url: 'serverCall/getChlgInfoF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id, opp_user:opp_user},
+            success: function(data) {
+            	if(data.status=="ok"){
+            			//TODO aca tengo que dibujar la view
+            			$('#myModalLabel').html(data.event_d);
+            			$('#modal-body').html($.View("views/aceptChlg.ejs",data));
+            			reloadStructs();
+    					//challengeView(true);
+    						
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
+};
+
+function cancelChlg(event_id, user_id){
+	$.ajax({
+            url: 'serverCall/cancelChlgF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id},
+            success: function(data) {
+            	if(data.status=="ok"){
+            			reloadStructs();
+    					chlgPendingView(true);
+    						
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
+};
+
+
+function cancelBet(event_id){
+	$.ajax({
+            url: 'serverCall/cancelBetF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id},
+            success: function(data) {
+            	if(data.status=="ok"){
+            			reloadStructs();
+    					betsView(1);
+    						
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
+};
+
+function makeBet(event_id){
+	
+};
+
+function editBet(event_id){
+	
+};
+
+function sendBet(event_id){
+	
+};
+
+function makeChlg(event_id){
+	
+};
+
+function processChallenge(event_id, user_opp){
+	$('#error').html("");
+	$('#processChallenge').attr("disabled","disabled");
+	$('#processChallenge').html('<i class="fa fa-spinner fa-spin"></i> Aceptando');
+	
+	var selection = $('input[name="optionsRadios"]:checked').val();
+	
+	$.ajax({
+            url: 'serverCall/aceptChlgF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id, user_opp:user_opp, selection:selection},
+            success: function(data) {
+            	$('#myModal').modal('hide');
+            	if(data.status=="ok"){
+            			reloadStructs();
+						reloadChallengeView();
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-success">'
+					            +'El desafio ha sido aceptado <a class="alert-link" >Exitosamente</a>!'  
+					        	+'</div>'
+					        	+'</div>');
+					        	
+    			}else if(data.status=="credit"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'No posee credito suficiente para aceptar el Desafio!'  
+					        	+'</div>'
+					        	+'</div>');
+				}else if(data.status=="bet"){
+					    $('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'Ya posee una apuesta asociada a ese evento. Debe cancelarla para aceptar el desafio!'  
+					        	+'</div>'
+					        	+'</div>');
+					        	
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
+	
 };

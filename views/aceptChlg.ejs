@@ -1,0 +1,35 @@
+<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%=this.event_d%></h4>
+</div>
+<div class="modal-body">
+<div id="error-modal"></div>
+        <div class="row">
+        <div class="col-lg-1"></div>
+        <strong>Valor del Desafio: </strong><%=this.amount%> Cr.
+        </div>
+        <br/>
+        <div class="row">
+        <div class="col-lg-1"></div>
+        <strong>Por Favor elija un resultado</strong>
+        </div>
+        <br/>
+        <div class="row">
+        	<div class="col-sm-1 col-md-1 col-lg-1"></div>
+        	<div  class="form-group input-group col-sm-8 col-md-6 col-lg-6">
+        		<form id="radios">
+        		<% for(i=0;i<this.opponents.length;i++){ %>
+        			<div class="radio">
+	  				<label>
+	    				<input type="radio" name="optionsRadios" id="optionsRadios1" value="<%=this.opponents[i].opp_id%>" <%if(i==0){%>checked<%}%>>
+	    				<%=this.opponents[i].opp_name%>
+	  				</label>
+				</div>
+				<% } %>
+			</form>
+		</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	<button id="processChallenge" type="button" data-dismiss="modal" onclick="processChallenge('<%=this.event_id%>','<%=this.opp_user%>')" class="btn btn-primary">Aceptar Desafio</button>
+</div>

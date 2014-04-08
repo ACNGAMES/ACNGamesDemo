@@ -13,9 +13,9 @@
                   		<a 
                   		<%if(this[i].alert_cd=='DE'){%>
 	                		onclick="navEvent('<%=this[i].nav_key%>','<%=this[i].id%>')"	
-	                	<%}else if(this[i].alert_cd=='AP'){%>	
+	                	<%}else if(this[i].alert_cd=='AP' || this[i].alert_cd=='PP'){%>	
 	                		onclick="navBet('<%=this[i].id%>')"
-	                	<%}else if(this[i].alert_cd=='DG'){%>
+	                	<%}else if(this[i].alert_cd=='DG' || this[i].alert_cd=='DP'){%>
 	                		onclick="navBet('<%=this[i].id%>')"
 	                	<%}else if(this[i].alert_cd=='DO'){%>
 	                        onclick="navCred('<%=this[i].id%>')"
@@ -41,8 +41,12 @@
 		                		<span class="label label-primary">Desafio</span> <%=this[i].descr%>	
 		                	<%}else if(this[i].alert_cd=='AP'){%>	
 		                		<span class="label label-success">Gano</span> <%=this[i].descr%>
+		                		<%}else if(this[i].alert_cd=='AP'){%>	
+		                		<span class="label label-success">Perdio</span> <%=this[i].descr%>
 		                	<%}else if(this[i].alert_cd=='DG'){%>
 		                		<span class="label label-info">Desafio Ganado</span> <%=this[i].descr%>
+		                	<%}else if(this[i].alert_cd=='DG'){%>
+		                		<span class="label label-info">Desafio Perdido</span> <%=this[i].descr%>
 		                	<%}else if(this[i].alert_cd=='DO'){%>
 		                        <span class="label label-warning">Donaciones</span> <%=this[i].descr%>
 		                	<%}else if(this[i].alert_cd=='AG'){%>

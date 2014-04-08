@@ -9,7 +9,7 @@ if(validate($id, $auth_token)){
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  
-  $sentencia = "SELECT ev.EVENT_ID, op.URL ,opb.OPPONENT_NAME  'opb.OPPONENT_NAME', NAME, SURNAME, opb.URL 'opb.URL', ope.ODDS, bet.USER_ID, cat.CATEGORY_ID, bet.CHLG_DTTM, bet.AMOUNT ,cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE FROM $db.CM_EVENT ev  
+  $sentencia = "SELECT ev.EVENT_ID, op.URL, bet.USER_ID 'CHAL_USER', opb.OPPONENT_NAME  'opb.OPPONENT_NAME', NAME, SURNAME, opb.URL 'opb.URL', ope.ODDS, bet.USER_ID, cat.CATEGORY_ID, bet.CHLG_DTTM, bet.AMOUNT ,cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID
 				  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
 				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
@@ -18,6 +18,7 @@ if(validate($id, $auth_token)){
 				  INNER JOIN $db.CM_OPPONENT opb ON bet.OPPONENT_ID=opb.OPPONENT_ID
 				  LEFT JOIN $db.CM_USER usr ON bet.USER_ID=usr.USER_ID
 				  WHERE ev.EVENT_STATUS_FLG = 'O'
+				  and ope.OPPONENT_ID != 0
 				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
@@ -83,7 +84,7 @@ if(validate($id, $auth_token)){
                             'bet_dttm'=>$fila['CHLG_DTTM'],
                             'url1'=>$fila['URL'],
                             'amount'=>$fila['AMOUNT'],
-                            'id'=>$id													
+                            'id'=>$fila['CHAL_USER']													
     						);
                     $i++;
                     $aux_event=$event;

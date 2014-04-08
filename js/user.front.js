@@ -14,6 +14,7 @@ function load(){
 	}else{
 		$('#container').html($.View("views/signIn.ejs"));
 	}
+	
 };
 
 //Esta funcion verifica el enter en un formulario de login
@@ -133,7 +134,7 @@ function pricesView(msg){
 };
 
 
-function betsView(){
+function betsView(action){
 	$.ajax({
             url: 'serverCall/getActiveBetsF.php',
             dataType: "json",
@@ -142,7 +143,15 @@ function betsView(){
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
 					$('#pagina_central').html($.View("views/betsView.ejs",data.bets));
-					chlgBadges();				            		
+					chlgBadges();
+					if(action==1){
+						$('#error').html(
+	                	'<div class="row">'
+	                	+'<div class="alert alert-success">'
+	              		+'La apuesta se ha cancelado <a class="alert-link" >Exitosamente</a>!'  
+	        		    +'</div>'
+	        		    +'</div>');	
+					}				            		
             	}else if(data.status=="exp"){
             		expire();
             	}else{
@@ -206,7 +215,7 @@ function challengeView(msg){
 	});
 };
 
-function chlgPendingView(){
+function chlgPendingView(msg){
 	$.ajax({
             url: 'serverCall/getChlgPendingF.php',
             dataType: "json",
@@ -215,7 +224,16 @@ function chlgPendingView(){
             	if(data.status=="ok"){
 					// aca tengo que llaamr al view q	uw dibuje los movimientos
 					$('#pagina_central').html($.View("views/chlgPendingView.ejs",data.challenges));
-					chlgBadges();				            		
+					chlgBadges();
+					
+					if(msg==true){
+						$('#error').html(
+	                	'<div class="row">'
+	                	+'<div class="alert alert-success">'
+	              		+'El desafio se ha rechazado <a class="alert-link" >Exitosamente</a>!'  
+	        		    +'</div>'
+	        		    +'</div>');	
+					}				            		
             	}else if(data.status=="exp"){
             		expire();
             	}else{
@@ -239,6 +257,48 @@ function chlgBadges(){
 					$('#pending').html(data.pending);
 					$('#requests').html(data.request);
 									            		
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
+};
+
+function openEvent(id){
+	$.ajax({
+            url: 'serverCall/getEventF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:id},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llaamr al view q	uw dibuje los movimientos
+					$('#pagina_central').html($.View("views/eventView.ejs", data.evt[0]));
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+	});
+};
+
+
+function reloadChallengeView(){
+	$.ajax({
+            url: 'serverCall/getChlgPendingF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token},
+            success: function(data) {
+            	if(data.status=="ok"){
+					// aca tengo que llaamr al view q	uw dibuje los movimientos
+					$('#container2').html($.View("views/pendingChlgList.ejs",data.challenges));
+					chlgBadges();
             	}else if(data.status=="exp"){
             		expire();
             	}else{

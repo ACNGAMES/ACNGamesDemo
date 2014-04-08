@@ -18,6 +18,7 @@ if(validate($id, $auth_token)){
 				  INNER JOIN $db.CM_OPPONENT opb ON bet.OPPONENT_ID=opb.OPPONENT_ID
 				  LEFT JOIN $db.CM_USER usr ON bet.USER_OPP_ID=usr.USER_ID
 				  WHERE ev.EVENT_STATUS_FLG = 'O'
+				  and ope.OPPONENT_ID != 0
 				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 

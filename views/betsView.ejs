@@ -56,7 +56,11 @@
 						<div class="row"><%=this[i].subcat_descr%></div>
 			        	<div class="row"><%=this[i].selection%></div>
 			        	<div class="row"><%=this[i].amount%> cr.</div>
-			        	<div class="row">x <%=this[i].odds%></div>
+			        	<%if(this[i].name!=null && this[i].surname!=null){%>
+			        		<div class="row">x 2.00</div>
+			        	<%}else{%>
+			        		<div class="row">x <%=this[i].odds%></div>
+			        	<%}%>
 			        	<%if(this[i].name!=null && this[i].surname!=null){%>
 			        		<div class="row"><%=this[i].name%> <%=this[i].surname%></div>
 			        	<%}%>
@@ -64,15 +68,16 @@
 			        </div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
 			        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			        	<%if(this[i].name==null && this[i].surname==null){%>
 			        	<div class="row">
 			        		<font style="cursor:pointer" color="red">
-                    			<i onclick="alert('<%=this[i].event_id%>')" title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
+                    			<i onclick="cancelBet('<%=this[i].event_id%>')" title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
                     		</font>                    			
                     		<font style="cursor:pointer" color="blue">
-                    			<i onclick="alert('<%=this[i].event_id%>')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
+                    			<i onclick="editBet('<%=this[i].event_id%>')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
                     		</font>
-                    		
                     	</div>
+                    	<%}%>	
 			        </div>
 			      </div>
 			    </div>
