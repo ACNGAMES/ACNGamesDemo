@@ -6,7 +6,7 @@
 <div id="error-modal"></div>
         <div class="row">
         <div class="col-lg-1"></div>
-        <strong>Valor del Desafio: </strong><%=this.amount%> Cr.
+        <strong>Valor de la Apuesta: </strong><%=this.amount%> Cr.
         </div>
         <br/>
         <div class="row">
@@ -30,5 +30,5 @@
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	<button id="processChallenge" type="button" data-dismiss="modal" onclick="processChallenge('<%=this.event_id%>','<%=this.opp_user%>')" class="btn btn-primary">Aceptar Desafio</button>
+	<button id="processChallenge" type="button" data-dismiss="modal" onclick="processChallenge('<%=this.event_id%>','<%=this.opp_user%>','<%=this.amount%>')" class="btn btn-primary">Apostar</button>
 </div>

@@ -171,3 +171,29 @@ function sendBet(event_id){
 function makeChlg(event_id){
 	
 };
+
+function processChallenge(event_id, user_opp){
+	$('#processChallenge').attr("disabled","disabled");
+	$('#processChallenge').html('<i class="fa fa-spinner fa-spin"></i> Aceptando');
+	$('#myModal').modal('hide');	
+	$('#error').html(
+             '<div class="row">'
+            +'<div class="alert alert-danger">'
+            +'No posee credito suficiente para axptar el Desafio!'  
+        	+'</div>'
+        	+'</div>');
+    
+    $('#error').html(
+             '<div class="row">'
+            +'<div class="alert alert-danger">'
+            +'Ya posee una apuesta asociada a ese evento. Debe cancelarla para aceptar el desafio!'  
+        	+'</div>'
+        	+'</div>');
+        	
+        	$('#error').html(
+             '<div class="row">'
+            +'<div class="alert alert-success">'
+            +'El desafio ha sido aceptado <a class="alert-link" >Exitosamente</a>!'  
+        	+'</div>'
+        	+'</div>');
+};
