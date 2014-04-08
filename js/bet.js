@@ -88,7 +88,6 @@ function aceptChlg(event_id, opp_user){
 	//TODO: monto apuesta
 	//TODO oponentes
 	//TODO descripcion  
-	
 	$.ajax({
             url: 'serverCall/getChlgInfoF.php',
             dataType: "json",
@@ -96,10 +95,10 @@ function aceptChlg(event_id, opp_user){
             success: function(data) {
             	if(data.status=="ok"){
             			//TODO aca tengo que dibujar la view
-            			$('#myModalLabel').html(data.descr);
-            			$('#myModal').modal('show');
+            			$('#myModalLabel').html(data.event_d);
+            			$('#modal-body').html($.View("views/aceptChlg.ejs",data));
             			reloadStructs();
-    					challengeView(true);
+    					//challengeView(true);
     						
             	}else if(data.status=="exp"){
             		expire();

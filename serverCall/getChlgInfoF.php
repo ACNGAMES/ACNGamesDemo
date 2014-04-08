@@ -17,37 +17,37 @@ if(validate($id, $auth_token)){
 				  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
 				  INNER JOIN $db.CM_CHALLENGE bet ON ev.EVENT_ID = bet.EVENT_ID 
 				  WHERE ev.EVENT_STATUS_FLG = 'O' 
-				  and bet.USER_ID = $id 
-				  and bet.USER_OPP_ID = $opp_user 
-				  and bet.EVENT_ID=$event_id
-				  and bet.OPPONENT_ID!=ope.OPPONENT_ID"; 
+				  and bet.USER_OPP_ID = $id 
+				  and bet.USER_ID = $opp_user 
+				  and bet.EVENT_ID = $event_id
+				  and bet.OPPONENT_ID != ope.OPPONENT_ID"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
   
   if(!$resultado) 
     die("Error: no se pudo realizar la consulta");
   $array=array();
-  //Inicializo las varialbes
-	 $array = array();
-	 
+   
 	 while ($fila = mysql_fetch_assoc($resultado)) {
      		//grabo la info de cada oponente	
+     		
      		$array[]= array('opp_name' => $fila['OPPONENT_NAME'],
     						'opp_id' => $fila['OPP_ID'],
-    						'amount'=>$fila['AMOUNT'],
-    						'event_id'=>$event_id,
-                            'opp_user' => $opp_user													
     						);
-             		     	
+             		     	$event_d=$fila['EVENT'];
+             		     	$amount=$fila['AMOUNT'];
      }
   $data = array('status'=> 'ok',
-  				'event_d' => $fila['EVENT'],
-					'opponents'=> $array                  
+  				'event_id'=>$event_id,
+                'opp_user' => $opp_user,
+  				'event_d' => $event_d,
+  				'amount'=>$amount,
+				'opponents'=> $array                  
     );
   mysql_free_result($resultado);
  	//Envio la respuesta por json
- 	echo json_encode($data);
-  
+ echo json_encode($data);
+ 
   // Cierra la conexión con la base de datos 
   mysql_close($iden);	
 		
