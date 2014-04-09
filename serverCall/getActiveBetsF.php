@@ -17,10 +17,11 @@ if(validate($id, $auth_token)){
 				  INNER JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $id 
 				  INNER JOIN $db.CM_OPPONENT opb ON bet.SELECTION=opb.OPPONENT_ID
 				  LEFT JOIN $db.CM_USER usr ON bet.OPP_USER_ID=usr.USER_ID
-				  and ope.OPPONENT_ID != 0
 				  WHERE ev.EVENT_STATUS_FLG = 'O'
+				  and ope.OPPONENT_ID != 0
 				  ORDER BY ev.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID"; 
-  // Ejecuta la sentencia SQL 
+  // Ejecuta la sentencia SQL
+  echo $sentencia; 
   $resultado = mysql_query($sentencia, $iden); 
   
   if(!$resultado) 
