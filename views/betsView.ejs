@@ -81,7 +81,7 @@
                     			<i onclick="cancelBet('<%=this[i].event_id%>')" title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
                     		</font>                    			
                     		<font style="cursor:pointer" color="blue">
-                    			<i onclick="editBet('<%=this[i].event_id%>')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
+                    			<i data-toggle="modal" href="#" data-target="#myModal" onclick="editBet('<%=this[i].event_id%>')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
                     		</font>
                     	</div>
                     	<%}%>	
