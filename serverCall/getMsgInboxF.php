@@ -20,7 +20,7 @@ if(validate($id, $auth_token)){
 		if($fila['FROM_ID']==0){
 			$from='Equipo de ACN Games';			
 		}else{
-			$from=$fila['FROM_ID'];
+			$from=$fila['NAME'];
 		}
 		
 		if($fila['SUBJECT']!= null){

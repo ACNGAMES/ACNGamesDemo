@@ -201,7 +201,26 @@ function editBet(event_id){
 };
 
 function sendBet(event_id){
-	
+	$.ajax({
+            url: 'serverCall/getBetInfoF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id},
+            success: function(data) {
+            	if(data.status=="ok"){
+            			$('#modal-body').html($.View("views/sendBet.ejs",data));
+            			reloadStructs();
+    					//challengeView(true);
+    						
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
 };
 
 function makeChlg(event_id){
@@ -456,7 +475,7 @@ function processChlgBet(event_id){
     					$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
-					            +'EL enterpise ingresado es <a class="alert-link" >Incorrecto</a>!'
+					            +'El enterpise ingresado es <a class="alert-link" >Incorrecto</a>!'
 					        	+'</div>'
 					        	+'</div>');
 				}else if(data.status=="exp"){
@@ -470,10 +489,54 @@ function processChlgBet(event_id){
 		});	
 	}
 	
-
-
 };
 
 function processSendBet(event_id){
+	$('#error').html("");
+	$('#processChallenge').attr("disabled","disabled");
+	$('#processChallenge').html('<i class="fa fa-spinner fa-spin"></i> Apostando');
+	
+	var opp_user = $('#enterprise').val();
+	if(opp_user == ""){
+		$('#myModal').modal('hide');
+		$('#error').html(
+	             '<div class="row">'
+	            +'<div class="alert alert-danger">'
+	            +'El Enterprise no puede ser <a class="alert-link" >Vacio</a>!'  
+	        	+'</div>'
+	        	+'</div>');
+	}else{
+		$.ajax({
+            url: 'serverCall/sendBetF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id, opp_user:opp_user},
+            success: function(data) {
+            	$('#myModal').modal('hide');
+            	if(data.status=="ok"){
+            			reloadStructs();
+						$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-success">'
+					            +'Se envio el Evento <a class="alert-link" >Exitosamente</a>!'  
+					        	+'</div>'
+					        	+'</div>');
+					        	
+    			}else if(data.status=="user"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'El enterpise ingresado es <a class="alert-link" >Incorrecto</a>!'
+					        	+'</div>'
+					        	+'</div>');
+				}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+		});	
+	}
 	
 };
