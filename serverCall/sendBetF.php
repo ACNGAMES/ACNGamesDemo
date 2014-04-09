@@ -44,10 +44,11 @@ if(validate($id, $auth_token)){
 		mysql_free_result($resultado);
 		
 	  	  //GENERO LA 
-	  	  $body = "Hola $opp_name: <br/>$name te recomienda el evento $descr <br> haga <a href=\"#\" onclick=\"openEvent($event_id)\">click aqui</a> para verlo completo <br/>Saludos.<br/>ACN Games";
+	  	  $body = "Hola $opp_name: <br/>$name te recomienda el evento $descr <br>Haga <a href=\"#\" onclick=\"openEvent($event_id)\">click aqui</a> para verlo completo <br/>Saludos.<br/>ACN Games";
 		  $sentencia = "INSERT INTO $db.CM_MSG(TO_ID, FROM_ID, SUBJECT, BODY, MSG_DTTM) VALUES('$opp_user_id','$id','$name Te envia un evento','$body', NOW())"; 
 	  	  mysql_query($sentencia, $iden);
-			
+		  $sentencia = "INSERT INTO $db.CM_MSG_SENT(TO_ID, FROM_ID, SUBJECT, BODY, MSG_DTTM) VALUES('$opp_user_id','$id','$name Te envia un evento','$body', NOW())"; 
+	  	  mysql_query($sentencia, $iden);
 		  $data = array('status'=> 'ok');
 		  
 		  //Envio la respuesta por json
