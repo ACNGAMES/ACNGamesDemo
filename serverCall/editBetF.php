@@ -50,18 +50,19 @@ if($amount >= 0.5 && ($amount*100)%50==0){
 			  	//TODO si el amount es > old_Amount
 			  	if($amount<$old_amount){
 			  		$new_amount=$old_amount-$amount;
+					$new_gold=$tot_gold+$new_amount;
 					//Actualizo la cantidad de monedas
 					  $sentencia = "UPDATE $db.CM_COIN SET GOLDEN_COINS=GOLDEN_COINS+$new_amount where user_id='$id'"; 
 					  // Ejecuta la sentencia SQL 
 					  mysql_query($sentencia, $iden); 
 					  //agrego un regitro en la tabla de movimientos
-					  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'G','Se modifico la Apuesta $descr',$new_amount,$new_gold,$new_silver)";
+					  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'G','Se modifico la Apuesta $descr',$new_amount,$new_gold,$tot_silver)";
 							
 					  // Ejecuta la sentencia SQL 
 					  mysql_query($sentencia, $iden);
 				  		
 		  	  		//GENERO LAS APUESTA
-			  		$sentencia = "UPDATE $db.CM_BET SET SELECTION=$selection, AMOUNT=$new_amount where EVENT_ID=$event_id and USER_ID=$id";
+			  		$sentencia = "UPDATE $db.CM_BET SET SELECTION=$selection, AMOUNT=$amount where EVENT_ID=$event_id and USER_ID=$id";
 					mysql_query($sentencia, $iden);
 					$data = array('status'=> 'ok');
 					
@@ -97,7 +98,7 @@ if($amount >= 0.5 && ($amount*100)%50==0){
 					  mysql_query($sentencia, $iden);
 				  		
 		  	  		//GENERO LAS APUESTA
-			  		$sentencia = "UPDATE $db.CM_BET SET SELECTION=$selection, AMOUNT=$new_amount where EVENT_ID=$event_id and USER_ID=$id";
+			  		$sentencia = "UPDATE $db.CM_BET SET SELECTION=$selection, AMOUNT=$amount where EVENT_ID=$event_id and USER_ID=$id";
 					mysql_query($sentencia, $iden);
 					$data = array('status'=> 'ok'); 
 			  	}else{
