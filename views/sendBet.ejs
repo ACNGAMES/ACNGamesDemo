@@ -1,0 +1,16 @@
+<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%=this.event_d%></h4>
+</div>
+<div class="modal-body">
+<div id="error-modal"></div>
+         <div class="row">
+        <div class="col-lg-1"></div>
+        <strong>Enviar a Enterprise: </strong><input type="text" id="enterprise" placeholder="Enterprise ID" required="" autofocus="true">
+        </div>
+        <br/>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	<button id="processChallenge" type="button" data-dismiss="modal" onclick="processSendBet('<%=this.event_id%>')" class="btn btn-primary">Enviar</button>
+</div>

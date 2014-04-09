@@ -205,7 +205,27 @@ function sendBet(event_id){
 };
 
 function makeChlg(event_id){
-	
+		$.ajax({
+            url: 'serverCall/getBetInfoF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id},
+            success: function(data) {
+            	if(data.status=="ok"){
+            			//TODO aca tengo que dibujar la view
+            			$('#modal-body').html($.View("views/chlgBet.ejs",data));
+            			reloadStructs();
+    					//challengeView(true);
+    						
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
 };
 
 function processChallenge(event_id, user_opp){
@@ -373,5 +393,14 @@ function processEditBet(event_id){
 	}
 	
 
+	
+};
+
+
+function processChlgBet(event_id){
+	
+};
+
+function processSendBet(event_id){
 	
 };
