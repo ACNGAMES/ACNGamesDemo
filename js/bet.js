@@ -347,7 +347,7 @@ function processEditBet(event_id){
 		$('#error').html(
 	             '<div class="row">'
 	            +'<div class="alert alert-danger">'
-	            +'El monto de apuesta debe ser multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
+	            +'El monto de apuesta debe ser mayor que 0 y multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
 	        	+'</div>'
 	        	+'</div>');
 
@@ -398,7 +398,80 @@ function processEditBet(event_id){
 
 
 function processChlgBet(event_id){
+	$('#error').html("");
+	$('#processChallenge').attr("disabled","disabled");
+	$('#processChallenge').html('<i class="fa fa-spinner fa-spin"></i> Apostando');
 	
+	var selection = $('input[name="optionsRadios"]:checked').val();
+	var amount = $('#amount').val();
+	var opp_user = $('#enterprise').val();
+	if(amount < 0.5 || (amount*100)%50!=0){
+		$('#myModal').modal('hide');
+		$('#error').html(
+	             '<div class="row">'
+	            +'<div class="alert alert-danger">'
+	            +'El monto de apuesta debe ser mayor que 0 y multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
+	        	+'</div>'
+	        	+'</div>');
+
+	}else if(opp_user == ""){
+		$('#myModal').modal('hide');
+		$('#error').html(
+	             '<div class="row">'
+	            +'<div class="alert alert-danger">'
+	            +'El Enterprise no puede ser <a class="alert-link" >Vacio</a>!'  
+	        	+'</div>'
+	        	+'</div>');
+	}else{
+		$.ajax({
+            url: 'serverCall/chlgBetF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id, selection:selection, amount:amount, opp_user:opp_user},
+            success: function(data) {
+            	$('#myModal').modal('hide');
+            	if(data.status=="ok"){
+            			reloadStructs();
+						$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-success">'
+					            +'El Desafio se realizo <a class="alert-link" >Exitosamente</a>!'  
+					        	+'</div>'
+					        	+'</div>');
+					        	
+    			}else if(data.status=="credit"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'No posee credito suficiente para aceptar el Desafio!'  
+					        	+'</div>'
+					        	+'</div>');
+				}else if(data.status=="bet"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'Ya posee una apuesta o un desafio asociado a este evento!'  
+					        	+'</div>'
+					        	+'</div>');			
+				}else if(data.status=="user"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'EL enterpise ingresado es <a class="alert-link" >Incorrecto</a>!'
+					        	+'</div>'
+					        	+'</div>');
+				}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+		});	
+	}
+	
+
+
 };
 
 function processSendBet(event_id){
