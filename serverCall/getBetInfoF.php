@@ -3,7 +3,6 @@
 putenv("TZ=America/Buenos_Aires");
 $id=$_GET["id"];
 $auth_token=$_GET["auth_token"];
-$opp_user=$_GET["opp_user"];
 $event_id=$_GET["event_id"];
 include 'valF.php';
 if(validate($id, $auth_token)){
@@ -12,16 +11,12 @@ if(validate($id, $auth_token)){
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  
-  $sentencia = "SELECT EVENT, OPPONENT_NAME, AMOUNT, ope.OPPONENT_ID 'OPP_ID'   
+  $sentencia = "SELECT EVENT, OPPONENT_NAME, ODDS, ope.OPPONENT_ID 'OPP_ID'   
   				  FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID
 				  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
-				  INNER JOIN $db.CM_CHALLENGE bet ON ev.EVENT_ID = bet.EVENT_ID 
 				  WHERE ev.EVENT_STATUS_FLG = 'O' 
-				  and bet.USER_OPP_ID = $id 
-				  and bet.USER_ID = $opp_user 
-				  and bet.EVENT_ID = $event_id
-				  and bet.OPPONENT_ID != ope.OPPONENT_ID"; 
+				  and ev.EVENT_ID = $event_id"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
   
@@ -33,17 +28,16 @@ if(validate($id, $auth_token)){
      		//grabo la info de cada oponente	
      		
      		$array[]= array('opp_name' => $fila['OPPONENT_NAME'],
-    						'opp_id' => $fila['OPP_ID']
+    						'opp_id' => $fila['OPP_ID'],
+    						'odds' => $fila['ODDS']
     						);
              		     	$event_d=$fila['EVENT'];
-             		     	$amount=$fila['AMOUNT'];
+             		     	
      }
   $data = array('status'=> 'ok',
   				'event_id'=>$event_id,
-                'opp_user' => $opp_user,
-  				'event_d' => $event_d,
-  				'amount'=>$amount,
-				'opponents'=> $array                  
+                'event_d' => $event_d,
+  				'opponents'=> $array                  
     );
   mysql_free_result($resultado);
  	//Envio la respuesta por json

@@ -1,3 +1,11 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="modal-body"></div> 
+    </div>
+  </div>
+</div>
+
 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
 <div class="col-sm-8 col-md-6 col-lg-6">
   <div class="jumbotron">
@@ -72,14 +80,14 @@
 	                    			<i onclick="cancelBet('<%=this.event_id%>')" title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
 	                    		</font>                    			
 	                    		<font style="cursor:pointer" color="blue">
-	                    			<i onclick="editBet('<%=this.event_id%>')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
+	                    			<i data-toggle="modal" href="#" data-target="#myModal" onclick="editBet('<%=this.event_id%>')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
 	                    		</font>
 	                    		<%}%>
                     		<%}else{%>
 	                    		<font color="blue">
-	                    			<i style="cursor:pointer" onclick="makeBeet('<%=this.event_id%>')" title="Apostar" class="fa fa-usd fa-lg pull-right"></i>
-	                    			<i style="cursor:pointer" onclick="makeChlg('<%=this.event_id%>')" title="Desafiar un amigo" class="fa fa-trophy fa-lg pull-right"></i>
-	                    			<i style="cursor:pointer" onclick="sendBet('<%=this.event_id%>')" title="Compartir" class="fa fa-envelope-o fa-lg pull-right"></i>
+	                    			<i data-toggle="modal" href="#" data-target="#myModal" style="cursor:pointer" onclick="makeBet('<%=this.event_id%>')" title="Apostar" class="fa fa-usd fa-lg pull-right"></i>
+	                    			<i data-toggle="modal" href="#" data-target="#myModal" style="cursor:pointer" onclick="makeChlg('<%=this.event_id%>')" title="Desafiar un amigo" class="fa fa-trophy fa-lg pull-right"></i>
+	                    			<i data-toggle="modal" href="#" data-target="#myModal" style="cursor:pointer" onclick="sendBet('<%=this.event_id%>')" title="Compartir" class="fa fa-envelope-o fa-lg pull-right"></i>
 	                    		</font>
                     		<%}%>
                     	</div>
