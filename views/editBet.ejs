@@ -6,7 +6,7 @@
 <div id="error-modal"></div>
         <div class="row">
         <div class="col-lg-1"></div>
-        <strong>Valor de la Apuesta: </strong><input id="amount" type="number" min="0" step="0.5"/> Cr.
+        <strong>Valor de la Apuesta: </strong><input id="amount" type="number" min="0" step="0.5" value="<%=this.amount%>"/> Cr.
         </div>
         <br/>
         <div class="row">
@@ -20,8 +20,8 @@
         		<% for(i=0;i<this.opponents.length;i++){ %>
         			<div class="radio">
 	  				<label>
-	    				<input type="radio" name="optionsRadios" id="optionsRadios1" value="<%=this.opponents[i].opp_id%>" <%if(i==0){%>checked<%}%>>
-	    				<%=this.opponents[i].opp_name%>
+	    				<input type="radio" name="optionsRadios" id="optionsRadios1" value="<%=this.opponents[i].opp_id%>" <%if(this.opponents[i].opp_id==this.selection){%>checked<%}%>>
+	    				<%=this.opponents[i].opp_name%> (x <%=this.opponents[i].odds%>)
 	  				</label>
 				</div>
 				<% } %>

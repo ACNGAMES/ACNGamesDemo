@@ -20,8 +20,8 @@
         		<% for(i=0;i<this.opponents.length;i++){ %>
         			<div class="radio">
 	  				<label>
-	    				<input type="radio" name="optionsRadios" id="optionsRadios1" value="<%=this.opponents[i].opp_id%>" <%if(i==0){%>checked<%}%>>
-	    				<%=this.opponents[i].opp_name%>
+	    				<input type="radio" name="optionsRadios" id="optionsRadios1" value="<%=this.opponents[i].opp_id%>" checked>
+	    				<%=this.opponents[i].opp_name%> (x <%=this.opponents[i].odds%>)
 	  				</label>
 				</div>
 				<% } %>

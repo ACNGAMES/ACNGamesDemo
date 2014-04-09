@@ -178,7 +178,26 @@ function makeBet(event_id){
 };
 
 function editBet(event_id){
-	
+	$.ajax({
+            url: 'serverCall/getBetEditInfoF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id},
+            success: function(data) {
+            	if(data.status=="ok"){
+            			$('#modal-body').html($.View("views/editBet.ejs",data));
+            			reloadStructs();
+    					//challengeView(true);
+    						
+            	}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+
+	});
 };
 
 function sendBet(event_id){
