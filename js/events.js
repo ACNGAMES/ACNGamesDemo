@@ -22,8 +22,9 @@ function getEventsByCat(id){
             dataType: "json",
             data: {userId:act.user_id, auth_token:act.auth_token, category_id:id},
             success: function(data) {
+            	console.log(data);
             	if(data.status=="ok"){
-					$('#pagina_central').html($.View("views/eventsCat.ejs"), data.events);					            		
+					$('#pagina_central').html($.View("views/eventsCat.ejs", data));					            		
             	}else{
             		alert('ocurrio un error');
             	}

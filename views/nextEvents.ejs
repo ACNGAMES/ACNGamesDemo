@@ -37,7 +37,7 @@
 					<div class="list-group">
 			   <% for(k=0;k<this[i].subcategories[j].events.length;k++){%>
                                   	
-                  	<a href="#" class="list-group-item">
+                  	<a class="list-group-item">
 					    <div class="row">
 					    	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 					    	<% if(this[i].subcategories[j].events[k].event_type!='N'){%>
@@ -51,21 +51,27 @@
 					    	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><%=this[i].subcategories[j].events[k].off_date%>
 								
 								<% if(this[i].subcategories[j].events[k].bet>0){%>
+									<%if(this[i].subcategories[j].events[k].opp_user==0) {%>
 										<font color="red">
-							    			<i onclick="cancelBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
+							    			<i style='cursor:pointer' onclick="cancelBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
 							    				title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
 							    		</font>                    			
 							    		<font color="blue">
-							    			<i onclick="editBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
+							    			<i style='cursor:pointer' onclick="editBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
 							    				title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
 							    		</font>
+							    	<%} else {%>
+							    		<font color="grey">
+                    			  			<i style='cursor:pointer' title="Posee un desafio" class="fa fa-trophy fa-lg pull-right"></i>
+                    			        </font>
+							    		<%}%>
 								<%} else {%>
 								<font color="blue">
-                    			<i onclick="makeBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
+                    			<i style='cursor:pointer' onclick="makeBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
                     				title="Apostar" class="fa fa-usd fa-lg pull-right"></i>
-                    			<i onclick="makeChlg('<%=this[i].subcategories[j].events[k].event_id%>')" 
+                    			<i style='cursor:pointer' onclick="makeChlg('<%=this[i].subcategories[j].events[k].event_id%>')" 
                     				title="Desafiar un amigo" class="fa fa-trophy fa-lg pull-right"></i>
-                    			<i onclick="sendBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
+                    			<i style='cursor:pointer' onclick="sendBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
                     			title="Compartir" class="fa fa-envelope-o fa-lg pull-right"></i>
                     		</font>
 								<%}%>  

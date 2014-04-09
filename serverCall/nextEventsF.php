@@ -11,7 +11,7 @@ if(validate($userId, $authToken)){
     die("Error: No se pudo conectar".mysql_error());
 	
 	
-    $sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID FROM $db.CM_EVENT ev  
+    $sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID, bet.OPP_USER_ID FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID 
 			   	  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
 				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
@@ -19,7 +19,7 @@ if(validate($userId, $authToken)){
 				  LEFT  JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $userId
 				  WHERE ev.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL 1 DAY)
 				  AND ev.EVENT_STATUS_FLG = 'O'
-				  AND ope.OPPONENT_ID <> 0
+				  AND ope.OPPONENT_ID != 0
 				  ORDER BY ev.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID";
 				  
 	$resultado = mysql_query($sentencia, $conn);
@@ -28,7 +28,7 @@ if(validate($userId, $authToken)){
 	
 	if($count<20){
 		
-	$sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID FROM $db.CM_EVENT ev  
+	$sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID, bet.OPP_USER_ID FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID 
 			   	  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
 				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
@@ -36,6 +36,7 @@ if(validate($userId, $authToken)){
 				  LEFT  JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $userId
 				  WHERE ev.OFF_DTTM > SYSDATE()
 				  AND ev.EVENT_STATUS_FLG = 'O'
+				  and ope.OPPONENT_ID != 0
 				  ORDER BY ev.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID
 				  LIMIT 30";
 				  
@@ -105,7 +106,8 @@ if(validate($userId, $authToken)){
 																		'event_type' => $event_type,
 																		'event_d'=>$fila['EVENT'],
 																		'off_dttm'=>$fila['OFF_DTTM'],
-																		'bet' => $bet													
+																		'bet' => $bet,
+																		'opp_user' => $fila['OPP_USER_ID']													
 																		);
      			}else{
      				//grabo la url
@@ -126,7 +128,8 @@ if(validate($userId, $authToken)){
 																		'url2'=>$fila['URL'],
 																		'event_d'=>$fila['EVENT'],
 																		'off_dttm'=>$fila['OFF_DTTM'],
-																		'bet' => $bet				
+																		'bet' => $bet,
+																		'opp_user' => $fila['OPP_USER_ID']				
 																		);
      			}
 			}	
