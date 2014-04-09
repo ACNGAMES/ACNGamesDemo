@@ -269,7 +269,7 @@ function processBetEvent(event_id){
 						$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-success">'
-					            +'El desafio ha sido aceptado <a class="alert-link" >Exitosamente</a>!'  
+					            +'La apuesta se realizo <a class="alert-link" >Exitosamente</a>!'  
 					        	+'</div>'
 					        	+'</div>');
 					        	
@@ -280,15 +280,7 @@ function processBetEvent(event_id){
 					            +'No posee credito suficiente para aceptar el Desafio!'  
 					        	+'</div>'
 					        	+'</div>');
-				}else if(data.status=="bet"){
-					    $('#error').html(
-					             '<div class="row">'
-					            +'<div class="alert alert-danger">'
-					            +'Ya posee una apuesta asociada a ese evento. Debe cancelarla para aceptar el desafio!'  
-					        	+'</div>'
-					        	+'</div>');
-					        	
-            	}else if(data.status=="exp"){
+				}else if(data.status=="exp"){
             		expire();
             	}else{
             		alert('ocurrio un error');
