@@ -354,6 +354,13 @@ function processEditBet(event_id){
 					            +'No posee credito suficiente para editar el Desafio!'  
 					        	+'</div>'
 					        	+'</div>');
+				}else if(data.status=="Bet"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'La apuesta ya fue retirada!'  
+					        	+'</div>'
+					        	+'</div>');
 				}else if(data.status=="exp"){
             		expire();
             	}else{
