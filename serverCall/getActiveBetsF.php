@@ -21,7 +21,7 @@ if(validate($id, $auth_token)){
 				  and ope.OPPONENT_ID != 0
 				  ORDER BY ev.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID"; 
   // Ejecuta la sentencia SQL
-  echo $sentencia; 
+  
   $resultado = mysql_query($sentencia, $iden); 
   
   if(!$resultado) 
