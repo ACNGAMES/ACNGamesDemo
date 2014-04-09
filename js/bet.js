@@ -313,3 +313,58 @@ function processBetEvent(event_id){
 
 	
 };
+
+function processEditBet(event_id){
+	
+	$('#error').html("");
+	$('#processChallenge').attr("disabled","disabled");
+	$('#processChallenge').html('<i class="fa fa-spinner fa-spin"></i> Apostando');
+	
+	var selection = $('input[name="optionsRadios"]:checked').val();
+	var amount = $('#amount').val();
+	if(amount < 0.5 || (amount*100)%50!=0){
+		$('#myModal').modal('hide');
+		$('#error').html(
+	             '<div class="row">'
+	            +'<div class="alert alert-danger">'
+	            +'El monto de apuesta debe ser multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
+	        	+'</div>'
+	        	+'</div>');
+
+	}else{
+		$.ajax({
+            url: 'serverCall/editBetF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, event_id:event_id, selection:selection, amount:amount},
+            success: function(data) {
+            	$('#myModal').modal('hide');
+            	if(data.status=="ok"){
+            			reloadStructs();
+						$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-success">'
+					            +'La apuesta se realizo <a class="alert-link" >Exitosamente</a>!'  
+					        	+'</div>'
+					        	+'</div>');
+					        	
+    			}else if(data.status=="credit"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'No posee credito suficiente para editar el Desafio!'  
+					        	+'</div>'
+					        	+'</div>');
+				}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+		});	
+	}
+	
+
+	
+};
