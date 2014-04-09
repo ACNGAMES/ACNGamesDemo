@@ -73,7 +73,7 @@ if($amount >= 0.5 && ($amount*100)%50==0){
 					
 			  	}else{
 			  		$new_amount=$amount-$old_amount;
-				  	if($tot_gold+$tot_silver>$new_amount){
+				  	if($tot_gold+$tot_silver>=$new_amount){
 				  		if($tot_gold>=$new_amount){
 				  			$res_silver=0;
 				  			$new_gold=$tot_gold-$new_amount;

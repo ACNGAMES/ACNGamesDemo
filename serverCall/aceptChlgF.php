@@ -44,7 +44,7 @@ if(validate($id, $auth_token)){
 		$tot_silver=$fila['SILVER_COINS'];
 	    mysql_free_result($resultado);
 	  
-	  	if($tot_gold+$tot_silver>$amount){
+	  	if($tot_gold+$tot_silver>=$amount){
 	  
 	  		
 	  		if($tot_gold>=$amount){
