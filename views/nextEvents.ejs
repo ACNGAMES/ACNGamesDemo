@@ -1,7 +1,15 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div id="modal-body"></div> 
+		    </div>
+		  </div>
+		</div>
 <div class="container">
-
+		<br/>
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-2"></div>
+         	<div class="col-lg-8">
             <h1>Proximos <small>Eventos</small></h1>
           </div>
         </div><!-- /.row -->
@@ -13,7 +21,7 @@
      <% if(this.length==0){%>
         <span> No hay eventos pr&oacute;ximos</span>
      <%}%>
-     <% for(i=0;i<this.length;i++){%>
+     <% for(var i=0;i<this.length;i++){%>
 		<div class="panel panel-success">
 			<div class="panel-heading">
     			<h3 class="panel-title"><strong><%=this[i].cat_descr%></strong></h3>
@@ -31,7 +39,7 @@
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content">
-				<% for(j=0;j<this[i].subcategories.length;j++){%>
+				<% for(var j=0;j<this[i].subcategories.length;j++){%>
 				<div class="tab-pane <% if(j==0){%>active<%}%>" id="<%='c'+this[i].cat_id+'s'+this[i].subcategories[j].subcat_id%>">
 					<!-- LISTA Y EVENTOS -->
 					<div class="list-group">
@@ -57,7 +65,7 @@
 							    				title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
 							    		</font>                    			
 							    		<font color="blue">
-							    			<i style='cursor:pointer' onclick="editBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
+							    			<i data-toggle="modal" href="#" data-target="#myModal" style='cursor:pointer' onclick="editBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
 							    				title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
 							    		</font>
 							    	<%} else {%>
@@ -67,11 +75,11 @@
 							    		<%}%>
 								<%} else {%>
 								<font color="blue">
-                    			<i style='cursor:pointer' onclick="makeBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
+                    			<i data-toggle="modal" href="#" data-target="#myModal" style='cursor:pointer' onclick="makeBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
                     				title="Apostar" class="fa fa-usd fa-lg pull-right"></i>
-                    			<i style='cursor:pointer' onclick="makeChlg('<%=this[i].subcategories[j].events[k].event_id%>')" 
+                    			<i data-toggle="modal" href="#" data-target="#myModal" style='cursor:pointer' onclick="makeChlg('<%=this[i].subcategories[j].events[k].event_id%>')" 
                     				title="Desafiar un amigo" class="fa fa-trophy fa-lg pull-right"></i>
-                    			<i style='cursor:pointer' onclick="sendBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
+                    			<i data-toggle="modal" href="#" data-target="#myModal" style='cursor:pointer' onclick="sendBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
                     			title="Compartir" class="fa fa-envelope-o fa-lg pull-right"></i>
                     		</font>
 								<%}%>  
@@ -90,6 +98,4 @@
 		<%}%>
 		</div>
       </div><!-- /.row -->
-	
-      </div>
-      
+    </div>
