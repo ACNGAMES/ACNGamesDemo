@@ -540,3 +540,75 @@ function processSendBet(event_id){
 	}
 	
 };
+
+
+function sendCr(){
+	$('#error').html("");
+	$('#sendCredBot').attr("disabled","disabled");
+	$('#sendCredBot').html('<i class="fa fa-spinner fa-spin"></i> Enviando');
+	
+	var amount = $('#amount').val();
+	var opp_user = $('#enterprise').val();
+	
+	if(amount < 0.5 || (amount*100)%50!=0){
+		$('#sendCredBot').removeAttr("disabled");
+		$('#sendCredBot').html('Enviar Credito');
+		$('#error').html(
+	             '<div class="row">'
+	            +'<div class="alert alert-danger">'
+	            +'El monto de apuesta debe ser mayor que 0 y multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
+	        	+'</div>'
+	        	+'</div>');
+
+	}else if(opp_user == ""){
+		$('#sendCredBot').removeAttr("disabled");
+		$('#sendCredBot').html('Enviar Credito');
+		$('#error').html(
+	             '<div class="row">'
+	            +'<div class="alert alert-danger">'
+	            +'El Enterprise no puede ser <a class="alert-link" >Vacio</a>!'  
+	        	+'</div>'
+	        	+'</div>');
+	}else{
+		$.ajax({
+            url: 'serverCall/sendCrF.php',
+            dataType: "json",
+            data: {id:act.user_id, auth_token:act.auth_token, amount:amount, opp_user:opp_user},
+            success: function(data) {
+            	$('#sendCredBot').removeAttr("disabled");
+				$('#sendCredBot').html('Enviar Credito');
+        		if(data.status=="ok"){
+            			reloadStructs();
+						$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-success">'
+					            +'Se envio el credito de forma <a class="alert-link" >Exitosamente</a>!'  
+					        	+'</div>'
+					        	+'</div>');
+					        	
+    			}else if(data.status=="credit"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'No posee credito suficiente para realizar dicha acci&oacute;n!'  
+					        	+'</div>'
+					        	+'</div>');
+				}else if(data.status=="user"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'El enterpise ingresado es <a class="alert-link" >Incorrecto</a>!'
+					        	+'</div>'
+					        	+'</div>');
+				}else if(data.status=="exp"){
+            		expire();
+            	}else{
+            		alert('ocurrio un error');
+            	}
+            },error: function(error){
+            	console.log(error);
+            } 
+		});	
+	}
+	
+};

@@ -309,3 +309,9 @@ function reloadChallengeView(){
             } 
 	});
 };
+
+function sendCreditView(){
+	$('#pagina_central').html($.View("views/sendCredit.ejs"));	
+};
+
+
