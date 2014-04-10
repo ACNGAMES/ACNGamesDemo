@@ -1,6 +1,6 @@
 var bet_id=0;
 var safety_id=0;
-function makeBet(amount, descr, newID){
+function makeBetBJ(amount, descr, newID){
 	$.ajax({
             url: 'serverCall/makeBetBJF.php',
             dataType: "json",

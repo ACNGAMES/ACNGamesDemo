@@ -544,7 +544,7 @@ function startRound() {
   numPlayerHands = 1;
 
   // Enable/disable buttons.
-
+	
   document.forms["controls"].elements["deal"].disabled      = true;
   document.forms["controls"].elements["increase"].disabled  = true;
   document.forms["controls"].elements["decrease"].disabled  = true;
@@ -568,7 +568,7 @@ function startRound() {
   dealRound();
   	//TODO aca tengo que actualizar el credito
   	getCoins();
-  	makeBet(player[0].bet/100,'Jugo al Blackjack',false);
+  	makeBetBJ(player[0].bet/100,'Jugo al Blackjack',false);
 	reloadCrBJ();
 	//console.log('UPDATE Credit:'+credits);
 }
@@ -671,7 +671,7 @@ if(credits>(player[0].bet / 2)){
 	
     // If the dealer has blackjack, show the down card and pay player at 2 to 1.
 	getCoins();
-	makeBet(amount/100, 'Blackjack apuesta a seguro',true);
+	makeBetBJ(amount/100, 'Blackjack apuesta a seguro',true);
 	reloadCrBJ();
     if (dealer.getScore() == 21)
     {
@@ -727,7 +727,7 @@ function playerSplit() {
   credits -= player[n].bet;
   //TODO separa cartas
   getCoins();
-  makeBet(player[n].bet/100, 'Blackjack separa cartas',false);
+  makeBetBJ(player[n].bet/100, 'Blackjack separa cartas',false);
   reloadCrBJ();
   updateBetDisplay(n);
   updateBetDisplay(n + 1);
@@ -745,7 +745,7 @@ function playerDouble() {
   credits -= defaultBet;
   //TODO aca tengo que volve a apostar
   getCoins();
-  makeBet(defaultBet/100,'Dobla apuesta Blackjack',false);
+  makeBetBJ(defaultBet/100,'Dobla apuesta Blackjack',false);
   updateBetDisplay(curPlayerHand);
   player[curPlayerHand].doubled = true;
   player[curPlayerHand].top = 0;
@@ -985,6 +985,9 @@ function endRound() {
 		document.forms["controls"].elements["deal"].disabled = false;
 	}else if(credits>=defaultBet){
 	 	 document.forms["controls"].elements["deal"].disabled = false;
+	}
+	if(credits== 0){
+		document.forms["controls"].elements["deal"].disabled = true;
 	}
 	reloadCrBJ();
 	updateBetDisplay(0);
