@@ -6,9 +6,11 @@
   if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
      
-  $sentencia = "SELECT * FROM $db.CM_CATEGORY"; 
+  $sentencia = "SELECT DISTINCT(cat.CATEGORY_ID), cat.DESCRIPTION, cat.URL FROM $db.CM_CATEGORY cat 
+  				INNER JOIN $db.CM_EVENT ev ON ev.CATEGORY_ID=cat.CATEGORY_ID
+  				WHERE ev.EVENT_STATUS_FLG = 'O'"; 
   // Ejecuta la sentencia SQL 
-  
+ 
   $resultado = mysql_query($sentencia, $iden); 
   if(!$resultado) 
     die("Error: no se pudo realizar la consulta");
