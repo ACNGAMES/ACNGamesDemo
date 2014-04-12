@@ -52,7 +52,7 @@
 					    		<%=this[i].subcategories[j].events[k].name1%> <img src="<%=this[i].subcategories[j].events[k].url1%>"/> <font size="4" color="orange"><%=this[i].subcategories[j].events[k].score1%></font> -
 					    	<%}%>
 					    	<% if(this[i].subcategories[j].events[k].event_type=='N'){%>
-					    	<%=this[i].subcategories[j].events[k].event_d%>
+					    		<%=this[i].subcategories[j].events[k].event_d%>  <font size="3" color="orange"><%=this[i].subcategories[j].events[k].wname%></font> 
 					    	<%}%>
 					    	<% if(this[i].subcategories[j].events[k].event_type!='N'){%>
 					    		<font size="4" color="orange"><%=this[i].subcategories[j].events[k].score2%></font> <img src="<%=this[i].subcategories[j].events[k].url2%>"/> <%=this[i].subcategories[j].events[k].name2%>
