@@ -82,7 +82,11 @@
 	                    		<font style="cursor:pointer" color="blue">
 	                    			<i data-toggle="modal" href="#" data-target="#myModal" onclick="editBet('<%=this.event_id%>')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
 	                    		</font>
-	                    		<%}%>
+	                    		<%}else{%>
+		                    		<font color="grey">
+		                    			 <i style='cursor:pointer' title="Posee un desafio" class="fa fa-trophy fa-lg pull-right"></i>
+		                    	    </font>
+                    	 		<%}%>
                     		<%}else{%>
 	                    		<font color="blue">
 	                    			<i data-toggle="modal" href="#" data-target="#myModal" style="cursor:pointer" onclick="makeBet('<%=this.event_id%>')" title="Apostar" class="fa fa-usd fa-lg pull-right"></i>
