@@ -1,54 +1,33 @@
 <?php
 
 putenv("TZ=America/Buenos_Aires");
-$userId=$_GET["id"];
-$authToken=$_GET["auth_token"];
-include('valF.php');
+include('var.php');
 $db="u157368432_acn";
 
-if(validate($userId, $authToken)){
   if (!($conn = db_connection()))
     die("Error: No se pudo conectar".mysql_error());
 	
 	
-    $sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID, bet.OPP_USER_ID FROM $db.CM_EVENT ev  
+    $sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, 
+    			  ev.EVENT_TYPE, ope.SCORE, op.OPPONENT_NAME, op2.OPPONENT_NAME as 'WNAME', ope.SCORE
+    			  FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID 
-			   	  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
+			   	  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID
+			   	  INNER JOIN $db.CM_OPPONENT op2 ON ev.RESULT = op2.OPPONENT_ID 
 				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
 				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
-				  LEFT  JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $userId
-				  WHERE ev.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL 1 DAY)
-				  AND ev.EVENT_STATUS_FLG = 'O'
-				  AND ope.OPPONENT_ID != 0
+				  WHERE ev.OFF_DTTM BETWEEN DATE_SUB(SYSDATE(), INTERVAL 14 DAY) AND SYSDATE()
+				  AND ev.EVENT_STATUS_FLG = 'E'
+				  AND ope.OPPONENT_ID <> 0
 				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM";
 				  
+				  //TODO Pasar valor 14 a la tabla de configuración
 				  //echo $sentencia;
-				  
+	
 	$resultado = mysql_query($sentencia, $conn);
 	
-	$count = mysql_num_rows($resultado);
-	
-	if($count<20){
-		
-	$sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID, bet.OPP_USER_ID FROM $db.CM_EVENT ev  
-				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID 
-			   	  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
-				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
-				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
-				  LEFT  JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $userId
-				  WHERE ev.OFF_DTTM > SYSDATE()
-				  AND ev.EVENT_STATUS_FLG = 'O'
-				  and ope.OPPONENT_ID != 0
-				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM
-				  LIMIT 30";
-				  
-				  //TODO Pasar valor 30 a la tabla de configuración
-	$resultado = mysql_query($sentencia, $conn);
-		
-	} 
-	 
 	 //Inicializo las varialbes
-	 $array = array();
+	$array = array();
 	 $array_sub = array();
 	 $array_evt = array();
 	 $aux_cat = 0;
@@ -58,7 +37,8 @@ if(validate($userId, $authToken)){
 	 $url2 = '';
 	 $i = 0;
 	 $j = 0;
-     while ($fila = mysql_fetch_assoc($resultado)) {
+	 
+      while ($fila = mysql_fetch_assoc($resultado)) {
      			
      		$cat=$fila['CATEGORY_ID'];
      		$subcat=$fila['SUB_CATEGORY_ID'];
@@ -100,39 +80,36 @@ if(validate($userId, $authToken)){
      		if($event!=$aux_event && $subcat==$aux_sub_cat && $cat == $aux_cat){
      			//Si es del tipo N grabo el encabezao	
      			if($event_type=='N'){
-     				$bet=$fila['USER_ID'];	
-     				if($bet==null){
-     					$bet=0;
-     				}
+     				
      				$array[$i-1]['subcategories'][$j-1]['events'][]= array('event_id' => $event,
 																		'event_type' => $event_type,
 																		'event_d'=>$fila['EVENT'],
 																		'off_date'=>$fila['OFF_DTTM'],
-																		'bet' => $bet,
-																		'opp_user' => $fila['OPP_USER_ID']													
+																		'wname'=>$fila['WNAME']
 																		);
      			}else{
      				//grabo la url
-     				$url1=$fila['URL'];	
+     				$url1=$fila['URL'];
+					$name1=$fila['OPPONENT_NAME'];
+					$score1=$fila['SCORE'];
      			}
 				$aux_event=$event;
 			//Verifico si el evento es viejo	
 			}else if($event==$aux_event && $subcat==$aux_sub_cat && $cat == $aux_cat){
 				//Si es de un tipo distinto de N, grabo el encabezado del evento
 				if($event_type!='N'){
-     				$bet=$fila['USER_ID'];	
-     				if($bet==null){
-     					$bet=0;
-     				}	
+     				
      				$array[$i-1]['subcategories'][$j-1]['events'][]= array('event_id' => $event,
 																		'event_type' => $event_type,
 																		'url1' => $url1,
 																		'url2'=>$fila['URL'],
 																		'event_d'=>$fila['EVENT'],
 																		'off_date'=>$fila['OFF_DTTM'],
-																		'bet' => $bet,
-																		'opp_user' => $fila['OPP_USER_ID']				
-																		);
+																		'name1' => $name1,
+																		'name2' => $fila['OPPONENT_NAME'],
+																		'score1' => $score1,
+																		'score2' => $fila['SCORE']
+																	 );
      			}
 			}	
 				
@@ -140,16 +117,11 @@ if(validate($userId, $authToken)){
      }
 
      $data = array('status'=> 'ok',
-					'next_events'=> $array                  
+					'allResults'=> $array                  
 					);
 	 	 
-	 mysql_free_result($resultado);
 	 echo json_encode($data);
+	 mysql_free_result($resultado);
 	 mysql_close($conn); 
-	 
-}else{
-	$data = array('status'=> 'exp');
-    echo json_encode($data);
-}
-
+ 
 ?>

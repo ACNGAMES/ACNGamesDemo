@@ -74,8 +74,29 @@ function getResults(){
 	
 };
 
-function viewResults(){
+function viewAllResults(){
 	
+	$.ajax({
+            url: 'serverCall/getAllResultsF.php',
+            dataType: "json",
+            success: function(data) {
+            	
+            	if(data.status=="ok"){
+            		console.log(data);
+					$('#pagina_central').html($.View("views/allResults.ejs", data.allResults));
+				
+				}else if(data.status=="exp"){
+            		expire();
+            		
+            	}else{
+            		
+					console.log("error");
+            	}
+            },error: function(error){
+            	
+            } 
+
+	});
 };
 
 
