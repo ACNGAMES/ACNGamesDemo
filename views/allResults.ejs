@@ -47,18 +47,23 @@
                                   	
                   	<a class="list-group-item">
 					    <div class="row">
-					    	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+					    	<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
 					    	<% if(this[i].subcategories[j].events[k].event_type!='N'){%>
 					    		<%=this[i].subcategories[j].events[k].name1%> <img src="<%=this[i].subcategories[j].events[k].url1%>"/> <font size="4" color="orange"><%=this[i].subcategories[j].events[k].score1%></font> -
 					    	<%}%>
 					    	<% if(this[i].subcategories[j].events[k].event_type=='N'){%>
-					    		<%=this[i].subcategories[j].events[k].event_d%>  <font size="3" color="orange"><%=this[i].subcategories[j].events[k].wname%></font> 
+					    		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					    		<%=this[i].subcategories[j].events[k].event_d%>
+					    		</div>  
+					    		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					    		<font size="3" color="orange"><%=this[i].subcategories[j].events[k].wname%></font> 
+					    	    </div>
 					    	<%}%>
 					    	<% if(this[i].subcategories[j].events[k].event_type!='N'){%>
 					    		<font size="4" color="orange"><%=this[i].subcategories[j].events[k].score2%></font> <img src="<%=this[i].subcategories[j].events[k].url2%>"/> <%=this[i].subcategories[j].events[k].name2%>
 					    	<%}%>
 					    	</div>
-					    	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					    	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 					    		<%=this[i].subcategories[j].events[k].off_date%>
 							</div>	
 					    </div>
