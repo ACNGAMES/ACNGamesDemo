@@ -1,9 +1,9 @@
 <?php
 
 putenv("TZ=America/Buenos_Aires");
-deleteMsg();
+deleteCrMoves();
 
-function deleteMsg() {
+function deleteCrMoves() {
 	
  include('var.php');
  $db="u157368432_acn";
@@ -11,7 +11,7 @@ function deleteMsg() {
  echo(die("Error: No se pudo conectar a la base de datos " .mysql_error()));
  
  
- $sentencia = "SELECT VALUE FROM $db.CM_CONFIG WHERE CONFIG_CD = 'DELETE_MSG'";
+ $sentencia = "SELECT VALUE FROM $db.CM_CONFIG WHERE CONFIG_CD = 'DELETE_CR_MOVES'";
 			   
  $resultado = mysql_query($sentencia, $conn); 
  
@@ -19,11 +19,8 @@ function deleteMsg() {
 
     $dias = $fila["VALUE"];
     
-	$sentencia_2 = "DELETE FROM $db.CM_MSG WHERE MSG_DTTM <= DATE_SUB(SYSDATE(), INTERVAL $dias DAY)";
+	$sentencia_2 = "DELETE FROM $db.CM_CR_MOVES WHERE MOVE_DTTM <= DATE_SUB(SYSDATE(), INTERVAL $dias DAY)";
 	mysql_query($sentencia_2, $conn);
-	
-	$sentencia_3 = "DELETE FROM $db.CM_MSG_SENT WHERE MSG_DTTM <= DATE_SUB(SYSDATE(), INTERVAL $dias DAY)";
-	mysql_query($sentencia_3, $conn);
 	
  }			   
 
