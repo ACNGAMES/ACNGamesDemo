@@ -96,7 +96,12 @@ function payBets () {
 				}
 			}
 		}
+
+		mysql_free_result($returnBets);
     }
+
+   mysql_free_result($resultBets);
+   mysql_close($conn); 
 }
 
 
