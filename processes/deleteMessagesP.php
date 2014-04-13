@@ -1,9 +1,9 @@
 <?php
 
 putenv("TZ=America/Buenos_Aires");
-deleteCmBJ();
+deleteMsg();
 
-function deleteCmBJ() {
+function deleteMsg() {
 	
  include('var.php');
  $db="u157368432_acn";
