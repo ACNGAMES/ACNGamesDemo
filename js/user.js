@@ -124,7 +124,7 @@ function signUp(){
 		$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'Debe aceptar los <a class="alert-link" >Terminos y Condiciones!</a>!'  
+            		+'Debe aceptar los <a class="alert-link" >Terminos y Condiciones</a>!'  
         			+'</div>'
         			+'</div>');
 			return;
@@ -135,7 +135,12 @@ function signUp(){
 	$('#signUpBot').html('<i class="fa fa-spinner fa-spin"></i> Registrando'); 
 	if(nm==""){
 		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
-		$('#errorName').html("Campo nombre está vacio<br/>");
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El Campo nombre no puder ser <a class="alert-link" >vacio</a>!'  
+        			+'</div>'
+        			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
 		$('#signUpBot').html('Registrarse');
 		return;
@@ -143,7 +148,12 @@ function signUp(){
 	
 	if(sn==""){
 		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
-		$('#errorSurname').html("Campo apellido está vacio<br/>");
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El Campo Apellido no puder ser <a class="alert-link" >vacio</a>!'  
+        			+'</div>'
+        			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
 		$('#signUpBot').html('Registrarse');
 		return;
@@ -151,7 +161,12 @@ function signUp(){
 	
 	if(id==""){
 		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
-		$('#errorEnterprise').html("Campo enterprise está vacio<br/>");
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El Campo Enterprise no puder ser <a class="alert-link" >vacio</a>!'  
+        			+'</div>'
+        			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
 		$('#signUpBot').html('Registrarse');
 		return;
@@ -159,7 +174,12 @@ function signUp(){
 	
 	if(ps=="" || ps2==""){
 		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
-		$('#errorPs').html("Campo contraseña está vacio<br/>");
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El Campo Contraseña no puder ser <a class="alert-link" >vacio</a>!'  
+        			+'</div>'
+        			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
 		$('#signUpBot').html('Registrarse');
 		return;
@@ -167,7 +187,12 @@ function signUp(){
 	
 	if(ps!=ps2){
 		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
-		$('#errorPs').html("Las contraseñas no coincidieron<br/>");
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El campo Contraseña y su verificaci&oacute;n no <a class="alert-link" >coinciden</a>!'  
+        			+'</div>'
+        			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
 		$('#signUpBot').html('Registrarse');
 		return;
@@ -188,7 +213,7 @@ function signUp(){
              		'<div class="row">'
             		+'<div class="alert alert-success">'
             		+'Su cuenta de <a class="alert-link" >ACN Games</a> ha sido creada <a class="alert-link" >exitosamente</a>!' 
-            		+'En minutos recibira un mail con el link de activaci&oacute;n. Por favor verifique que no este en la secci&oacute;n de spam'  
+            		+'En minutos recibira un mail con el link de activaci&oacute;n. Por favor verifique que no se encuentre en la secci&oacute;n de spam'  
         			+'</div>'
         			+'</div>');
 					
@@ -210,7 +235,12 @@ function signUp(){
             },
             
             error: function(error){
-            	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+            	$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'Ocurio un error por favor intente nuevamente!'  
+        			+'</div>'
+        			+'</div>');
 				$('#signUpBot').removeAttr("disabled");
 				$('#signUpBot').html('Registrarse');
 				console.log(error);
