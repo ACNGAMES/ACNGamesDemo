@@ -315,3 +315,12 @@ function sendCreditView(){
 };
 
 
+function donationsView(){
+	$('#pagina_central').html($.View("views/donations.ejs"));
+};
+
+
+function terms(){
+	$('#terms-body').html($.View("views/terms.ejs"));
+	
+};
