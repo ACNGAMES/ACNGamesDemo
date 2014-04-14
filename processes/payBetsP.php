@@ -43,7 +43,7 @@ function payBets () {
 				if ($oppUserId>0) {
 					
 					//Se efectua el pago de la apuesta
-					payBet($amount, 2, $userId);
+					payBetGolden($amount, 2, $userId);
 					
 					//Se cierra la apuesta ganada
 					closeBetWon($userId, 'W');
@@ -60,7 +60,7 @@ function payBets () {
 				} else {
 					
 					//Se efectua el pago de la apuesta
-					payBet($amount, $odds, $userId);
+					payBetSilver($amount, $odds, $userId);
 					
 					//Se cierra la apuesta ganada
 					closeBetWon($userId, 'W');
@@ -105,7 +105,13 @@ function payBets () {
 }
 
 
-function payBet ($amount, $odds, $userId) {
+function payBetGolden ($amount, $odds, $userId) {
+	
+	$payBet = "UPDATE $db.CM_COIN SET GOLDEN_COINS = (GOLDEN_COINS + ($amount * $odds)) WHERE USER_ID='$userId'";
+	mysql_query($payBet, $conn);
+}
+
+function payBetSilver ($amount, $odds, $userId) {
 	
 	$payBet = "UPDATE $db.CM_COIN SET SILVER_COINS = (SILVER_COINS + ($amount * $odds)) WHERE USER_ID='$userId'";
 	mysql_query($payBet, $conn);

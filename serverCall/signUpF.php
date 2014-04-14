@@ -41,7 +41,7 @@ function insertAccount(){
 		}
 		
 		if ($var==true) {
-	 	   $sentencia = "INSERT INTO $db.CM_USER (USER_ID, ENTERPRISE_ID, NAME, SURNAME, PASSWORD, CRE_DTTM, AUTH_TOKEN) VALUES (FLOOR( 1 + ( RAND( ) * 9999999999)), '$enterprise', '$name', '$surname', '$hash',NOW(), ' ');";
+	 	   $sentencia = "INSERT INTO $db.CM_USER (ENTERPRISE_ID, NAME, SURNAME, PASSWORD, CRE_DTTM, AUTH_TOKEN) VALUES ('$enterprise', '$name', '$surname', '$hash',NOW(), ' ');";
 		      	
 		   $resultado = mysql_query($sentencia, $iden);
 		   if (!$resultado) 

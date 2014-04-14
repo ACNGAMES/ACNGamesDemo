@@ -9,44 +9,30 @@ $db="u157368432_acn";
 if(validate($userId, $authToken)){
   if (!($conn = db_connection()))
     die("Error: No se pudo conectar".mysql_error());
+  
+     $query = "SELECT VALUE FROM $db.CM_CONFIG WHERE CONFIG_CD = 'DAYS_NEXTEVENTS'";
+	   
+     $resultadoValue = mysql_query($query, $conn);
 	
-	
-    $sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID, bet.OPP_USER_ID FROM $db.CM_EVENT ev  
+	 $fila = mysql_fetch_assoc($resultadoValue);
+
+     $days = $fila["VALUE"];
+    
+	 $sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID, bet.OPP_USER_ID FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID 
 			   	  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
 				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
 				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
 				  LEFT  JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $userId
-				  WHERE ev.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL 1 DAY)
+				  WHERE ev.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL $days DAY)
 				  AND ev.EVENT_STATUS_FLG = 'O'
 				  AND ope.OPPONENT_ID != 0
-				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM";
-				  
-				  //echo $sentencia;
-				  
+				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM, ev.EVENT_ID, ope.LOCAL ASC";
+
 	$resultado = mysql_query($sentencia, $conn);
 	
 	$count = mysql_num_rows($resultado);
 	
-	if($count<20){
-		
-	$sentencia = "SELECT ev.EVENT_ID, op.URL, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE, bet.USER_ID, bet.OPP_USER_ID FROM $db.CM_EVENT ev  
-				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID 
-			   	  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
-				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
-				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
-				  LEFT  JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $userId
-				  WHERE ev.OFF_DTTM > SYSDATE()
-				  AND ev.EVENT_STATUS_FLG = 'O'
-				  and ope.OPPONENT_ID != 0
-				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM
-				  LIMIT 30";
-				  
-				  //TODO Pasar valor 30 a la tabla de configuración
-	$resultado = mysql_query($sentencia, $conn);
-		
-	} 
-	 
 	 //Inicializo las varialbes
 	 $array = array();
 	 $array_sub = array();
@@ -143,6 +129,7 @@ if(validate($userId, $authToken)){
 					'next_events'=> $array                  
 					);
 	 	 
+	 mysql_free_result($resultadoValue);
 	 mysql_free_result($resultado);
 	 echo json_encode($data);
 	 mysql_close($conn); 

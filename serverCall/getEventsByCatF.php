@@ -22,7 +22,7 @@ include 'var.php';
 				AND evt.EVENT_STATUS_FLG = 'O'
 				and ope.OPPONENT_ID != 0
 				AND evt.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL 7 DAY)
-				ORDER BY evt.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID"; 
+				ORDER BY evt.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ope.LOCAL ASC"; 
   // Ejecuta la sentencia SQL
   //echo $sentencia; 
   
