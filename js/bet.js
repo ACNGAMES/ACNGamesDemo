@@ -141,7 +141,15 @@ function cancelBet(event_id){
             	if(data.status=="ok"){
             			reloadStructs();
     					betsView(1);
-    						
+    					
+    			}else if(data.status=="date"){
+					    $('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'El evento ya ha conmenzado!'  
+					        	+'</div>'
+					        	+'</div>');
+					        	
             	}else if(data.status=="exp"){
             		expire();
             	}else{
@@ -285,6 +293,14 @@ function processChallenge(event_id, user_opp){
 					        	+'</div>'
 					        	+'</div>');
 					        	
+				}else if(data.status=="date"){
+					    $('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'El evento ya ha conmenzado!'  
+					        	+'</div>'
+					        	+'</div>');
+					        	
             	}else if(data.status=="exp"){
             		expire();
             	}else{
@@ -338,6 +354,14 @@ function processBetEvent(event_id){
 					            +'No posee credito suficiente para aceptar el Desafio!'  
 					        	+'</div>'
 					        	+'</div>');
+				}else if(data.status=="date"){
+					    $('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'El evento ya ha conmenzado!'  
+					        	+'</div>'
+					        	+'</div>');
+					        	
 				}else if(data.status=="exp"){
             		expire();
             	}else{
@@ -383,6 +407,14 @@ function processEditBet(event_id){
 					             '<div class="row">'
 					            +'<div class="alert alert-success">'
 					            +'La apuesta se realizo <a class="alert-link" >Exitosamente</a>!'  
+					        	+'</div>'
+					        	+'</div>');
+					        	
+				}else if(data.status=="date"){
+					    $('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'El evento ya ha conmenzado!'  
 					        	+'</div>'
 					        	+'</div>');
 					        	
@@ -456,7 +488,14 @@ function processChlgBet(event_id){
 					            +'El Desafio se realizo <a class="alert-link" >Exitosamente</a>!'  
 					        	+'</div>'
 					        	+'</div>');
-					        	
+				}else if(data.status=="date"){
+					    $('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'El evento ya ha conmenzado!'  
+					        	+'</div>'
+					        	+'</div>');
+					        		 
     			}else if(data.status=="credit"){		
     					$('#error').html(
 					             '<div class="row">'

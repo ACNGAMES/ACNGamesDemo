@@ -113,50 +113,86 @@ function signUp(){
 	var id=$('#enterprise').val();
 	var ps=hash($('#ps').val());
 	var ps2=hash($('#ps2').val());
-	
+	var tc=$('#termsFlg:checked').val();
 	$('#errorName').html("");
 	$('#errorSurname').html("");
 	$('#errorEnterprise').html("");
 	$('#errorPs').html("");
 	$('#msg').html("");
 	
+	if(tc!="true"){
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'Debe aceptar los <a class="alert-link" >Terminos y Condiciones</a>!'  
+        			+'</div>'
+        			+'</div>');
+			return;
+	}
+	
+	
 	$('#signUpBot').attr("disabled","disabled");
 	$('#signUpBot').html('<i class="fa fa-spinner fa-spin"></i> Registrando'); 
 	if(nm==""){
-		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
-		$('#errorName').html("Campo nombre está vacio<br/>");
+		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El Campo nombre no puder ser <a class="alert-link" >vacio</a>!'  
+        			+'</div>'
+        			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
 		$('#signUpBot').html('Registrarse');
 		return;
 	}
 	
 	if(sn==""){
-		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
-		$('#errorSurname').html("Campo apellido está vacio<br/>");
+		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El Campo Apellido no puder ser <a class="alert-link" >vacio</a>!'  
+        			+'</div>'
+        			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
 		$('#signUpBot').html('Registrarse');
 		return;
 	}
 	
 	if(id==""){
-		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
-		$('#errorEnterprise').html("Campo enterprise está vacio<br/>");
+		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El Campo Enterprise no puder ser <a class="alert-link" >vacio</a>!'  
+        			+'</div>'
+        			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
 		$('#signUpBot').html('Registrarse');
 		return;
 	}
 	
 	if(ps=="" || ps2==""){
-		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
-		$('#errorPs').html("Campo contraseña está vacio<br/>");
+		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El Campo Contraseña no puder ser <a class="alert-link" >vacio</a>!'  
+        			+'</div>'
+        			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
 		$('#signUpBot').html('Registrarse');
 		return;
 	}
 	
 	if(ps!=ps2){
-		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
-		$('#errorPs').html("Las contraseñas no coincidieron<br/>");
+		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
+		$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'El campo Contraseña y su verificaci&oacute;n no <a class="alert-link" >coinciden</a>!'  
+        			+'</div>'
+        			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
 		$('#signUpBot').html('Registrarse');
 		return;
@@ -169,7 +205,7 @@ function signUp(){
             data: {name:nm, surname:sn, enterprise:id, ps:ps},
             success: function(data) {
             	if (data.status == "ok") {
-            		$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4");
+            		$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6");
             		//$('#signUpForm').attr("class","form-group input-group has-ok");
                 	$('#signUpBot').removeAttr("disabled");
 					$('#signUpBot').html('Registrarse');
@@ -177,14 +213,14 @@ function signUp(){
              		'<div class="row">'
             		+'<div class="alert alert-success">'
             		+'Su cuenta de <a class="alert-link" >ACN Games</a> ha sido creada <a class="alert-link" >exitosamente</a>!' 
-            		+'En minutos recibira un mail con el link de activaci&oacute;n. Por favor verifique que no este en la secci&oacute;n de spam'  
+            		+'En minutos recibira un mail con el link de activaci&oacute;n. Por favor verifique que no se encuentre en la secci&oacute;n de spam'  
         			+'</div>'
         			+'</div>');
 					
                 } 
                 //if (data.status == "error");
                 else {
-                	$('#signUpForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
+                	$('#signUpForm').attr("class","col-sm-6 col-md-6 col-lg-6 has-error");
                 	//$('#signUpForm').attr("class","form-group input-group has-error");
 					$('#signUpBot').removeAttr("disabled");
 					$('#signUpBot').html('Registrarse');
@@ -199,7 +235,12 @@ function signUp(){
             },
             
             error: function(error){
-            	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+            	$('#msg').html(
+             		'<div class="row">'
+            		+'<div class="alert alert-danger">'
+            		+'Ocurio un error por favor intente nuevamente!'  
+        			+'</div>'
+        			+'</div>');
 				$('#signUpBot').removeAttr("disabled");
 				$('#signUpBot').html('Registrarse');
 				console.log(error);

@@ -52,6 +52,20 @@ echo '<!DOCTYPE html>
     </nav>
     <br /><br /><br /><br />
  <div class="container">
+    <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Terminos y Condiciones</h4>
+      </div>
+      <div class="modal-body" id="terms-body">
+        
+    </div>
+  </div>
+</div>
+</div>	
+ 
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -157,7 +171,19 @@ if(count($_GET)!=2 || !isset($_GET[1]) || !isset($_GET[2])){
         <button id="signInBot" class="btn btn-lg btn-primary btn-block" onclick="signIn()">Iniciar Sesi&oacute;n</button>      
       </div>
         </div> <!-- /container -->
-  
+  		<div class="container">
+
+        <hr>
+
+        <footer>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <p>Copyright &copy; Company 2014 - <a data-toggle="modal" href="#" data-target="#termsModal" onclick="terms()">Reglas, Terminos y Condiciones</a></p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
         </body>
     </html>';
   
