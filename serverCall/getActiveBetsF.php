@@ -9,13 +9,14 @@ if(validate($id, $auth_token)){
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  
-  $sentencia = "SELECT ev.EVENT_ID, op.URL, opb.OPPONENT_NAME  'opb.OPPONENT_NAME', NAME, SURNAME, opb.URL 'opb.URL', ope.ODDS, bet.OPP_USER_ID, cat.CATEGORY_ID, bet.BET_DTTM, bet.AMOUNT ,cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE FROM $db.CM_EVENT ev  
+  $sentencia = "SELECT ev.EVENT_ID, op.URL, opb.OPPONENT_NAME  'opb.OPPONENT_NAME', NAME, SURNAME, opb.URL 'opb.URL', ope2.ODDS, bet.OPP_USER_ID, cat.CATEGORY_ID, bet.BET_DTTM, bet.AMOUNT ,cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID
 				  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
 				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
 				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
 				  INNER JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $id 
 				  INNER JOIN $db.CM_OPPONENT opb ON bet.SELECTION=opb.OPPONENT_ID
+				  INNER JOIN $db.CM_OPPONENT_EVENT ope2 ON bet.SELECTION=ope2.OPPONENT_ID
 				  LEFT JOIN $db.CM_USER usr ON bet.OPP_USER_ID=usr.USER_ID
 				  WHERE ev.EVENT_STATUS_FLG = 'O'
 				  and ope.OPPONENT_ID != 0

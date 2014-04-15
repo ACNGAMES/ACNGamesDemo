@@ -53,10 +53,10 @@ if(validate($id, $auth_token)){
 			mysql_free_result($resultado);
 		
 	  		//Busco el monto de la apuesta en la tabla de cm_challenge
-	  		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM <= NOW()"; 
+	  		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM > NOW()"; 
 	  		// Ejecuta la sentencia SQL 
 			$resultado=mysql_query($sentencia, $iden);
-			if(mysql_num_rows($resultado)== 0){
+			if(mysql_num_rows($resultado) > 0){
 				$fila = mysql_fetch_assoc($resultado);
 				$descr=$fila['EVENT'];
 				mysql_free_result($resultado);

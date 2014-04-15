@@ -25,11 +25,11 @@ if(validate($id, $auth_token)){
   	if(mysql_num_rows($resultado)== 0){
   		mysql_free_result($resultado);
   		//Busco el monto de la apuesta en la tabla de cm_challenge
-  		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM <= NOW()"; 
+  		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM > NOW()"; 
   		// Ejecuta la sentencia SQL 
 		$resultado=mysql_query($sentencia, $iden);
 		//Significa que el evento ya arranco
-		if(mysql_num_rows($resultado)== 0){
+		if(mysql_num_rows($resultado) > 0){
 			$fila = mysql_fetch_assoc($resultado);
 			$descr=$fila['EVENT'];
 			mysql_free_result($resultado);
@@ -62,7 +62,7 @@ if(validate($id, $auth_token)){
 			  mysql_query($sentencia, $iden); 
 			  //agrego un regitro en la tabla de movimientos
 			  if($res_silver==0){
-			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se realizo la Apuesta $descr',$amount,$new_gold,$new_silver)";
+			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se realizo la apuesta $descr',$amount,$new_gold,$new_silver)";
 					
 			  }else{
 			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se realizo la Apuesta  $descr',$tot_gold,$res_silver,$new_gold,$new_silver)";

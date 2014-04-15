@@ -29,10 +29,10 @@ if($amount >= 0.5 && ($amount*100)%50==0){
 				$old_amount=$fila['AMOUNT'];
 				mysql_free_result($resultado);
 				
-		  		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM <= NOW()"; 
+		  		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM > NOW()"; 
 		  		// Ejecuta la sentencia SQL 
 				$resultado=mysql_query($sentencia, $iden);
-				if(mysql_num_rows($resultado)== 0){
+				if(mysql_num_rows($resultado) > 0){
 					$fila = mysql_fetch_assoc($resultado);
 					$descr=$fila['EVENT'];
 					mysql_free_result($resultado);

@@ -16,10 +16,10 @@ if(validate($id, $auth_token)){
   
   $sentencia = "SELECT * FROM $db.CM_BET 
   				INNER JOIN $db.CM_EVENT ON CM_EVENT.EVENT_ID=CM_BET.EVENT_ID
-  				WHERE CM_BET.USER_ID=$id and CM_BET.EVENT_ID=$event_id and CM_EVENT.OFF_DTTM <= NOW()"; 
+  				WHERE CM_BET.USER_ID=$id and CM_BET.EVENT_ID=$event_id and CM_EVENT.OFF_DTTM > NOW()"; 
   // Ejecuta la sentencia SQL 
   $resultado=mysql_query($sentencia, $iden);
-  if(mysql_num_rows($resultado)== 0){
+  if(mysql_num_rows($resultado) > 0){
 	  $fila = mysql_fetch_assoc($resultado);
 	  $event_d=$fila['EVENT'];
 	  $amount=$fila['AMOUNT'];

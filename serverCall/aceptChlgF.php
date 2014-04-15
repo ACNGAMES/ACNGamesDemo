@@ -26,10 +26,10 @@ if(validate($id, $auth_token)){
   		//Busco el monto de la apuesta en la tabla de cm_challenge
   		$sentencia = "SELECT * FROM $db.CM_CHALLENGE chg 
   					  INNER JOIN $db.CM_EVENT ev ON ev.EVENT_ID=chg.EVENT_ID
-  					  WHERE user_id=$user_opp and ev.event_id=$event_id AND user_opp_id=$id and ev.OFF_DTTM <= NOW()"; 
+  					  WHERE user_id=$user_opp and ev.event_id=$event_id AND user_opp_id=$id and ev.OFF_DTTM > NOW()"; 
   		// Ejecuta la sentencia SQL 
 		$resultado=mysql_query($sentencia, $iden);
-		if(mysql_num_rows($resultado)== 0){
+		if(mysql_num_rows($resultado) > 0){
 			$fila = mysql_fetch_assoc($resultado);
 			$amount=$fila['AMOUNT'];
 			$descr=$fila['EVENT'];
