@@ -15,7 +15,7 @@ $db="u157368432_acn";
 				  WHERE ev.OFF_DTTM > SYSDATE()
 				  AND ev.EVENT_STATUS_FLG = 'O'
 				  AND ope.OPPONENT_ID <> 0
-				  ORDER BY ev.OFF_DTTM, ope.LOCAL ASC";
+				  ORDER BY ev.OFF_DTTM, ev.EVENT_ID, ope.LOCAL";
 				  
 	$resultado = mysql_query($sentencia, $conn);
 

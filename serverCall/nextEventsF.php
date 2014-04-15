@@ -27,7 +27,7 @@ if(validate($userId, $authToken)){
 				  WHERE ev.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL $days DAY)
 				  AND ev.EVENT_STATUS_FLG = 'O'
 				  AND ope.OPPONENT_ID != 0
-				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM, ev.EVENT_ID, ope.LOCAL ASC";
+				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM, ev.EVENT_ID, ope.LOCAL";
 
 	$resultado = mysql_query($sentencia, $conn);
 	

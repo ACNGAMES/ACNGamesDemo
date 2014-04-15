@@ -36,6 +36,9 @@ function giftCredit() {
 	$sentencia_4 = "UPDATE $db.CM_COIN SET GOLDEN_COINS = (GOLDEN_COINS + $giftCredit) WHERE USER_ID = $userId";
 	mysql_query($sentencia_4, $conn);
 	
+	$sentencia_5 = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'CD', 'ACN Games te envio $giftCredit cr. de regalo', NOW())";
+	mysql_query($sentencia_5, $conn);
+	
  }			   
 
  mysql_free_result($sillCredit);

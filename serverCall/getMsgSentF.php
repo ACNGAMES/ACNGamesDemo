@@ -10,7 +10,7 @@ if(validate($id, $auth_token)){
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  
-  $sentencia = "SELECT * FROM $db.CM_MSG_SENT LEFT JOIN $db.CM_USER ON to_id=user_id where from_id='$id'"; 
+  $sentencia = "SELECT * FROM $db.CM_MSG_SENT LEFT JOIN $db.CM_USER ON to_id=user_id where from_id='$id' order by MSG_DTTM DESC"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
   if(!$resultado) 

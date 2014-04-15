@@ -20,7 +20,7 @@ if(validate($id, $auth_token)){
 				  LEFT JOIN $db.CM_USER usr ON bet.OPP_USER_ID=usr.USER_ID
 				  WHERE ev.EVENT_STATUS_FLG = 'E' AND ev.OFF_DTTM >= DATE_SUB(SYSDATE(), INTERVAL 15 DAY)
 				  and ope.OPPONENT_ID != 0
-				  ORDER BY ev.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID"; 
+				  ORDER BY ev.OFF_DTTM DESC, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.EVENT_ID, ope.LOCAL"; 
   // Ejecuta la sentencia SQL 
   $resultado = mysql_query($sentencia, $iden); 
   

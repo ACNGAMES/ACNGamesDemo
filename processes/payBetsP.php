@@ -98,6 +98,10 @@ function payBets () {
 		}
 
 		mysql_free_result($returnBets);
+		
+		//Finalizado los pagos de apuestas, se cierra el evento
+		endEvent($eventId);
+		
     }
 
    mysql_free_result($resultBets);
@@ -146,6 +150,12 @@ function insertAlarm ($userId, $type, $alarmValue, $getUserName) {
 	
 	$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'DP', '$alarmValue $getUserName', NOW())";    
 	mysql_query($insertAlarm, $conn);
+}
+
+function endEvent ($eventId) {
+		
+	$endEvent = "UPDATE $db.CM_EVENT SET EVENT_STATUS_FLG = 'E' WHERE EVENT_ID = $eventId";
+	mysql_query($endEvent, $conn);
 }
 
 

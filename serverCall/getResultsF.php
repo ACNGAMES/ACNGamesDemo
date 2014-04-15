@@ -17,7 +17,7 @@ $db="u157368432_acn";
 				  WHERE ev.OFF_DTTM BETWEEN DATE_SUB(SYSDATE(), INTERVAL 14 DAY) AND SYSDATE()
 				  AND ev.EVENT_STATUS_FLG = 'E'
 				  AND ope.OPPONENT_ID <> 0
-				  ORDER BY ev.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID";
+				  ORDER BY ev.OFF_DTTM DESC, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.EVENT_ID, ope.LOCAL";
 				  
 				  //TODO Pasar valor 14 a la tabla de configuración
 	
