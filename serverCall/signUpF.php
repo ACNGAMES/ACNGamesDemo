@@ -32,7 +32,7 @@ function insertAccount(){
 		$resultado = mysql_query($checkAccount, $iden); 
 		
 		if (!$resultado) 
-		   die("Error: no se pudo realizar la consulta");
+		   die("Error: no se pudo realizar la consulta 1");
 		  
 		if (mysql_num_rows($resultado)==0) {
 		   $var=true;
@@ -45,7 +45,7 @@ function insertAccount(){
 		      	
 		   $resultado = mysql_query($sentencia, $iden);
 		   if (!$resultado) 
-		     die("Error: no se pudo realizar la consulta");
+		     die("Error: no se pudo realizar la consulta 2");
 		  
 		   	 $sentencia = "SELECT USER_ID FROM $db.CM_USER where enterprise_id='$enterprise'";
 			 $resultado = mysql_query($sentencia, $iden);
@@ -80,7 +80,7 @@ function insertAccount(){
 function sendMail($userId, $name, $enterprise, $activeToken){
 
 $para = "$enterprise@accenture.com";
-$titulo = 'Activación de cuenta';
+$titulo = 'Activacion de cuenta';
 $mensaje = "<fieldset><lengend>";
 $mensaje .= "Hola <var>$name</var>, te damos la bienvenida a <strong size='10''>ACN Games</strong>.<br/><br/>";
 $mensaje .= "Para activar tu cuenta por favor hacer click en el siguiente link: <br/>";
