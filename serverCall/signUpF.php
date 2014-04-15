@@ -86,7 +86,7 @@ $mensaje .= "Hola <var>$name</var>, te damos la bienvenida a <strong size='10''>
 $mensaje .= "Para activar tu cuenta por favor hacer click en el siguiente link: <br/>";
 $mensaje .= "<a href='http://acngames.com.ar/act.php?1=$userId&2=$activeToken'>http://acngames.com.ar/act.php?1=$userId&2=$activeToken<a>";
 $mensaje .= "<br/><br/>";
-$mensaje .= "Si tienes problemas para acceder oprimiendo en el link, copia y pegalo en el buscador de tu navegador web.";
+$mensaje .= "Si tienes problemas para acceder oprimiendo en el link, copia y pegalo en el buscador de tu navegador web. ";
 $mensaje .= "Record&aacute; que ten&eacute;s 48Hs para activar tu cuenta, pasado ese tiempo tu cuenta ser&aacute; eliminada.";
 $mensaje .= "<br/>";
 $mensaje .= "Si tu no has solicitado la creaci&oacute;n de una cuenta, desestim&aacute; este mail!<br/>";
