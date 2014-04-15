@@ -45,7 +45,7 @@ if(validate($id, $auth_token)){
 		  // Ejecuta la sentencia SQL 
 		  mysql_query($sentencia, $iden); 
 		  //agrego un regitro en la tabla de movimientos
-		  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'R','Se Retiro la Apuesta $event_d',$amount,$new_gold,$new_silver)";
+		  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'R','Se Retiro la apuesta $event_d',$amount,$new_gold,$new_silver)";
 		  // Ejecuta la sentencia SQL 
 		  mysql_query($sentencia, $iden);
 		  //Borro el regitro de la tabla de pagos

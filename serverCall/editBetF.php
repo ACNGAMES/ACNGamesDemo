@@ -57,7 +57,7 @@ if($amount >= 0.5 && ($amount*100)%50==0){
 						  // Ejecuta la sentencia SQL 
 						  mysql_query($sentencia, $iden); 
 						  //agrego un regitro en la tabla de movimientos
-						  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'G','Se modifico la Apuesta $descr',$new_amount,$new_gold,$tot_silver)";
+						  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'G','Se modifico la apuesta $descr',$new_amount,$new_gold,$tot_silver)";
 								
 						  // Ejecuta la sentencia SQL 
 						  mysql_query($sentencia, $iden);
