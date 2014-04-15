@@ -22,14 +22,14 @@ include 'var.php';
 				AND evt.EVENT_STATUS_FLG = 'O'
 				and ope.OPPONENT_ID != 0
 				AND evt.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL 7 DAY)
-				ORDER BY scat.SUB_CATEGORY_ID, evt.OFF_DTTM, ev.EVENT_ID, ope.LOCAL"; 
+				ORDER BY scat.SUB_CATEGORY_ID, evt.OFF_DTTM, evt.EVENT_ID, ope.LOCAL"; 
   // Ejecuta la sentencia SQL
   //echo $sentencia; 
   
   $resultado = mysql_query($sentencia, $iden); 
   
-  if(!$resultado) 
-    die("Error: no se pudo realizar la consulta");
+  //if(!$resultado) 
+    //die("Error: no se pudo realizar la consulta");
   $array=array();
   //Inicializo las varialbes
 
