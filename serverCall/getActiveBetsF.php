@@ -42,7 +42,8 @@ if(validate($id, $auth_token)){
      		$cat=$fila['CATEGORY_ID'];
      		$subcat=$fila['SUB_CATEGORY_ID'];
      		$event=$fila['EVENT_ID'];	
-			$event_type=$fila['EVENT_TYPE'];     							
+			$event_type=$fila['EVENT_TYPE'];
+			     							
      		
      		//Grabo el header de la categoria
      		if($cat != $aux_cat){
