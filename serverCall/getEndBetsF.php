@@ -86,7 +86,7 @@ if(validate($id, $auth_token)){
                             'selection_url'=>$fila['opb.URL'],
                             'bet_dttm'=>$fila['BET_DTTM'],
                             'url1'=>$fila['URL'],
-                            'win_status'=>$fila['WIN_FLG']=='Y'?'Gano':'Perdio',
+                            'win_status'=>$fila['WIN_FLG']=='W'?'Gano':'Perdio',
                             'amount'=>$fila['AMOUNT']													
     						);
                     $i++;

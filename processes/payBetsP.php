@@ -12,7 +12,7 @@ function payBets () {
 	if (!($conn = db_connection()))
 		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error()));
 	
-	$returnEvents = "SELECT EVENT_ID, EVENT, RESULT, ODDS FROM $db.CM_EVENT eva
+	$returnEvents = "SELECT EVENT_ID, EVENT, RESULT, ODDS FROM $db.CM_EVENT ev
 				 	INNER JOIN $db.CM_OPPONENT_EVENT oe ON ev.RESULT = oe.OPPONENT_ID
 				 	WHERE EVENT_STATUS_FLG = 'C'";
 
@@ -46,7 +46,7 @@ function payBets () {
 					payBetGolden($amount, 2, $userId);
 					
 					//Se cierra la apuesta ganada
-					closeBetWon($userId, 'W');
+					closeBet($userId, 'W');
 					
 					//Se recupera el valor de configuración del tipo de apuesta DG
 					$alarmValue = getAlarmDesc('DG');
@@ -63,7 +63,7 @@ function payBets () {
 					payBetSilver($amount, $odds, $userId);
 					
 					//Se cierra la apuesta ganada
-					closeBetWon($userId, 'W');
+					closeBet($userId, 'W');
 					
 					//Se recupera el valor de configuración del tipo de apuesta AP
 					$alarmValue = getAlarmDesc('AP');
