@@ -62,10 +62,10 @@ if(validate($id, $auth_token)){
 			  mysql_query($sentencia, $iden); 
 			  //agrego un regitro en la tabla de movimientos
 			  if($res_silver==0){
-			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se realizo la apuesta $descr',$amount,$new_gold,$new_silver)";
+			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se realizo la predicci&oacute;n $descr',$amount,$new_gold,$new_silver)";
 					
 			  }else{
-			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se realizo la Apuesta  $descr',$tot_gold,$res_silver,$new_gold,$new_silver)";
+			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se realizo la predicci&oacute;n  $descr',$tot_gold,$res_silver,$new_gold,$new_silver)";
 				
 			  }
 			  // Ejecuta la sentencia SQL 
