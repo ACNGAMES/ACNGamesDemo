@@ -25,7 +25,7 @@ if(validate($id, $auth_token)){
   	if(mysql_num_rows($resultado)== 0){
   		mysql_free_result($resultado);
   		//Busco el monto de la apuesta en la tabla de cm_challenge
-  		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM > NOW()"; 
+  		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM > '".NOW()."'"; 
   		// Ejecuta la sentencia SQL 
 		$resultado=mysql_query($sentencia, $iden);
 		//Significa que el evento ya arranco
@@ -62,10 +62,10 @@ if(validate($id, $auth_token)){
 			  mysql_query($sentencia, $iden); 
 			  //agrego un regitro en la tabla de movimientos
 			  if($res_silver==0){
-			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se realizo la apuesta $descr',$amount,$new_gold,$new_silver)";
+			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','B','Se realizo la apuesta $descr',$amount,$new_gold,$new_silver)";
 					
 			  }else{
-			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se realizo la Apuesta  $descr',$tot_gold,$res_silver,$new_gold,$new_silver)";
+			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','B','Se realizo la Apuesta  $descr',$tot_gold,$res_silver,$new_gold,$new_silver)";
 				
 			  }
 			  // Ejecuta la sentencia SQL 
@@ -73,7 +73,7 @@ if(validate($id, $auth_token)){
 			
 			  
 	  	  //GENERO LAS APUESTA
-		  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$id',NOW(),'0','$selection','$amount')"; 
+		  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$id','".NOW()."','0','$selection','$amount')"; 
 	  	  mysql_query($sentencia, $iden);
 			
 			

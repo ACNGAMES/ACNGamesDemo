@@ -61,24 +61,24 @@ if(validate($id, $auth_token)){
 			  mysql_query($sentencia, $iden); 
 			  //agrego un regitro en la tabla de movimientos
 			  if($res_silver==0){
-			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se Transfirio Credito a $opp_name',$amount,$new_gold,$new_silver)";
+			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','B','Se Transfirio Credito a $opp_name',$amount,$new_gold,$new_silver)";
 					
 			  }else{
-			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se Transfirio Credito a $opp_name',$tot_gold,$res_silver,$new_gold,$new_silver)";
+			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','B','Se Transfirio Credito a $opp_name',$tot_gold,$res_silver,$new_gold,$new_silver)";
 				
 			  }
 			  // Ejecuta la sentencia SQL 
 			  mysql_query($sentencia, $iden);
 			
 			  //Aca creo el cr move del opp_user
-			  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$opp_user_id',NOW(),'G','Se Recibio Credito de $name',$amount,$new_gold,$new_silver)";
+			  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$opp_user_id','".NOW()."','G','Se Recibio Credito de $name',$amount,$new_gold,$new_silver)";
 			  mysql_query($sentencia, $iden);
 			  //Aca aho el update de las monedas del opp_user
 	  	  	  $sentencia = "UPDATE $db.CM_COIN SET GOLDEN_COINS=GOLDEN_COINS+$amount where user_id='$opp_user_id'";
 	  	  	  mysql_query($sentencia, $iden);
 	  	  	  
 		 //GENERO LA ALERTA
-		  $sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$opp_user_id','DO','$name le envio $amount Cr.',NOW())"; 
+		  $sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$opp_user_id','DO','$name le envio $amount Cr.','".NOW()."')"; 
 	  	  mysql_query($sentencia, $iden);
 			
 			$data = array('status'=> 'ok');

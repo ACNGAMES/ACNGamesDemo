@@ -29,10 +29,10 @@ if(validate($id, $auth_token)){
 	  // Ejecuta la sentencia SQL 
 	mysql_query($sentencia, $iden); 
 	//agrego un regitro en la tabla de movimientos
-	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'P','$descr',$price,$golden_coins,$silver_coins)";
+	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','P','$descr',$price,$golden_coins,$silver_coins)";
 	// Ejecuta la sentencia SQL 
 	mysql_query($sentencia, $iden);
-	$sentencia = "INSERT INTO $db.CM_STORE_USER VALUES ('$prod_id','$id',NOW(),'N')";
+	$sentencia = "INSERT INTO $db.CM_STORE_USER VALUES ('$prod_id','$id','".NOW()."','N')";
 	// Ejecuta la sentencia SQL 
 	mysql_query($sentencia, $iden);
 	

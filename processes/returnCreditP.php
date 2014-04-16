@@ -52,7 +52,7 @@ function getAlarmDesc ($alarmCd) {
 
 function insertAlarm ($userId, $type, $amount, $alarmValue) {
 	
-	$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'DR', '$amount $alarmValue', NOW())";    
+	$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'DR', '$amount $alarmValue', '".NOW()."')";    
 	mysql_query($insertAlarm, $conn);
 }
 

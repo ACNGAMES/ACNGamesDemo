@@ -26,7 +26,7 @@ if(validate($id, $auth_token)){
   		//Busco el monto de la apuesta en la tabla de cm_challenge
   		$sentencia = "SELECT * FROM $db.CM_CHALLENGE chg 
   					  INNER JOIN $db.CM_EVENT ev ON ev.EVENT_ID=chg.EVENT_ID
-  					  WHERE user_id=$user_opp and ev.event_id=$event_id AND user_opp_id=$id and ev.OFF_DTTM > NOW()"; 
+  					  WHERE user_id=$user_opp and ev.event_id=$event_id AND user_opp_id=$id and ev.OFF_DTTM > '".NOW()."'"; 
   		// Ejecuta la sentencia SQL 
 		$resultado=mysql_query($sentencia, $iden);
 		if(mysql_num_rows($resultado) > 0){
@@ -64,10 +64,10 @@ if(validate($id, $auth_token)){
 			  mysql_query($sentencia, $iden); 
 			  //agrego un regitro en la tabla de movimientos
 			  if($res_silver==0){
-			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se Acepto el Desafio $descr',$amount,$new_gold,$new_silver)";
+			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','B','Se Acepto el Desafio $descr',$amount,$new_gold,$new_silver)";
 					
 			  }else{
-			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se Acepto el Desafio  $descr',$tot_gold,$res_silver,$new_gold,$new_silver)";
+			  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','B','Se Acepto el Desafio  $descr',$tot_gold,$res_silver,$new_gold,$new_silver)";
 				
 			  }
 			  // Ejecuta la sentencia SQL 
@@ -81,15 +81,15 @@ if(validate($id, $auth_token)){
 			$name=$fila['NAME'];
 			mysql_free_result($resultado);
 			  
-			$sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$user_opp','DE','$name Acepto el desafio $descr.',NOW())"; 
+			$sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$user_opp','DE','$name Acepto el desafio $descr.','".NOW()."')"; 
 	  		mysql_query($sentencia, $iden);
 			
 			//GENERO LAS APUESTAS CRUZADAS
-		  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$user_opp',NOW(),'$id','$opponent','$amount')"; 
+		  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$user_opp','".NOW()."','$id','$opponent','$amount')"; 
 	  	  
 	  	  mysql_query($sentencia, $iden);
 	  	  //GENERO LAS APUESTAS CRUZADAS
-		  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$id',NOW(),'$user_opp','$selection','$amount')"; 
+		  $sentencia = "INSERT INTO $db.CM_BET(EVENT_ID, USER_ID, BET_DTTM, OPP_USER_ID, SELECTION, AMOUNT) VALUES ('$event_id','$id','".NOW()."','$user_opp','$selection','$amount')"; 
 	  	  mysql_query($sentencia, $iden);
 			
 			//Borro el chalenge   

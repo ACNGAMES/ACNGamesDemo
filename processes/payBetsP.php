@@ -1,20 +1,20 @@
 <?php
 
 putenv("TZ=America/Buenos_Aires");
-include('var.php');	
-$db="u157368432_acn";
-global $conn;
-
+	
 payBets();
 
 function payBets () {
-	
+	include('var.php');	
+	global $conn;
+	$db="u157368432_acn";
 	if (!($conn = db_connection()))
 		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error()));
 	
-	$returnEvents = "SELECT EVENT_ID, EVENT, RESULT, ODDS FROM $db.CM_EVENT ev
+	$returnEvents = "SELECT ev.EVENT_ID, EVENT, RESULT, ODDS FROM $db.CM_EVENT ev
 				 	INNER JOIN $db.CM_OPPONENT_EVENT oe ON ev.RESULT = oe.OPPONENT_ID
-				 	WHERE EVENT_STATUS_FLG = 'C'";
+				 	WHERE EVENT_STATUS_FLG = 'C'
+				 	GROUP BY ev.EVENT_ID";				
 
 	$resultEvents = mysql_query($returnEvents, $conn); 
  
@@ -43,34 +43,34 @@ function payBets () {
 				if ($oppUserId>0) {
 					
 					//Se efectua el pago de la apuesta
-					payBetGolden($amount, 2, $userId);
+					payBetGolden($conn, $db, $amount, 2, $userId);
 					
 					//Se cierra la apuesta ganada
-					closeBet($userId, 'W');
+					closeBet($conn, $db, $userId, 'W');
 					
 					//Se recupera el valor de configuración del tipo de apuesta DG
-					$alarmValue = getAlarmDesc('DG');
+					$alarmValue = getAlarmDesc($conn, $db, 'DG');
 					
 					//Se recupera el nombre del oponente del desafio
-					$getUserName = getUserName($oppUserId);
+					$getUserName = getUserName($conn, $db, $oppUserId);
 					
 					//Se inserta la alarma de desafio ganado
-					insertAlarm($userId, 'DG', $alarmValue, $getUserName);
+					insertAlarm($conn, $db, $userId, 'DG', $alarmValue, $getUserName);
 						
 				} else {
 					
 					//Se efectua el pago de la apuesta
-					payBetSilver($amount, $odds, $userId);
+					payBetSilver($conn, $db, $amount, $odds, $userId);
 					
 					//Se cierra la apuesta ganada
-					closeBet($userId, 'W');
+					closeBet($conn, $db, $userId, 'W');
 					
 					//Se recupera el valor de configuración del tipo de apuesta AP
-					$alarmValue = getAlarmDesc('AP');
+					$alarmValue = getAlarmDesc($conn, $db, 'AP');
 					
 					$credits = $amount * $odds;
 					//Se inserta la alarma de la apuesta ganado
-					insertAlarm ($userId, 'AP', $credits, $alarmValue);					
+					insertAlarm ($conn, $db, $userId, 'AP', $credits, $alarmValue);					
 				}
 				
 				
@@ -79,50 +79,50 @@ function payBets () {
 				if ($oppUserId>0) {
 					
 					//Se cierra la apuesta perdida
-					closeBet($userId, 'L');
+					closeBet($conn, $db, $userId, 'L');
 					
 					//Se recupera el valor de configuración del tipo de apuesta DP
-					$alarmValue = getAlarmDesc('DP');
+					$alarmValue = getAlarmDesc($conn, $db, 'DP');
 					
 					//Se recupera el nombre del oponente del desafio
-					$getUserName = getUserName($oppUserId);
+					$getUserName = getUserName($conn, $db, $oppUserId);
 					
 					//Se inserta la alarma de desafio perdido
-					insertAlarm ($userId, 'DP', $alarmValue, $getUserName);
+					insertAlarm ($conn, $db, $userId, 'DP', $alarmValue, $getUserName);
 									
 				} else {
 					//Se cierra la apuesta perdida
-					closeBet($userId, 'L');
+					closeBet($conn, $db, $userId, 'L');
 				}
 			}
 		}
 
-		mysql_free_result($returnBets);
+		mysql_free_result($resultBets);
 		
 		//Finalizado los pagos de apuestas, se cierra el evento
-		endEvent($eventId);
+		endEvent($conn, $db, $eventId);
 		
     }
 
-   mysql_free_result($resultBets);
+   mysql_free_result($resultEvents);
    mysql_close($conn); 
 }
 
 
-function payBetGolden ($amount, $odds, $userId) {
+function payBetGolden ($conn, $db, $amount, $odds, $userId) {
 	
 	$payBet = "UPDATE $db.CM_COIN SET GOLDEN_COINS = (GOLDEN_COINS + ($amount * $odds)) WHERE USER_ID='$userId'";
 	mysql_query($payBet, $conn);
 }
 
-function payBetSilver ($amount, $odds, $userId) {
+function payBetSilver ($conn, $db, $amount, $odds, $userId) {
 	
 	$payBet = "UPDATE $db.CM_COIN SET SILVER_COINS = (SILVER_COINS + ($amount * $odds)) WHERE USER_ID='$userId'";
 	mysql_query($payBet, $conn);
 }
 
 
-function getAlarmDesc ($alarmCd) {
+function getAlarmDesc ($conn, $db, $alarmCd) {
 		
 	$getAlarm = "SELECT VALUE FROM $db.CM_ALARM_TYPE WHERE ALARM_CD = '$alarmCd'";
 	$value = mysql_query($getAlarm, $conn);
@@ -130,7 +130,7 @@ function getAlarmDesc ($alarmCd) {
 	return $value;
 }
 
-function getUserName () {
+function getUserName ($conn, $db, $oppUserId) {
 	
 	$userName = "SELECT NAME FROM $db.CM_USER WHERE USER_ID = $oppUserId";
 	$name = mysql_query($userName, $conn);
@@ -139,20 +139,20 @@ function getUserName () {
 					
 }
 
-function closeBet ($userId, $winFlag) {
+function closeBet ($conn, $db, $userId, $winFlag) {
 	
 	$closeBet = "UPDATE $db.CM_BET SET BET_STATUS_FLG = 'C', WIN_FLG = '$winFlag' WHERE USER_ID = $userId";
 	mysql_query($closeBet, $conn);
 	
 }
 
-function insertAlarm ($userId, $type, $alarmValue, $getUserName) {
+function insertAlarm ($conn, $db, $userId, $type, $alarmValue, $getUserName) {
 	
-	$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'DP', '$alarmValue $getUserName', NOW())";    
+	$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'DP', '$alarmValue $getUserName', '".NOW()."')";    
 	mysql_query($insertAlarm, $conn);
 }
 
-function endEvent ($eventId) {
+function endEvent ($conn, $db, $eventId) {
 		
 	$endEvent = "UPDATE $db.CM_EVENT SET EVENT_STATUS_FLG = 'E' WHERE EVENT_ID = $eventId";
 	mysql_query($endEvent, $conn);

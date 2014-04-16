@@ -15,7 +15,7 @@ if(validate($id, $auth_token)){
   $db="u157368432_acn";  
   
   $newID= mt_rand();
-  $sentencia = "INSERT INTO $db.CM_BJ VALUES ('$id','$newID',NOW())"; 
+  $sentencia = "INSERT INTO $db.CM_BJ VALUES ('$id','$newID','".NOW()."')"; 
   // Ejecuta la sentencia SQL 
   mysql_query($sentencia, $iden);
   
@@ -46,10 +46,10 @@ if(validate($id, $auth_token)){
 	  mysql_query($sentencia, $iden); 
 	  //agrego un regitro en la tabla de movimientos
 	  if($res_silver==0){
-	  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','$descr',$amount,$new_gold,$new_silver)";
+	  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','B','$descr',$amount,$new_gold,$new_silver)";
 			
 	  }else{
-	  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','$descr',$tot_gold,$res_silver,$new_gold,$new_silver)";
+	  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','B','$descr',$tot_gold,$res_silver,$new_gold,$new_silver)";
 		
 	  }
 	  // Ejecuta la sentencia SQL 

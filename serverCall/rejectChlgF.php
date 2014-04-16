@@ -32,7 +32,7 @@ if(validate($id, $auth_token)){
   
   
   
-  $sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$chlg_user_id','DE','$name Rechazo el desafio $event_d.',NOW())"; 
+  $sentencia = "INSERT INTO $db.CM_ALERT(USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ('$chlg_user_id','DE','$name Rechazo el desafio $event_d.','".NOW()."')"; 
   mysql_query($sentencia, $iden); 
   
   
@@ -50,7 +50,7 @@ if(validate($id, $auth_token)){
 	  // Ejecuta la sentencia SQL 
 	  mysql_query($sentencia, $iden); 
 	  //agrego un regitro en la tabla de movimientos
-	  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$chlg_user_id',NOW(),'R','Se Rechazo el Desafio $event_d',$amount,$new_gold,$new_silver)";
+	  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$chlg_user_id','".NOW()."','R','Se Rechazo el Desafio $event_d',$amount,$new_gold,$new_silver)";
 	  // Ejecuta la sentencia SQL 
 	  mysql_query($sentencia, $iden);
 	  //Borro el regitro de la tabla de pagos

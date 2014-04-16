@@ -34,7 +34,7 @@ if(validate($id, $auth_token)){
 		$tot_silver=$fila['SILVER_COINS'];
 		mysql_free_result($resultado);
 	  //agrego un regitro en la tabla de movimientos
-	  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR ,SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'G','$descr',$amount,$tot_gold,$tot_silver)"; 
+	  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR ,SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','G','$descr',$amount,$tot_gold,$tot_silver)"; 
 	  // Ejecuta la sentencia SQL 
 	  mysql_query($sentencia, $iden);
 	  //Borro el regitro de la tabla de pagos

@@ -13,11 +13,11 @@ if(validate($id, $auth_token)){
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";  
-  $sentencia = "INSERT INTO $db.CM_MSG(TO_ID, FROM_ID, SUBJECT, BODY, MSG_DTTM) VALUES('$to','$id','$subject','$body', NOW())"; 
+  $sentencia = "INSERT INTO $db.CM_MSG(TO_ID, FROM_ID, SUBJECT, BODY, MSG_DTTM) VALUES('$to','$id','$subject','$body', '".NOW()."')"; 
   // Ejecuta la sentencia SQL 
   mysql_query($sentencia, $iden);
   //Inserto el mensaje en la tabla de enviado 
-  $sentencia = "INSERT INTO $db.CM_MSG_SENT(TO_ID, FROM_ID, SUBJECT, BODY, MSG_DTTM) VALUES('$to','$id','$subject','$body', NOW())"; 
+  $sentencia = "INSERT INTO $db.CM_MSG_SENT(TO_ID, FROM_ID, SUBJECT, BODY, MSG_DTTM) VALUES('$to','$id','$subject','$body', '".NOW()."')"; 
   // Ejecuta la sentencia SQL 
   mysql_query($sentencia, $iden);
   $data = array('status'=> 'ok');
