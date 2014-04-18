@@ -9,8 +9,9 @@
 	<div class="jumbotron">
 		<br />
 		<ul class="nav nav-pills nav-stacked">
-	  		<li class="active"><a href="#" onclick="betsView()">Apuestas Vigentes</a></li>
-	 		<li><a href="#" onclick="endBetsView()">Apuestas Finalizadas</a></li>
+	  		<li class="active"><a href="#" onclick="betsView()">Predicciones Pendientes</a></li>
+			<li><a href="#" onclick="progressBetsView()">Predicciones en Curso</a></li>
+	 		<li><a href="#" onclick="endBetsView()">Predicciones Finalizadas</a></li>
 	 		<li><a href="#" onclick="challengeView()"><span id="pending" class="badge pull-right"></span>Desafios Pendientes</a></li>
 	 		<li><a href="#" onclick="chlgPendingView()"><span id="requests" class="badge pull-right"></span>Solicitud de Desafios</a></li>
 	 	</ul>
@@ -18,7 +19,7 @@
 </div>
 <div class="col-sm-8 col-md-6 col-lg-6">
   <div class="jumbotron">
-    <h2>Apuestas Vigentes</h2><br/>
+    <h2>Predicciones Pendientes</h2><br/>
     <div id="error"></div>
     <div class="container2">
 			
@@ -50,7 +51,7 @@
 						<div class="row"><strong>Categoria:</strong></div>
 						<div class="row"><strong>Subcategoria:</strong></div>
 			        	<div class="row"><strong>Elecci&oacute;n:</strong></div>
-			        	<div class="row"><strong>Apuesta:</strong></div>
+			        	<div class="row"><strong>Valor:</strong></div>
 			        	<div class="row"><strong>Paga:</strong></div>
 			        	<%if(this[i].name != null && this[i].surname!=null){%>
 			        		<div class="row"><strong>Desafio:</strong></div>
@@ -78,10 +79,10 @@
 			        	<%if(this[i].name==null && this[i].surname==null){%>
 			        	<div class="row">
 			        		<font style="cursor:pointer" color="red">
-                    			<i onclick="cancelBet('<%=this[i].event_id%>')" title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
+                    			<i onclick="cancelBet('<%=this[i].event_id%>')" title="Retirar Prediccion" class="fa fa-times fa-lg pull-right"></i>
                     		</font>                    			
                     		<font style="cursor:pointer" color="blue">
-                    			<i data-toggle="modal" href="#" data-target="#myModal" onclick="editBet('<%=this[i].event_id%>')" title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
+                    			<i data-toggle="modal" href="#" data-target="#myModal" onclick="editBet('<%=this[i].event_id%>')" title="Modificar Prediccion" class="fa fa-pencil fa-lg pull-right"></i>
                     		</font>
                     	</div>
                     	<%}else{%>

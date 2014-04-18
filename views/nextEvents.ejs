@@ -62,11 +62,11 @@
 									<%if(this[i].subcategories[j].events[k].opp_user==0) {%>
 										<font color="red">
 							    			<i style='cursor:pointer' onclick="cancelBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
-							    				title="Retirar Apuesta" class="fa fa-times fa-lg pull-right"></i>
+							    				title="Retirar Prediccion" class="fa fa-times fa-lg pull-right"></i>
 							    		</font>                    			
 							    		<font color="blue">
 							    			<i data-toggle="modal" href="#" data-target="#myModal" style='cursor:pointer' onclick="editBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
-							    				title="Modificar Apuesta" class="fa fa-pencil fa-lg pull-right"></i>
+							    				title="Modificar Prediccion" class="fa fa-pencil fa-lg pull-right"></i>
 							    		</font>
 							    	<%} else {%>
 							    		<font color="grey">
@@ -76,7 +76,7 @@
 								<%} else {%>
 								<font color="blue">
                     			<i data-toggle="modal" href="#" data-target="#myModal" style='cursor:pointer' onclick="makeBet('<%=this[i].subcategories[j].events[k].event_id%>')" 
-                    				title="Apostar" class="fa fa-usd fa-lg pull-right"></i>
+                    				title="Predecir" class="fa fa-usd fa-lg pull-right"></i>
                     			<i data-toggle="modal" href="#" data-target="#myModal" style='cursor:pointer' onclick="makeChlg('<%=this[i].subcategories[j].events[k].event_id%>')" 
                     				title="Desafiar un amigo" class="fa fa-trophy fa-lg pull-right"></i>
                     			<i data-toggle="modal" href="#" data-target="#myModal" style='cursor:pointer' onclick="sendBet('<%=this[i].subcategories[j].events[k].event_id%>')" 

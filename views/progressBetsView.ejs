@@ -1,18 +1,25 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="modal-body"></div> 
+    </div>
+  </div>
+</div>
 <div class="col-sm-2 col-md-3 col-lg-3">
 	<div class="jumbotron">
 		<br />
 		<ul class="nav nav-pills nav-stacked">
 	  		<li><a href="#" onclick="betsView()">Predicciones Pendientes</a></li>
-	 		<li><a href="#" onclick="progressBetsView()">Predicciones en Curso</a></li>
+			<li class="active"><a href="#" onclick="progressBetsView()">Predicciones en Curso</a></li>
 	 		<li><a href="#" onclick="endBetsView()">Predicciones Finalizadas</a></li>
-	 		<li class="active"><a href="#" onclick="challengeView()"><span id="pending" class="badge pull-right"></span>Desafios Pendientes</a></li>
+	 		<li><a href="#" onclick="challengeView()"><span id="pending" class="badge pull-right"></span>Desafios Pendientes</a></li>
 	 		<li><a href="#" onclick="chlgPendingView()"><span id="requests" class="badge pull-right"></span>Solicitud de Desafios</a></li>
 	 	</ul>
 	</div>
 </div>
 <div class="col-sm-8 col-md-6 col-lg-6">
   <div class="jumbotron">
-    <h2>Desafios Pendientes</h2><br/>
+    <h2>Predicciones en Curso</h2><br/>
     <div id="error"></div>
     <div class="container2">
 			
@@ -45,8 +52,9 @@
 						<div class="row"><strong>Subcategoria:</strong></div>
 			        	<div class="row"><strong>Elecci&oacute;n:</strong></div>
 			        	<div class="row"><strong>Valor:</strong></div>
+			        	<div class="row"><strong>Paga:</strong></div>
 			        	<%if(this[i].name != null && this[i].surname!=null){%>
-			        		<div class="row"><strong>Desafio contra:</strong></div>
+			        		<div class="row"><strong>Desafio:</strong></div>
 			        	<%}%>
 			        	<div class="row"><strong>Fecha:</strong></div>
 			        	
@@ -57,18 +65,17 @@
 			        	<div class="row"><%=this[i].selection%></div>
 			        	<div class="row"><%=this[i].amount%> cr.</div>
 			        	<%if(this[i].name!=null && this[i].surname!=null){%>
+			        		<div class="row">x 2.00</div>
+			        	<%}else{%>
+			        		<div class="row">x <%=this[i].odds%></div>
+			        	<%}%>
+			        	<%if(this[i].name!=null && this[i].surname!=null){%>
 			        		<div class="row"><%=this[i].name%> <%=this[i].surname%></div>
 			        	<%}%>
 			        	<div class="row"><%=this[i].bet_dttm%></div>
 			        </div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-			        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-			        	<div class="row">
-			        		<font style="cursor:pointer" color="red">
-                    			<i id="cancelde<%=this[i].event_id%>u<%=this[i].id%>" onclick="cancelChlg('<%=this[i].event_id%>', '<%=this[i].id%>')" title="Cancelar Desafio" class="fa fa-times fa-lg pull-right"></i>
-                    		</font>                    			
-                    	</div>
-			        </div>
+			        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
 			      </div>
 			    </div>
 			  </div>
