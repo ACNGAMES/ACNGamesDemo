@@ -44,7 +44,7 @@ function returnCredit () {
 
 function getAlarmDesc ($alarmCd) {
 		
-	$getAlarm = "SELECT VALUE FROM $db.CM_ALARM_TYPE WHERE ALARM_CD = '$alarmCd'";
+	$getAlarm = "SELECT VALUE FROM $db.CM_ALERT_TYPE WHERE ALERT_CD = '$alarmCd'";
 	$value = mysql_query($getAlarm, $conn);
 	mysql_free_result($value);
 	return $value;
