@@ -14,8 +14,12 @@
                 		<li><a onclick="navBet('<%=this[i].id%>')" href="#"><span class="label label-info">Desafio Ganado</span> <%=this[i].descr%></a></li>
                 	<%}else if(this[i].alert_cd=='DP'){%>
                 		<li><a onclick="navBet('<%=this[i].id%>')" href="#"><span class="label label-info">Desafio Perdido</span> <%=this[i].descr%></a></li>
+                	<%}else if(this[i].alert_cd=='DR'){%>
+                		<li><a onclick="navBet('<%=this[i].id%>')" href="#"><span class="label label-info">Desafio Rechazado</span> <%=this[i].descr%></a></li>
                 	<%}else if(this[i].alert_cd=='DO'){%>
                         <li><a onclick="navCred('<%=this[i].id%>')" href="#"><span class="label label-warning">Donaciones</span> <%=this[i].descr%></a></li>
+                    <%}else if(this[i].alert_cd=='CD'){%>
+                        <li><a onclick="navCred('<%=this[i].id%>')" href="#"><span class="label label-warning">Credito Donado</span> <%=this[i].descr%></a></li>
                 	<%}else if(this[i].alert_cd=='AG'){%>
                 		<li><a onclick="navRead('<%=this[i].id%>')" href="#"><span class="label label-danger">ACNGames</span> <%=this[i].descr%></a></li>
                 	<%}%>
