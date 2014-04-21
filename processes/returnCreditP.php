@@ -12,8 +12,8 @@ function returnCredit () {
 	if (!($conn = db_connection()))
 		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error()));
 	
-	$returnChallenges = "SELECT cha.USER_ID, cha.EVENT_ID, cha.AMOUNT FROM CM_CHALLENGE cha 
-				         INNER JOIN CM_EVENT ev ON cha.EVENT_ID = ev.EVENT_ID 
+	$returnChallenges = "SELECT cha.USER_ID, cha.EVENT_ID, cha.AMOUNT FROM $db.CM_CHALLENGE cha 
+				         INNER JOIN $db.CM_EVENT ev ON cha.EVENT_ID = ev.EVENT_ID 
 				         WHERE ev.EVENT_STATUS_FLG IN ('C','E','R')";
 
 	$resultChallenge = mysql_query($returnChallenges, $conn); 
