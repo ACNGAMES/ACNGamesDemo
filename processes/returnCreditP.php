@@ -2,13 +2,13 @@
 
 putenv("TZ=America/Buenos_Aires");
 include('var.php');	
-$db="u157368432_acn";
 global $conn;
 
 returnCredit();
 
 function returnCredit () {
 	
+	$db="u157368432_acn";
 	if (!($conn = db_connection()))
 		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error()));
 	
@@ -24,17 +24,19 @@ function returnCredit () {
 		$amount = $fila['AMOUNT'];
 		$eventId = $fila['EVENT_ID'];
 		
-		$returnCoins = "UPDATE $db.CM_COIN SET GOLDEN_COINS = (GOLDEN_COINS + $amount) WHERE USER_ID = $userId'";
+		$returnCoins = "UPDATE $db.CM_COIN SET GOLDEN_COINS = (GOLDEN_COINS + $amount) WHERE USER_ID = $userId";
 		mysql_query($returnCoins, $conn);
 		
 		$deleteChallenge = "DELETE FROM $db.CM_CHALLENGE WHERE USER_ID = $userId AND EVENT_ID = $eventId";
 		mysql_query($deleteChallenge, $conn);
 		
 		//Se recupera el valor de configuración del tipo de apuesta DR
-		$alarmValue = getAlarmDesc('DR');
+		$alarmValue = getAlarmDesc($conn,'DR');
+		
+		$eventDesc = getEventDesc($conn, $eventId);
 		
 		//Se inserta la alarma de desafio perdido
-		insertAlarm ($userId, 'DR', $amount, $alarmValue);
+		insertAlarm ($conn, $userId, 'DR', $amount, $alarmValue, $eventDesc);
  
      }	
 
@@ -42,17 +44,29 @@ function returnCredit () {
    mysql_close($conn); 
 }
 
-function getAlarmDesc ($alarmCd) {
-		
+function getAlarmDesc ($conn, $alarmCd) {
+	$db="u157368432_acn";
 	$getAlarm = "SELECT VALUE FROM $db.CM_ALERT_TYPE WHERE ALERT_CD = '$alarmCd'";
 	$value = mysql_query($getAlarm, $conn);
-	mysql_free_result($value);
-	return $value;
+	$alarm = mysql_fetch_assoc($value);
+	$alarmVal = $alarm['VALUE'];
+	return $alarmVal;
 }
 
-function insertAlarm ($userId, $type, $amount, $alarmValue) {
-	
-	$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'DR', '$amount $alarmValue', '".NOW()."')";    
+function getEventDesc ($conn, $eventId) {
+		
+	$db="u157368432_acn";
+	$getAlarm = "SELECT EVENT FROM $db.CM_EVENT WHERE EVENT_ID = $eventId";
+	$value = mysql_query($getAlarm, $conn);
+	$EventVal = mysql_fetch_assoc($value);
+	$EventValue = $EventVal['EVENT'];
+	return $EventValue;
+}
+
+function insertAlarm ($conn, $userId, $type, $amount, $alarmValue, $eventDesc) {
+	$db="u157368432_acn";
+	$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, '$type', '$amount $alarmValue | $eventDesc', '".NOW()."')";
+	//echo $insertAlarm;
 	mysql_query($insertAlarm, $conn);
 }
 
