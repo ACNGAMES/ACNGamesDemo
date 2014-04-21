@@ -27,7 +27,7 @@ function payBets () {
 		
 		$returnBets = "SELECT USER_ID, OPP_USER_ID, SELECTION, AMOUNT FROM $db.CM_BET
 					   WHERE EVENT_ID = $eventId
-					   AND BET_STATUS_FLG = 'P'";
+					   AND BET_STATUS_FLG = 'O'";
 					   
        	$resultBets = mysql_query($returnBets, $conn); 
  
