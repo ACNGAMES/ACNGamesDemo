@@ -16,7 +16,7 @@ if(validate($id, $auth_token)){
   
   $sentencia = "SELECT * FROM $db.CM_BET 
   				INNER JOIN $db.CM_EVENT ON CM_EVENT.EVENT_ID=CM_BET.EVENT_ID
-  				WHERE CM_BET.USER_ID=$id and CM_BET.EVENT_ID=$event_id and CM_EVENT.OFF_DTTM > NOW()"; 
+  				WHERE CM_BET.USER_ID=$id and CM_BET.EVENT_ID=$event_id and CM_EVENT.OFF_DTTM > '".NOW()."'"; 
   // Ejecuta la sentencia SQL 
   $resultado=mysql_query($sentencia, $iden);
   if(mysql_num_rows($resultado) > 0){
@@ -45,7 +45,7 @@ if(validate($id, $auth_token)){
 		  // Ejecuta la sentencia SQL 
 		  mysql_query($sentencia, $iden); 
 		  //agrego un regitro en la tabla de movimientos
-		  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'R','Se Retiro la predicci&oacute;n $event_d',$amount,$new_gold,$new_silver)";
+		  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','R','Se Retiro la predicci&oacute;n $event_d',$amount,$new_gold,$new_silver)";
 		  // Ejecuta la sentencia SQL 
 		  mysql_query($sentencia, $iden);
 		  //Borro el regitro de la tabla de pagos

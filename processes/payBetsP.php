@@ -57,6 +57,8 @@ function payBets () {
 					//Se inserta la alarma de desafio ganado
 					$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'DG', '$alarmValue $event a $getUserName', '".NOW()."')";    
 					mysql_query($insertAlarm, $conn);
+					
+					//$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$userId','".NOW()."','G','Se acert&oacute; la predicci&oacute;n $event',$tot_gold,$res_silver,$new_gold,$new_silver)";
 											
 				} else {
 					

@@ -29,7 +29,7 @@ if($amount >= 0.5 && ($amount*100)%50==0){
 				$old_amount=$fila['AMOUNT'];
 				mysql_free_result($resultado);
 
-		  		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM > NOW()"; 
+		  		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM > '".NOW()."'"; 
 		  		// Ejecuta la sentencia SQL 
 				$resultado=mysql_query($sentencia, $iden);
 				if(mysql_num_rows($resultado) > 0){
@@ -57,7 +57,7 @@ if($amount >= 0.5 && ($amount*100)%50==0){
 						  // Ejecuta la sentencia SQL 
 						  mysql_query($sentencia, $iden); 
 						  //agrego un regitro en la tabla de movimientos
-						  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'G','Se modifico la predicci&oacute;n $descr',$new_amount,$new_gold,$tot_silver)";
+						  $sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','G','Se modifico la predicci&oacute;n $descr',$new_amount,$new_gold,$tot_silver)";
 
 						  // Ejecuta la sentencia SQL 
 						  mysql_query($sentencia, $iden);
@@ -91,9 +91,9 @@ if($amount >= 0.5 && ($amount*100)%50==0){
 						  mysql_query($sentencia, $iden); 
 						  //agrego un regitro en la tabla de movimientos
 						  if($res_silver==0){
-						  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se modifico la Apuesta $descr',$new_amount,$new_gold,$new_silver)";
+						  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','B','Se modifico la Apuesta $descr',$new_amount,$new_gold,$new_silver)";
 						  }else{
-						  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id',NOW(),'B','Se modifico la Apuesta  $descr',$tot_gold,$res_silver,$new_gold,$new_silver)";
+						  	$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$id','".NOW()."','B','Se modifico la Apuesta  $descr',$tot_gold,$res_silver,$new_gold,$new_silver)";
 						  }
 						  // Ejecuta la sentencia SQL 
 						  mysql_query($sentencia, $iden);
