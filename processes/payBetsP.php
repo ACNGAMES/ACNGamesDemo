@@ -68,7 +68,7 @@ function payBets () {
 					
 					$coinsWon = $amount * 2;
 					
-					$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$userId','".NOW()."','G','Se acert&oacute; el desaf&iacute;o $event', $coinsWon, $tot_gold, $tot_silver)";
+					$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, SILVER, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$userId','".NOW()."','G','Se acert&oacute; el desaf&iacute;o $event','0.00', $coinsWon, $tot_gold, $tot_silver)";
 					mysql_query($sentencia, $conn);
 											
 				} else {
@@ -95,7 +95,7 @@ function payBets () {
 					$tot_silver=$fila['SILVER_COINS'];
 				    mysql_free_result($resultadoCoins);
 					
-					$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$userId','".NOW()."','G','Se acert&oacute; la predicci&oacute;n $event', $credits , $tot_gold, $tot_silver)";
+					$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, SILVER, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$userId','".NOW()."','G','Se acert&oacute; la predicci&oacute;n $event', $credits,'0.00' , $tot_gold, $tot_silver)";
 					mysql_query($sentencia, $conn);				
 				}
 				

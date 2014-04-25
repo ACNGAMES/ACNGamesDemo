@@ -23,7 +23,14 @@ function giftCredit() {
  if(!$giftCredit) 
     die("Error: no se pudo realizar la consulta de GIFT_CREDIT");
  
- $sentencia_3 = "SELECT USER_ID FROM $db.CM_COIN WHERE SILVER_COINS+GOLDEN_COINS <= $sillCredit";
+ $fila2 = mysql_fetch_assoc($giftCredit);
+ $giftCreditValue = $fila2["VALUE"];
+ 
+ $fila = mysql_fetch_assoc($sillCredit);
+ $sillCreditValue = $fila["VALUE"];
+ 
+ 
+ $sentencia_3 = "SELECT USER_ID FROM $db.CM_COIN WHERE SILVER_COINS+GOLDEN_COINS <= $sillCreditValue";
 			   
  $userIds = mysql_query($sentencia_3, $conn);
  if(!$userIds) 
@@ -33,11 +40,22 @@ function giftCredit() {
 
     $userId = $fila["USER_ID"];
     
-	$sentencia_4 = "UPDATE $db.CM_COIN SET GOLDEN_COINS = (GOLDEN_COINS + $giftCredit) WHERE USER_ID = $userId";
+	$sentencia_4 = "UPDATE $db.CM_COIN SET GOLDEN_COINS = (GOLDEN_COINS + $giftCreditValue) WHERE USER_ID = $userId";
 	mysql_query($sentencia_4, $conn);
 	
-	$sentencia_5 = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'CD', 'ACN Games te envio $giftCredit cr. de regalo', '".NOW()."')";
+	$sentencia_5 = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'CD', 'ACN Games te envio $giftCreditValue cr. de regalo', '".NOW()."')";
 	mysql_query($sentencia_5, $conn);
+	
+	$coins = "SELECT * FROM $db.CM_COIN WHERE user_id = '$userId'"; 
+  	// Ejecuta la sentencia SQL 
+	$resultadoCoins = mysql_query($coins, $conn);
+	$fila3 = mysql_fetch_assoc($resultadoCoins);
+	$tot_gold=$fila3['GOLDEN_COINS'];
+	$tot_silver=$fila3['SILVER_COINS'];
+    mysql_free_result($resultadoCoins);
+	
+	$sentencia_6 = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, SILVER, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$userId','".NOW()."','G','ACN Games te envio $giftCreditValue cr. de regalo','0.00', $giftCreditValue, $tot_gold, $tot_silver)";
+	mysql_query($sentencia_6, $conn);
 	
  }			   
 
