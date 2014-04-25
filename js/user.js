@@ -16,7 +16,7 @@ function signIn(){
 		$('#error').html(
              '<div class="row">'
             +'<div class="alert alert-danger">'
-            +'El usuario y/o contraseña no pueden ser <a class="alert-link" >vacios</a>!'  
+            +'El usuario y/o contraseña no pueden ser <a class="alert-link" >vac&iacute;os</a>!'  
         	+'</div>'
         	+'</div>');
 		
@@ -60,7 +60,7 @@ function signIn(){
                 	$('#error').html(
                 	'<div class="row">'
             				+'<div class="alert alert-danger">'
-              					+'La cuenta no esta  <a class="alert-link" >Activada</a>! haga <a href="#" onclick="sendActMail()">click aqui </a>para solicitar el mail de acitcaci&oacute;n'  
+              					+'La cuenta no est&aacute;  <a class="alert-link" >Activada</a>! haga <a href="#" onclick="sendActMail()">click aqui </a>para solicitar el mail de activaci&oacute;n'  
         		    		+'</div>'
         		    +'</div>');
                 	
@@ -70,7 +70,7 @@ function signIn(){
                 	$('#error').html(
              			'<div class="row">'
           				  +'<div class="alert alert-danger">'
-            			  +'El usuario y/o contraseña son <a class="alert-link" >invalidos</a>!'  
+            			  +'El usuario y/o contraseña son <a class="alert-link" >inv&aacute;lidos</a>!'  
         				  +'</div>'
         				  +'</div>');
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
@@ -81,13 +81,13 @@ function signIn(){
                 	$('#error').html(
              			'<div class="row">'
           				  +'<div class="alert alert-danger">'
-            			  +'Ocurio un error por favor intente nuevamente'  
+            			  +'Ocurri&oacute; un error. Por favor intente nuevamente'  
         				  +'</div>'
         				  +'</div>');
                 }
             },
             error: function(error){
-				$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+				$('#error').html("Ocurri&oacute; un error. Por favor intente nuevamente<br/>");
 				console.log(error);            	
             }
         });
@@ -124,7 +124,7 @@ function signUp(){
 		$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'Debe aceptar los <a class="alert-link" >Terminos y Condiciones</a>!'  
+            		+'Debe aceptar los <a class="alert-link" >T&eacute;rminos y Condiciones de Uso</a>!'  
         			+'</div>'
         			+'</div>');
 			return;
@@ -138,7 +138,7 @@ function signUp(){
 		$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'El Campo nombre no puder ser <a class="alert-link" >vacio</a>!'  
+            		+'El Campo nombre no puede ser <a class="alert-link" >vac&iacute;o</a>!'  
         			+'</div>'
         			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
@@ -151,7 +151,7 @@ function signUp(){
 		$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'El Campo Apellido no puder ser <a class="alert-link" >vacio</a>!'  
+            		+'El Campo Apellido no puede ser <a class="alert-link" >vac&iacute;o</a>!'  
         			+'</div>'
         			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
@@ -164,7 +164,7 @@ function signUp(){
 		$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'El Campo Enterprise no puder ser <a class="alert-link" >vacio</a>!'  
+            		+'El Campo Enterprise no puede ser <a class="alert-link" >vac&iacute;o</a>!'  
         			+'</div>'
         			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
@@ -177,7 +177,7 @@ function signUp(){
 		$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'El Campo Contraseña no puder ser <a class="alert-link" >vacio</a>!'  
+            		+'El Campo Contraseña no puede ser <a class="alert-link" >vac&iacute;o</a>!'  
         			+'</div>'
         			+'</div>');
 		$('#signUpBot').removeAttr("disabled");
@@ -213,7 +213,7 @@ function signUp(){
              		'<div class="row">'
             		+'<div class="alert alert-success">'
             		+'Su cuenta de <a class="alert-link" >ACN Games</a> ha sido creada <a class="alert-link" >exitosamente</a>!' 
-            		+'En minutos recibira un mail con el link de activaci&oacute;n. Por favor verifique que no se encuentre en la secci&oacute;n de spam'  
+            		+'En minutos recibir&aacute; un mail con el link de activaci&oacute;n. Por favor verifique que no se encuentre en la secci&oacute;n de spam'  
         			+'</div>'
         			+'</div>');
 					
@@ -238,7 +238,7 @@ function signUp(){
             	$('#msg').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'Ocurio un error por favor intente nuevamente!'  
+            		+'Ocurrio un error. Por favor intente nuevamente!'  
         			+'</div>'
         			+'</div>');
 				$('#signUpBot').removeAttr("disabled");
@@ -325,7 +325,7 @@ function sendActMail(){
 					$('#error').html(
                 	'<div class="row">'
                 	+'<div class="alert alert-success">'
-              		+'La solicitud se ha enviado  <a class="alert-link" >Exitosamente</a>! En minutos recibira un mail con el link de activaci&oacute;n. Por favor verifique que no este en la secci&oacute;n de spam'  
+              		+'La solicitud se ha enviado  <a class="alert-link" >Exitosamente</a>! En minutos recibir&aacute; un mail con el link de activaci&oacute;n. Por favor verifique que no se encuentre en la secci&oacute;n de spam'  
         		    +'</div>'
         		    +'</div>');					            		
             	}else if(data.status=="exp"){
@@ -362,7 +362,7 @@ function changePs(){
 		$('#error').html(
              '<div class="row">'
             +'<div class="alert alert-danger">'
-            +'Los campos de contraseña, nueva contraseña y verificar nueva contraseña no pueden ser <a class="alert-link" >vacios</a>!'  
+            +'Los campos de contraseña, nueva contraseña y verificar nueva contraseña no pueden ser <a class="alert-link" >vac&iacute;os</a>!'  
         	+'</div>'
         	+'</div>');
 	}else if(new_ps!=re_ps){
@@ -373,7 +373,7 @@ function changePs(){
 			$('#error').html(
              '<div class="row">'
             +'<div class="alert alert-danger">'
-            +'Los campos nueva contraseña y verificar <a class="alert-link" >no coinciden</a>!'  
+            +'Los campos nueva contraseña y verificar nueva contraseña <a class="alert-link" >no coinciden</a>!'  
         	+'</div>'
         	+'</div>');
 	}else{
@@ -402,17 +402,17 @@ function changePs(){
 					$('#error').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'La contraseña es <a class="alert-link" >invalida</a>!'  
+            		+'La contraseña es <a class="alert-link" >inv&aacute;lida</a>!'  
         			+'</div>'
         			+'</div>');
 				}else{
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
-                	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+                	$('#error').html("Ocurri&oacute; un error. Por favor intente nuevamente<br/>");
                 	$('#changePsBot').removeAttr("disabled");
 					$('#changePsBot').html('Cambiar Contreña');
                 }
             },error: function(error){
-            	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+            	$('#error').html("Ocurri&oacute; un error. Por favor intente nuevamente<br/>");
 				console.log(error);
             } 
 
@@ -435,7 +435,7 @@ function restorePass(){
 		$('#error').html(
              '<div class="row">'
             +'<div class="alert alert-danger">'
-            +'El enterprise Id para <a class="alert-link">blanquear contraseña</a> no puede ser <a class="alert-link" >vacio</a>!'  
+            +'El Enterprise Id para <a class="alert-link">blanquear contraseña</a> no puede ser <a class="alert-link" >vac&iacute;o</a>!'  
         	+'</div>'
         	+'</div>');
         $('#myModal').modal('hide');	
@@ -452,7 +452,7 @@ function restorePass(){
              		'<div class="row">'
             		+'<div class="alert alert-success">'
             		+'Se ha enviado un mail para finalizar el <a class="alert-link">blanqueo de contraseña</a>.<br/>' 
-            		+'Verifique que no se encuentre en la carpeta de Spam. Gracias!'  
+            		+'Verifique que no se encuentre en la secci&oacute;n de Spam. Gracias!'  
         			+'</div>'
         			+'</div>');
 					$('#myModal').modal('hide');
@@ -463,7 +463,7 @@ function restorePass(){
 					$('#error').html(
              		'<div class="row">'
             		+'<div class="alert alert-danger">'
-            		+'El enterprise Id ingresado es <a class="alert-link" >invalida</a>!'  
+            		+'El Enterprise Id ingresado es <a class="alert-link" >inv&aacute;lido</a>!'  
         			+'</div>'
         			+'</div>');
         			$('#myModal').modal('hide');
@@ -471,11 +471,11 @@ function restorePass(){
 					$('#processRestBot').removeAttr("disabled");
 					$('#processRestBot').html('Continuar');
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
-                	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+                	$('#error').html("Ocurri&oacute; un error. Por favor intente nuevamente<br/>");
                 	$('#myModal').modal('hide');
                 }
             },error: function(error){
-            	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+            	$('#error').html("Ocurri&oacute; un error. Por favor intente nuevamente<br/>");
             	$('#processRestBot').removeAttr("disabled");
 				$('#processRestBot').html('Continuar');
 				$('#myModal').modal('hide');
@@ -515,7 +515,7 @@ function restorePs(){
 		$('#error').html(
              '<div class="row">'
             +'<div class="alert alert-danger">'
-            +'Los campos de nueva contraseña y verificar nueva contraseña no pueden ser <a class="alert-link" >vacios</a>!'  
+            +'Los campos de nueva contraseña y verificar nueva contraseña no pueden ser <a class="alert-link" >vac&iacute;os</a>!'  
         	+'</div>'
         	+'</div>');
 	}else if(new_ps!=re_ps){
@@ -526,7 +526,7 @@ function restorePs(){
 		$('#error').html(
              '<div class="row">'
             +'<div class="alert alert-danger">'
-            +'Los campos nueva contraseña y verificar <a class="alert-link" >no coinciden</a>!'  
+            +'Los campos nueva contraseña y verificar nueva contraseña <a class="alert-link" >no coinciden</a>!'  
         	+'</div>'
         	+'</div>');
 	}else{
@@ -559,10 +559,10 @@ function restorePs(){
                 	$('#restoreBot').removeAttr("disabled");
 					$('#restoreBot').html('Cambiar Contreña');
                 	$('#singInForm').attr("class","col-sm-6 col-md-4 col-lg-4 has-error");
-                	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+                	$('#error').html("Ocurri&oacute; un error. Por favor intente nuevamente<br/>");
                 }
             },error: function(error){
-            	$('#error').html("Ocurio un error por favor intente nuevamente<br/>");
+            	$('#error').html("Ocurri&oacute; un error. Por favor intente nuevamente<br/>");
 				console.log(error);
             } 
 

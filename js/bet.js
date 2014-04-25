@@ -282,17 +282,25 @@ function processChallenge(event_id, user_opp){
     					$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
-					            +'No posee credito suficiente para aceptar el Desafio!'  
+					            +'No posee cr&eacute;dito suficiente para aceptar el Desafio!'  
 					        	+'</div>'
 					        	+'</div>');
 				}else if(data.status=="bet"){
 					    $('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
-					            +'Ya posee una apuesta asociada a ese evento. Debe cancelarla para aceptar el desafio!'  
+					            +'Ya posee una predicci&oacute;n asociada a ese evento. Debe cancelarla para aceptar el desafio!'  
 					        	+'</div>'
 					        	+'</div>');
 					        	
+				}else if(data.status=="chl"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'Ya realiz&oacute; un desaf&iacute;o pendiente asociado a este evento!<br/>Debe cancelarlo para aceptar esta solicitud.'  
+					        	+'</div>'
+					        	+'</div>');
+							
 				}else if(data.status=="date"){
 					    $('#error').html(
 					             '<div class="row">'
@@ -327,7 +335,7 @@ function processBetEvent(event_id){
 		$('#error').html(
 	             '<div class="row">'
 	            +'<div class="alert alert-danger">'
-	            +'El monto de apuesta debe ser multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
+	            +'El monto de la predicci&oacute;n debe ser multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
 	        	+'</div>'
 	        	+'</div>');
 
@@ -343,7 +351,7 @@ function processBetEvent(event_id){
 						$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-success">'
-					            +'La apuesta se realizo <a class="alert-link" >Exitosamente</a>!'  
+					            +'La predicci&oacute;n se realiz&oacute; <a class="alert-link" >Exitosamente</a>!'  
 					        	+'</div>'
 					        	+'</div>');
 					        	
@@ -351,7 +359,21 @@ function processBetEvent(event_id){
     					$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
-					            +'No posee credito suficiente para aceptar el Desafio!'  
+					            +'No posee cr&eacute;dito suficiente para realizar esta acci&oacute;n!'  
+					        	+'</div>'
+					        	+'</div>');
+				}else if(data.status=="chl"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'Ya posee un desaf&iacute;o asociado a este evento! Debe cancelarlo para realizar esta predicci&oacute;n'  
+					        	+'</div>'
+					        	+'</div>');
+				}else if(data.status=="bet"){
+					    $('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'Ya posee una predicci&oacute;n asociada a ese evento!'  
 					        	+'</div>'
 					        	+'</div>');
 				}else if(data.status=="date"){
@@ -390,7 +412,7 @@ function processEditBet(event_id){
 		$('#error').html(
 	             '<div class="row">'
 	            +'<div class="alert alert-danger">'
-	            +'El monto de apuesta debe ser mayor que 0 y multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
+	            +'El monto de predicci&oacute;n debe ser mayor que 0 y multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
 	        	+'</div>'
 	        	+'</div>');
 
@@ -406,7 +428,7 @@ function processEditBet(event_id){
 						$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-success">'
-					            +'La apuesta se realizo <a class="alert-link" >Exitosamente</a>!'  
+					            +'La predicci&oacute;n se realiz&oacute; <a class="alert-link" >Exitosamente</a>!'  
 					        	+'</div>'
 					        	+'</div>');
 					        	
@@ -422,14 +444,14 @@ function processEditBet(event_id){
     					$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
-					            +'No posee credito suficiente para editar el Desafio!'  
+					            +'No posee cr&eacute;dito suficiente para editar el Desafio!'  
 					        	+'</div>'
 					        	+'</div>');
 				}else if(data.status=="Bet"){		
     					$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
-					            +'La apuesta ya fue retirada!'  
+					            +'La predicci&oacute;n ya fue retirada!'  
 					        	+'</div>'
 					        	+'</div>');
 				}else if(data.status=="exp"){
@@ -461,7 +483,7 @@ function processChlgBet(event_id){
 		$('#error').html(
 	             '<div class="row">'
 	            +'<div class="alert alert-danger">'
-	            +'El monto de apuesta debe ser mayor que 0 y multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
+	            +'El monto de la predicci&oacute;n debe ser mayor que 0 y multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
 	        	+'</div>'
 	        	+'</div>');
 
@@ -470,7 +492,7 @@ function processChlgBet(event_id){
 		$('#error').html(
 	             '<div class="row">'
 	            +'<div class="alert alert-danger">'
-	            +'El Enterprise no puede ser <a class="alert-link" >Vacio</a>!'  
+	            +'El Enterprise no puede ser <a class="alert-link" >Vac&iacute;o</a>!'  
 	        	+'</div>'
 	        	+'</div>');
 	}else{
@@ -485,14 +507,14 @@ function processChlgBet(event_id){
 						$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-success">'
-					            +'El Desafio se realizo <a class="alert-link" >Exitosamente</a>!'  
+					            +'El Desaf&iacute;o se realiz&oacute; <a class="alert-link" >Exitosamente</a>!'  
 					        	+'</div>'
 					        	+'</div>');
 				}else if(data.status=="date"){
 					    $('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
-					            +'El evento ya ha conmenzado!'  
+					            +'El evento ya ha comenzado!'  
 					        	+'</div>'
 					        	+'</div>');
 					        		 
@@ -500,16 +522,24 @@ function processChlgBet(event_id){
     					$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
-					            +'No posee credito suficiente para aceptar el Desafio!'  
+					            +'No posee cr&eacute;dito suficiente para realizar el Desafio!'  
 					        	+'</div>'
 					        	+'</div>');
 				}else if(data.status=="bet"){		
     					$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
-					            +'Ya posee una apuesta o un desafio asociado a este evento!'  
+					            +'Ya posee una predicci&oacute;n o desaf&iacute;o asociado a este evento!'  
 					        	+'</div>'
-					        	+'</div>');			
+					        	+'</div>');
+				}else if(data.status=="chl"){		
+    					$('#error').html(
+					             '<div class="row">'
+					            +'<div class="alert alert-danger">'
+					            +'Ya posee un desaf&iacute;o pendiente asociado a este evento!<br/>Debe cancelar la solicitud para desafiar nuevamente.'  
+					        	+'</div>'
+					        	+'</div>');
+							
 				}else if(data.status=="user"){		
     					$('#error').html(
 					             '<div class="row">'
@@ -541,7 +571,7 @@ function processSendBet(event_id){
 		$('#error').html(
 	             '<div class="row">'
 	            +'<div class="alert alert-danger">'
-	            +'El Enterprise no puede ser <a class="alert-link" >Vacio</a>!'  
+	            +'El Enterprise no puede ser <a class="alert-link" >Vac&iacute;o</a>!'  
 	        	+'</div>'
 	        	+'</div>');
 	}else{
@@ -595,7 +625,7 @@ function sendCr(){
 		$('#error').html(
 	             '<div class="row">'
 	            +'<div class="alert alert-danger">'
-	            +'El monto de apuesta debe ser mayor que 0 y multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
+	            +'El monto de la predicci&oacute;n debe ser mayor que 0 y multiplo de <a class="alert-link" >0.5 Cr.</a>!'  
 	        	+'</div>'
 	        	+'</div>');
 
@@ -605,7 +635,7 @@ function sendCr(){
 		$('#error').html(
 	             '<div class="row">'
 	            +'<div class="alert alert-danger">'
-	            +'El Enterprise no puede ser <a class="alert-link" >Vacio</a>!'  
+	            +'El Enterprise no puede ser <a class="alert-link" >Vac&iacute;o</a>!'  
 	        	+'</div>'
 	        	+'</div>');
 	}else{
@@ -621,7 +651,7 @@ function sendCr(){
 						$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-success">'
-					            +'Se envio el credito de forma <a class="alert-link" >Exitosamente</a>!'  
+					            +'Se envio el cr&eacute;dito de forma <a class="alert-link" >Exitosamente</a>!'  
 					        	+'</div>'
 					        	+'</div>');
 					        	
@@ -629,7 +659,7 @@ function sendCr(){
     					$('#error').html(
 					             '<div class="row">'
 					            +'<div class="alert alert-danger">'
-					            +'No posee credito suficiente para realizar dicha acci&oacute;n!'  
+					            +'No posee cr&eacute;dito suficiente para realizar dicha acci&oacute;n!'  
 					        	+'</div>'
 					        	+'</div>');
 				}else if(data.status=="user"){		
