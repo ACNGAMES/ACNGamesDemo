@@ -12,7 +12,7 @@ $db="u157368432_acn";
 				  INNER JOIN $db.CM_OPPONENT op ON ope.OPPONENT_ID = op.OPPONENT_ID 
 				  INNER JOIN $db.CM_CATEGORY cat ON ev.CATEGORY_ID = cat.CATEGORY_ID  
 				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
-				  WHERE ev.OFF_DTTM > SYSDATE()
+				  WHERE ev.OFF_DTTM > '".NOW()."'
 				  AND ev.EVENT_STATUS_FLG = 'O'
 				  AND ope.OPPONENT_ID <> 0
 				  ORDER BY ev.OFF_DTTM, ev.EVENT_ID, ope.LOCAL";
