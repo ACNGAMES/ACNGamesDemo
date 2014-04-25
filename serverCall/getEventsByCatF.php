@@ -11,6 +11,15 @@ include 'var.php';
   	if (!($iden = db_connection()))
         die("Error: No se pudo conectar".mysql_error()); 
   $db="u157368432_acn";
+  
+  $query = "SELECT VALUE FROM $db.CM_CONFIG WHERE CONFIG_CD = 'DAYS_NEXTEVENTS'";
+	   
+  $resultadoValue = mysql_query($query, $conn);
+	
+  $fila = mysql_fetch_assoc($resultadoValue);
+
+  $days = $fila["VALUE"];
+  
   $sentencia = "SELECT evt.EVENT_ID, cat.CATEGORY_ID, cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, 
 				evt.EVENT, evt.OFF_DTTM, evt.EVENT_TYPE, op.URL, bet.USER_ID, bet.OPP_USER_ID FROM $db.CM_EVENT  evt
 				INNER JOIN $db.CM_OPPONENT_EVENT ope ON evt.EVENT_ID = ope.EVENT_ID 
@@ -21,7 +30,7 @@ include 'var.php';
 				WHERE cat.CATEGORY_ID = $catId
 				AND evt.EVENT_STATUS_FLG = 'O'
 				and ope.OPPONENT_ID != 0
-				AND evt.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL 7 DAY)
+				AND evt.OFF_DTTM BETWEEN SYSDATE() AND DATE_ADD(SYSDATE(), INTERVAL $days DAY)
 				ORDER BY scat.SUB_CATEGORY_ID, evt.OFF_DTTM, evt.EVENT_ID, ope.LOCAL"; 
   // Ejecuta la sentencia SQL
   //echo $sentencia; 
