@@ -8,7 +8,8 @@
      
   $sentencia = "SELECT DISTINCT(cat.CATEGORY_ID), cat.DESCRIPTION, cat.URL FROM $db.CM_CATEGORY cat 
   				INNER JOIN $db.CM_EVENT ev ON ev.CATEGORY_ID=cat.CATEGORY_ID
-  				WHERE ev.EVENT_STATUS_FLG = 'O'"; 
+  				WHERE ev.EVENT_STATUS_FLG = 'O'
+  				AND ev.OFF_DTTM > '".NOW()."'"; 
   // Ejecuta la sentencia SQL 
  
   $resultado = mysql_query($sentencia, $iden); 
