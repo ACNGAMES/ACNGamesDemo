@@ -14,7 +14,7 @@ include 'var.php';
   
   $query = "SELECT VALUE FROM $db.CM_CONFIG WHERE CONFIG_CD = 'DAYS_NEXTEVENTS'";
 	   
-  $resultadoValue = mysql_query($query, $conn);
+  $resultadoValue = mysql_query($query, $iden);
 	
   $fila = mysql_fetch_assoc($resultadoValue);
 
