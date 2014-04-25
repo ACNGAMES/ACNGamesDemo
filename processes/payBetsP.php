@@ -58,7 +58,18 @@ function payBets () {
 					$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'DG', '$alarmValue $event a $getUserName', '".NOW()."')";    
 					mysql_query($insertAlarm, $conn);
 					
-					//$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$userId','".NOW()."','G','Se acert&oacute; la predicci&oacute;n $event',$tot_gold,$res_silver,$new_gold,$new_silver)";
+					$coins = "SELECT * FROM $db.CM_COIN WHERE user_id = '$userId'"; 
+				  	// Ejecuta la sentencia SQL 
+					$resultadoCoins = mysql_query($coins, $conn);
+					$fila = mysql_fetch_assoc($resultadoCoins);
+					$tot_gold=$fila['GOLDEN_COINS'];
+					$tot_silver=$fila['SILVER_COINS'];
+				    mysql_free_result($resultadoCoins);
+					
+					$coinsWon = $amount * 2;
+					
+					$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$userId','".NOW()."','G','Se acert&oacute; el desaf&iacute;o $event', $coinsWon, $tot_gold, $tot_silver)";
+					mysql_query($sentencia, $conn);
 											
 				} else {
 					
@@ -73,8 +84,19 @@ function payBets () {
 					
 					$credits = $amount * $odds;
 					//Se inserta la alarma de la apuesta ganado
-					$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'AP', '$credits $alarmValue $event', '".NOW()."')";    
-					mysql_query($insertAlarm, $conn);				
+					$insertAlarm = "INSERT INTO $db.CM_ALERT (USER_ID, ALERT_CD,DESCR, ALERT_DTTM) VALUES ($userId, 'AP', '$credits $resultAp $event', '".NOW()."')";    
+					mysql_query($insertAlarm, $conn);
+					
+					$coins = "SELECT * FROM $db.CM_COIN WHERE user_id = '$userId'"; 
+				  	// Ejecuta la sentencia SQL 
+					$resultadoCoins = mysql_query($coins, $conn);
+					$fila = mysql_fetch_assoc($resultadoCoins);
+					$tot_gold=$fila['GOLDEN_COINS'];
+					$tot_silver=$fila['SILVER_COINS'];
+				    mysql_free_result($resultadoCoins);
+					
+					$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, SILVER, TOT_GOLD, TOT_SILVER) VALUES ('$userId','".NOW()."','G','Se acert&oacute; la predicci&oacute;n $event', $credits , $tot_gold, $tot_silver)";
+					mysql_query($sentencia, $conn);				
 				}
 				
 				

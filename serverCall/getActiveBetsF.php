@@ -18,7 +18,7 @@ if(validate($id, $auth_token)){
 				  INNER JOIN $db.CM_OPPONENT opb ON bet.SELECTION=opb.OPPONENT_ID
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope2 ON bet.SELECTION=ope2.OPPONENT_ID AND ev.EVENT_ID = ope2.EVENT_ID
 				  LEFT JOIN $db.CM_USER usr ON bet.OPP_USER_ID=usr.USER_ID
-				  WHERE ev.EVENT_STATUS_FLG = 'O'
+				  WHERE ev.EVENT_STATUS_FLG = 'O' AND ev.OFF_DTTM > '".NOW()."'
 				  and ope.OPPONENT_ID != 0
 				  ORDER BY ev.OFF_DTTM, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.EVENT_ID, ope.LOCAL"; 
   // Ejecuta la sentencia SQL

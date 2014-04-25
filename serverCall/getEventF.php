@@ -18,7 +18,7 @@ if(validate($id, $auth_token)){
 				  INNER JOIN $db.CM_SUB_CATEGORY scat ON ev.SUB_CATEGORY_ID = scat.SUB_CATEGORY_ID 
 				  LEFT JOIN $db.CM_BET bet ON ev.EVENT_ID = bet.EVENT_ID AND bet.USER_ID = $id 
 				  LEFT JOIN $db.CM_OPPONENT opb ON bet.SELECTION=opb.OPPONENT_ID
-				  LEFT JOIN $db.CM_OPPONENT_EVENT oe ON oe.OPPONENT_ID = opb.OPPONENT_ID
+				  LEFT JOIN $db.CM_OPPONENT_EVENT oe ON oe.OPPONENT_ID = opb.OPPONENT_ID AND bet.EVENT_ID = oe.EVENT_ID
 				  LEFT JOIN $db.CM_USER usr ON bet.OPP_USER_ID=usr.USER_ID
 				  WHERE ev.EVENT_ID=$event_id and op.OPPONENT_ID != 0 
 				  ORDER BY cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.OFF_DTTM"; 

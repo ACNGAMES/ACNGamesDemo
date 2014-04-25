@@ -8,7 +8,7 @@ if(validate($id, $auth_token)){
 		
 	//include('var.php');
   	if (!($iden = db_connection()))
-        die("Error: No se pudo conectar".mysql_error()); 
+        die("Error: No se pudo conectar".mysql_error());
   $db="u157368432_acn";  
   $sentencia = "SELECT ev.EVENT_ID, op.URL, bet.WIN_FLG ,opb.OPPONENT_NAME  'opb.OPPONENT_NAME', NAME, SURNAME, opb.URL 'opb.URL', ope2.ODDS, bet.OPP_USER_ID, cat.CATEGORY_ID, bet.BET_DTTM, bet.AMOUNT ,cat.DESCRIPTION as 'DESC', scat.DESCRIPTION, scat.SUB_CATEGORY_ID, ev.EVENT, ev.OFF_DTTM, ev.EVENT_TYPE FROM $db.CM_EVENT ev  
 				  INNER JOIN $db.CM_OPPONENT_EVENT ope ON ev.EVENT_ID = ope.EVENT_ID
@@ -23,7 +23,7 @@ if(validate($id, $auth_token)){
 				  and ope.OPPONENT_ID != 0
 				  ORDER BY ev.OFF_DTTM DESC, cat.CATEGORY_ID, scat.SUB_CATEGORY_ID, ev.EVENT_ID, ope.LOCAL"; 
   // Ejecuta la sentencia SQL 
-  $resultado = mysql_query($sentencia, $iden); 
+  $resultado = mysql_query($sentencia, $iden);
   
   if(!$resultado) 
     die("Error: no se pudo realizar la consulta");
