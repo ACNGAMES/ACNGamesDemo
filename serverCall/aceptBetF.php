@@ -23,6 +23,14 @@ if(validate($id, $auth_token)){
 	$resultado=mysql_query($sentencia, $iden);
   
   	if(mysql_num_rows($resultado)== 0){
+  			
+  		mysql_free_result($resultado);
+	   //TODO chequear que no exista un desafio para ese evento
+	   $sentencia = "SELECT * FROM $db.CM_CHALLENGE WHERE user_id='$id' and event_id=$event_id"; 
+ 	   $resultado=mysql_query($sentencia, $iden);
+  
+  	    if(mysql_num_rows($resultado)== 0){
+  		
   		mysql_free_result($resultado);
   		//Busco el monto de la apuesta en la tabla de cm_challenge
   		$sentencia = "SELECT * FROM  $db.CM_EVENT WHERE event_id=$event_id and OFF_DTTM > '".NOW()."'"; 
@@ -96,6 +104,13 @@ if(validate($id, $auth_token)){
 		mysql_close($iden);
   	}
 
+  	}else{
+  		mysql_free_result($resultado);
+		$data = array('status'=> 'chl');
+    	echo json_encode($data);
+		mysql_close($iden);
+  	}
+  	
   	}else{
   		mysql_free_result($resultado);
 		$data = array('status'=> 'bet');
