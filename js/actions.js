@@ -8,5 +8,5 @@
     		}
  };
 
-//Esta funcion se encarga de refrescar los creditos cada 30 segundos
-setInterval(reloadStructs,30000);
+//Esta funcion se encarga de refrescar los creditos cada 60 segundos
+setInterval(reloadStructs,60000);
