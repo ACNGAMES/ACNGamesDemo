@@ -6,15 +6,14 @@ payBets();
 
 function payBets () {
 	include('var.php');	
-	global $conn;
 	$db="u157368432_acn";
 	if (!($conn = db_connection()))
 		echo(die("Error: No se pudo conectar metodo insert() " .mysql_error()));
 	
 	$returnEvents = "SELECT ev.EVENT_ID, EVENT, RESULT, ODDS FROM $db.CM_EVENT ev
-				 	INNER JOIN $db.CM_OPPONENT_EVENT oe ON ev.RESULT = oe.OPPONENT_ID
+				 	INNER JOIN $db.CM_OPPONENT_EVENT oe ON ev.EVENT_ID = oe.EVENT_ID AND ev.RESULT = oe.OPPONENT_ID
 				 	WHERE EVENT_STATUS_FLG = 'C'
-				 	GROUP BY ev.EVENT_ID";				
+				 	GROUP BY ev.EVENT_ID";
 
 	$resultEvents = mysql_query($returnEvents, $conn); 
  
@@ -31,13 +30,13 @@ function payBets () {
 					   
        	$resultBets = mysql_query($returnBets, $conn); 
  
-    	while ($fila = mysql_fetch_assoc($resultBets)) {				   
+    	while ($fila2 = mysql_fetch_assoc($resultBets)) {				   
  	
-			$userId = $fila['USER_ID'];
-			$oppUserId = $fila['OPP_USER_ID'];
-			$selection = $fila['SELECTION'];
-			$amount = $fila['AMOUNT'];
-			
+			$userId = $fila2['USER_ID'];
+			$oppUserId = $fila2['OPP_USER_ID'];
+			$selection = $fila2['SELECTION'];
+			$amount = $fila2['AMOUNT'];
+
 			if ($result==$selection) {
 				
 				if ($oppUserId>0) {
@@ -46,7 +45,7 @@ function payBets () {
 					payBetGolden($conn, $db, $amount, 2, $userId);
 					
 					//Se cierra la apuesta ganada
-					closeBet($conn, $db, $userId, 'W');
+					closeBet($conn, $db, $eventId, $userId, 'W');
 					
 					//Se recupera el valor de configuración del tipo de apuesta DG
 					$resultDg = getAlarmDesc($conn, $db, 'DG');
@@ -61,9 +60,9 @@ function payBets () {
 					$coins = "SELECT * FROM $db.CM_COIN WHERE user_id = '$userId'"; 
 				  	// Ejecuta la sentencia SQL 
 					$resultadoCoins = mysql_query($coins, $conn);
-					$fila = mysql_fetch_assoc($resultadoCoins);
-					$tot_gold=$fila['GOLDEN_COINS'];
-					$tot_silver=$fila['SILVER_COINS'];
+					$fila3 = mysql_fetch_assoc($resultadoCoins);
+					$tot_gold=$fila3['GOLDEN_COINS'];
+					$tot_silver=$fila3['SILVER_COINS'];
 				    mysql_free_result($resultadoCoins);
 					
 					$coinsWon = $amount * 2;
@@ -77,7 +76,7 @@ function payBets () {
 					payBetSilver($conn, $db, $amount, $odds, $userId);
 					
 					//Se cierra la apuesta ganada
-					closeBet($conn, $db, $userId, 'W');
+					closeBet($conn, $db, $eventId, $userId, 'W');
 					
 					//Se recupera el valor de configuración del tipo de apuesta AP
 					$resultAp = getAlarmDesc($conn, $db, 'AP');
@@ -90,9 +89,9 @@ function payBets () {
 					$coins = "SELECT * FROM $db.CM_COIN WHERE user_id = '$userId'"; 
 				  	// Ejecuta la sentencia SQL 
 					$resultadoCoins = mysql_query($coins, $conn);
-					$fila = mysql_fetch_assoc($resultadoCoins);
-					$tot_gold=$fila['GOLDEN_COINS'];
-					$tot_silver=$fila['SILVER_COINS'];
+					$fila4 = mysql_fetch_assoc($resultadoCoins);
+					$tot_gold=$fila4['GOLDEN_COINS'];
+					$tot_silver=$fila4['SILVER_COINS'];
 				    mysql_free_result($resultadoCoins);
 					
 					$sentencia = "INSERT INTO $db.CM_CR_MOVES(USER_ID, MOVE_DTTM, MOVE_CD, DESCR, SILVER, GOLD, TOT_GOLD, TOT_SILVER) VALUES ('$userId','".NOW()."','G','Se acert&oacute; la predicci&oacute;n $event', $credits,'0.00' , $tot_gold, $tot_silver)";
@@ -105,7 +104,7 @@ function payBets () {
 				if ($oppUserId>0) {
 					
 					//Se cierra la apuesta perdida
-					closeBet($conn, $db, $userId, 'L');
+					closeBet($conn, $db, $eventId, $userId, 'L');
 					
 					//Se recupera el valor de configuración del tipo de apuesta DP
 					$resultDp = getAlarmDesc($conn, $db, 'DP');
@@ -119,7 +118,7 @@ function payBets () {
 														
 				} else {
 					//Se cierra la apuesta perdida
-					closeBet($conn, $db, $userId, 'L');
+					closeBet($conn, $db, $eventId, $userId, 'L');
 					
 					$resultDp = getAlarmDesc($conn, $db, 'PP');
 					
@@ -174,9 +173,9 @@ function getUserName ($conn, $db, $oppUserId) {
 					
 }
 
-function closeBet ($conn, $db, $userId, $winFlag) {
+function closeBet ($conn, $db, $eventId, $userId, $winFlag) {
 	
-	$closeBet = "UPDATE $db.CM_BET SET BET_STATUS_FLG = 'C', WIN_FLG = '$winFlag' WHERE USER_ID = $userId";
+	$closeBet = "UPDATE $db.CM_BET SET BET_STATUS_FLG = 'C', WIN_FLG = '$winFlag' WHERE USER_ID = $userId AND EVENT_ID = $eventId";
 	mysql_query($closeBet, $conn);
 	
 }
